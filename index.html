@@ -277,6 +277,8 @@ canvas.ink{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cu
 .pair{display:flex;flex-direction:column;gap:6px}
 .s3{display:flex;flex-wrap:wrap;gap:12px;align-items:stretch}
 .cline{position:relative;flex:1 1 280px;height:96px;background:var(--sheet);border:1.5px solid var(--rule);border-radius:8px;overflow:hidden}
+.video.music{max-width:960px}
+.steps3{margin:0;padding-left:1.4em;display:flex;flex-direction:column;gap:6px}
 .eraser{position:absolute;right:6px;top:6px;z-index:2;border:1.5px solid var(--ink);background:var(--sheet);color:var(--ink);border-radius:999px;padding:2px 10px;font-size:.84rem;font-weight:700}
 .eraser:hover{background:var(--ink);color:var(--paper)}
 .think{flex:0 1 220px;border:2px dashed var(--soft);border-radius:12px;padding:8px 12px;display:flex;flex-direction:column;gap:6px;justify-content:center;--ks:34px}
@@ -335,6 +337,7 @@ section{display:flex;flex-direction:column;gap:14px}
       <button type="button" data-target="cv">140／280 音</button>
       <button type="button" data-target="blend">拼讀機</button>
       <button type="button" data-target="quiz">聽音選字</button>
+      <button type="button" data-target="music">用音樂練發音聽力</button>
     </div>
     <div class="ngrp"><span class="nlab">寫</span>
       <button type="button" data-target="pad">假字手寫板</button>
@@ -506,6 +509,24 @@ section{display:flex;flex-direction:column;gap:14px}
     </div>
     <div id="pp" style="display:flex;flex-direction:column;gap:12px"></div>
     <p class="sm">三階段規劃原理發想：SoR 正音師 進翔老師（<a href="https://www.facebook.com/share/r/1DXCFrbmPg/" target="_blank" rel="noopener">原始貼文</a>）</p>
+  </section>
+
+  <!-- 用音樂練發音聽力 -->
+  <section id="view-music" hidden>
+    <div class="card">
+      <h2><span class="tag">音樂</span>用音樂練發音聽力</h2>
+      <p class="hint">跟著歌曲練耳朵和嘴巴：先專心聽，再小聲跟唱，最後放開來唱。播放清單裡的影片可以從右上角的清單圖示切換。</p>
+    </div>
+    <div class="video music"><iframe src="https://www.youtube-nocookie.com/embed/videoseries?list=PL68aZEUti9QAShbi0VtE3kn1BmylYkn1R&amp;rel=0" title="用音樂練發音聽力 播放清單" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+    <div class="card">
+      <h2><span class="tag">練習步驟</span>一首歌練三遍</h2>
+      <ol class="steps3">
+        <li><b>聽</b>：第一遍只聽不唱，注意每個字的頭子音、母音和尾子音。</li>
+        <li><b>跟</b>：第二遍小聲跟唱，把尾子音唱清楚，不要多加母音。</li>
+        <li><b>唱</b>：第三遍放開唱。卡住的音節，回到「8800 音」或「140／280 音」分頁找出來，錄自己的聲音和示範比一比。</li>
+      </ol>
+      <p class="sm" style="margin-top:8px">影片無法播放時，<a href="https://www.youtube.com/playlist?list=PL68aZEUti9QAShbi0VtE3kn1BmylYkn1R" target="_blank" rel="noopener">到 YouTube 觀看播放清單</a>。</p>
+    </div>
   </section>
 
   <!-- 我的真字 -->
@@ -930,10 +951,10 @@ $("cvPads").addEventListener("click",function(e){var b=e.target.closest("button[
 $("cvPadPlay").addEventListener("click",function(){seqPlay([].map.call($("cvPads").querySelectorAll(".cell"),function(c){return {k:c.querySelector("button").getAttribute("data-k"),sid:"cv",el:c};}));});
 
 /* ===== 切換 ===== */
-var VIEWS=["grid","cv","blend","quiz","pad","pp","stars","guide"];
+var VIEWS=["grid","cv","blend","quiz","music","pad","pp","stars","guide"];
 function setMode(m){mode=m;stopAll();VIEWS.forEach(function(k){$("view-"+k).hidden=k!==m;});
   [].forEach.call($("modes").querySelectorAll("button[data-target]"),function(b){b.setAttribute("aria-pressed",b.getAttribute("data-target")===m);});
-  var g=m==="guide"||m==="cv";$("sheetArea").hidden=g;$("headBox").hidden=g||m==="stars";
+  var g=m==="guide"||m==="cv"||m==="music";$("sheetArea").hidden=g;$("headBox").hidden=g||m==="stars";
   if(m==="stars")drawStars();if(m==="quiz"&&!q)newQ();if(m==="blend")drawBlend();if(m==="pad")drawPads();if(m==="pp")drawPP();if(m==="cv"){loadAudio("cv");drawCV();}}
 function setSheet(i){cur=i;store.sheet=i;save();stopAll();loadAudio(sheet(i).id);drawSheets();drawHead();drawSteps();
   var s=sheet(cur);if(codas(s).indexOf(sel.c)<0)sel.c=codas(s)[codas(s).length>20?6:5];drawTable();focusCell(sel.o,sel.c,false);
