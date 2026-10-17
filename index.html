@@ -277,6 +277,8 @@ canvas.ink{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cu
 .pair{display:flex;flex-direction:column;gap:6px}
 .s3{display:flex;flex-wrap:wrap;gap:12px;align-items:stretch}
 .cline{position:relative;flex:1 1 280px;height:96px;background:var(--sheet);border:1.5px solid var(--rule);border-radius:8px;overflow:hidden}
+.eraser{position:absolute;right:6px;top:6px;z-index:2;border:1.5px solid var(--ink);background:var(--sheet);color:var(--ink);border-radius:999px;padding:2px 10px;font-size:.84rem;font-weight:700}
+.eraser:hover{background:var(--ink);color:var(--paper)}
 .think{flex:0 1 220px;border:2px dashed var(--soft);border-radius:12px;padding:8px 12px;display:flex;flex-direction:column;gap:6px;justify-content:center;--ks:34px}
 .think small{color:var(--soft)}
 input.tx{font:inherit;font-family:var(--latin);font-size:1.05rem;padding:5px 12px;border:1.5px solid var(--ink);border-radius:999px;background:var(--sheet);color:var(--ink);width:11em}
@@ -826,7 +828,7 @@ function drawPP(){ppU=ppParse($("ppIn").value);if(!ppU.length){$("pp").innerHTML
   h+='<div class="stage"><div class="sn">1</div><div class="bd"><h3>第一階段：只寫注音聲音</h3><p>不寫英文，只把聽到、念出的音素寫成注音。共 '+n+' 個音素＝'+n+' 格。</p>'+boxRow(n,null,"r1")+chk+'</div></div>';
   h+='<div class="stage"><div class="sn">2</div><div class="bd"><h3>第二階段：音素下方對應寫字母</h3><p>上排寫音素，下排寫對應的英文字母拼法。格子數必須對齊音素。</p><div class="pair">'+boxRow(n,null,"r2")+boxRow(n,ppU)+'</div><div class="row"><button type="button" class="btn'+(ppHint?" on":"")+'" id="ppHintBtn">字母提示：'+(ppHint?"開":"關")+'</button></div></div></div>';
   var ans=ppExp?'<button type="button" class="btn" id="ppAns">看注音答案</button><div id="ppAnsRow" hidden>'+seqHTML(ppExp)+'</div>':"";
-  h+='<div class="stage"><div class="sn">3</div><div class="bd"><h3>第三階段：直接默寫英文，心裡念注音</h3><p>只寫英文，不看提示。手在寫 '+esc(ppU.join("-"))+'，心裡念的是聲音。</p><div class="s3"><div class="cline"><div class="ln" style="top:14%"></div><div class="ln mid" style="top:38%"></div><div class="ln base" style="top:64%"></div><div class="ln" style="top:88%"></div><canvas class="ink"></canvas></div><div class="think"><small>心裡念</small><button type="button" class="btn pu" id="ppSay">🔊 聽一次 '+esc(w)+'</button>'+ans+'</div></div></div></div>';
+  h+='<div class="stage"><div class="sn">3</div><div class="bd"><h3>第三階段：直接默寫英文，心裡念注音</h3><p>只寫英文，不看提示。手在寫 '+esc(ppU.join("-"))+'，心裡念的是聲音。</p><div class="s3"><div class="cline" id="ppLine"><div class="ln" style="top:14%"></div><div class="ln mid" style="top:38%"></div><div class="ln base" style="top:64%"></div><div class="ln" style="top:88%"></div><canvas class="ink"></canvas><button type="button" class="eraser" id="ppErase" title="擦掉重寫">🧽 擦掉重寫</button></div><div class="think"><small>心裡念</small><button type="button" class="btn pu" id="ppSay">🔊 聽一次 '+esc(w)+'</button>'+ans+'</div></div></div></div>';
   $("pp").innerHTML=h;markNext();sizeInk($("pp"));}
 function nextSlot(){var n=ppU.length,rs=["r1","r2"];for(var k=0;k<2;k++){var r=rs[k];slots[r]=slots[r]||[];for(var i=0;i<n;i++)if(!slots[r][i])return [r,i];}return null;}
 function markNext(){var t=nextSlot();if(!t)return;var e=$("pp").querySelector('.bx.slot[data-row="'+t[0]+'"][data-i="'+t[1]+'"]');if(e)e.classList.add("next");}
@@ -840,6 +842,7 @@ $("pp").addEventListener("click",function(e){var sl=e.target.closest(".bx.slot")
   if(b.id==="ppCheck"){ppChk=true;drawPP();return;}
   if(b.id==="ppAns"){var r2=$("ppAnsRow");r2.hidden=!r2.hidden;b.textContent=r2.hidden?"看注音答案":"收起答案";return;}
   if(b.id==="ppSay")speak(ppJoin(ppU));
+  if(b.id==="ppErase"){var cv=$("ppLine").querySelector("canvas"),c=cv.getContext("2d");c.save();c.setTransform(1,0,0,1,0,0);c.clearRect(0,0,cv.width,cv.height);c.restore();return;}
   if(b.id==="ppHintBtn"){ppHint=!ppHint;drawPP();}});
 $("ppGo").addEventListener("click",function(){setPP(ppParse($("ppIn").value));});
 $("ppIn").addEventListener("keydown",function(e){if(e.key==="Enter")setPP(ppParse($("ppIn").value));});
