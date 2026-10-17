@@ -1,0 +1,12 @@
+{
+  "name": "8800 音音節表互動學習單",
+  "short_name": "8800音",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#fbf7f2",
+  "theme_color": "#d6705f",
+  "icons": [
+    {"src": "img/icon-192.png", "sizes": "192x192", "type": "image/png"},
+    {"src": "img/icon-512.png", "sizes": "512x512", "type": "image/png"}
+  ]
+}
