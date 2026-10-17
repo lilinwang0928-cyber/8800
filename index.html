@@ -140,7 +140,7 @@ footer .links a{font-weight:700;text-decoration:none;border:1.5px solid var(--co
 footer .links a:hover{background:var(--coral);color:var(--coral-ink)}
 @media (max-width:640px){footer{grid-template-columns:1fr}footer .links{align-items:flex-start}}
 nav.modes button{flex:none;border:1.5px solid var(--rule);background:var(--sheet);border-radius:999px;padding:6px 14px;font-weight:700;color:var(--soft)}
-.navlink{flex:none;border:1.5px solid var(--orange);color:var(--orange);background:var(--orange-bg);border-radius:999px;padding:6px 14px;font-weight:700;text-decoration:none;white-space:nowrap}
+.navlink{flex:none;border:1.5px solid var(--orange);color:var(--orange);background:var(--orange-bg);border-radius:999px;padding:4px 12px;font-weight:700;text-decoration:none;white-space:nowrap}
 .navlink:hover{background:var(--orange);color:#fff}
 .cell.play .pad{border-color:var(--coral);box-shadow:0 0 0 3px var(--coral-bg)}
 .cell>button .spk{font-size:.9rem}
@@ -344,7 +344,10 @@ section{display:flex;flex-direction:column;gap:14px}
       <button type="button" data-target="stars">我的真字</button>
       <button type="button" data-target="guide">教師說明</button>
     </div>
-    <a class="navlink" href="https://phonics-practice-audio.ktapp.workers.dev/" target="_blank" rel="noopener">Phonics 拼讀練習 ↗</a>
+    <div class="ngrp"><span class="nlab">連結</span>
+      <a class="navlink" href="https://phonics-practice-audio.ktapp.workers.dev/" target="_blank" rel="noopener">Phonics 拼讀練習 ↗</a>
+      <a class="navlink" href="https://sor-blocks-whiteboard.netlify.app/" target="_blank" rel="noopener">聲音積木白板 ↗</a>
+    </div>
   </nav>
 
   <div id="sheetArea">
@@ -565,6 +568,7 @@ section{display:flex;flex-direction:column;gap:14px}
     <div class="links">
       <a href="https://www.milinguall.com/" target="_blank" rel="noopener">SoR 官網 ↗</a>
       <a href="https://phonics-practice-audio.ktapp.workers.dev/" target="_blank" rel="noopener">Phonics 拼讀練習 ↗</a>
+      <a href="https://sor-blocks-whiteboard.netlify.app/" target="_blank" rel="noopener">聲音積木白板 ↗</a>
     </div>
   </footer>
 </div>
