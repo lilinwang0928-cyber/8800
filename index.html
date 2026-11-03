@@ -182,6 +182,9 @@ nav.modes button[aria-pressed="true"]{background:var(--coral);border-color:var(-
 .btn.pu{background:var(--purple);border-color:var(--purple);color:#fff;font-weight:700}
 .btn.nv{background:var(--navy);border-color:var(--navy);color:#fff;font-weight:700}
 .btn:disabled{opacity:.45;cursor:default}
+.tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tscroll table{min-width:560px}
+#aiTune{margin-top:16px}
 .tip{margin:0;display:flex;gap:8px;align-items:flex-start;background:var(--coral-bg);color:var(--ink,inherit);border-left:6px solid var(--coral);border-radius:10px;padding:10px 14px;font-weight:700;font-size:1rem;line-height:1.5}
 .hint{color:var(--soft);font-size:.88rem;margin:0;max-width:70ch}
 .seg{display:inline-flex;border:1.5px solid var(--rule);border-radius:999px;overflow:hidden;background:var(--sheet)}
@@ -606,6 +609,89 @@ section{display:flex;flex-direction:column;gap:14px}
         <li><b>假字是刻意設計</b>：手寫板上的假字沒有意義，學生無法靠「認得這個字」猜讀，只能真正把音拼出來，這正是檢核拼讀能力的關鍵。</li>
         <li><b>把小成功累積起來</b>：表格上的已讀進度與「我的真字」讓學生看見自己的進步。</li>
         <li><b>PA 與 Phonics 兩條腿走路</b>：PA 練「盤、分、合、加、減、換」六大能力；Phonics 練「看字讀音、聽音辨字」二大能力。格內顯示切到「SoR專利注音」是 PA，切到「字母」是 Phonics。</li>
+      </ul>
+    </div>
+      <div class="guide card" id="aiTune">
+      <h2>幫 AI 調音：一場 SoR 假字發音的協作紀錄</h2>
+      <p class="sm">王麗玲 · 2026 年 10 月</p>
+      <p><b>AI 語音模型唸英文假字時犯的錯，跟還不會解碼的學生幾乎一樣；而修正它的方法，正是 SoR（閱讀科學）教學生的方法：一個音素一個音素地聽、拆、對、練。</b></p>
+
+      <h3>前言：我發現自己在幫 AI 調音</h3>
+      <p>2026 年 10 月，我和 AI 助理 Claude 一起製作這份「8800 音音節表互動學習單」，需要為 6,788 個假字配上標準發音。做到後來我才發現：我不是在「用 AI」，而是在「教 AI 發音」。它唸錯的地方，我在課堂上都看過；我糾正它的方式，就是我每天教學生的方式。</p>
+      <p>我想讓正在用 SoR 學英文的孩子、家長和老師知道：你們練的方法，有科學根據，而且每一步都可以被檢驗。</p>
+
+      <h3>我們做了什麼</h3>
+      <ul>
+        <li><b>140 音、280 音</b>：頭子音加母音的開音節，共 216 個不同的發音。</li>
+        <li><b>8800 音</b>：17 張音節表，頭子音 × 母音 × 尾子音，共 6,572 個不同的發音。</li>
+        <li><b>練習功能</b>：56～96 BPM 節拍器、橫唸／直唸／全表唸、錄音回放、假字手寫板、音素三階段、SoR 專利注音。</li>
+      </ul>
+      <p>我對音檔只有一個要求：<b>照假字規則唸出音素組合，不能當成真字唸，也不能唸成字母。</b>瀏覽器內建的文字轉語音做不到，所以改用可以直接輸入音標的開源語音模型。接下來的每一個問題，都是我用耳朵聽出來、Claude 用數據找出原因、再一起修正。</p>
+
+      <h3>調音紀錄：AI 犯的錯，和學生一樣</h3>
+      <p>我們一共修正了 10 類問題，依發生順序排列：</p>
+      <div class="tscroll"><table>
+        <thead><tr><th>我聽到的</th><th>原因</th><th>學生身上的對應</th><th>修正方式</th></tr></thead>
+        <tbody>
+          <tr><td>ap、at 唸成字母 A-P、A-T</td><td>模型不認得這個「字」，就改唸字母</td><td>遇到生字不會拼，只好唸字母名稱</td><td>不給拼字，直接輸入音素</td></tr>
+          <tr><td>bach 聽不到 ch</td><td>往熟悉的真字去猜</td><td>看到字就猜一個像的字（如把 bach 唸成 back）</td><td>指定每個音素、逐一檢查尾音是否出現</td></tr>
+          <tr><td>beb 的尾音像 /bi/，尾音 p 像 /pi/</td><td>子音後面多帶一個母音</td><td>台灣學生常把尾子音加母音，如 book 唸成 book-a</td><td>切掉爆破後的母音，保留爆破音</td></tr>
+          <tr><td>頭子音 12、14、25～28 號前多一個 /ʌ/</td><td>模型在句首自己加了一個音</td><td>子音叢前加音，如 street 唸成 su-tree-t</td><td>用前導音把贅音吃掉再切開</td></tr>
+          <tr><td>尾子音 3、5、7、15 號（b、d、g、nd）不清楚</td><td>尾音被削得太乾淨</td><td>尾音吞掉沒唸</td><td>保留爆破音的前 40 毫秒</td></tr>
+          <tr><td>開音節 /ʊ/、/æ/ 聽起來怪</td><td>母音在音節尾變形</td><td>母音音質不穩</td><td>用閉音節的母音重建</td></tr>
+          <tr><td>尾子音 10 號 sp 語調上揚</td><td>英語問句式語調</td><td>一緊張就唸成問句</td><td>全部音檔統一為母音四聲</td></tr>
+          <tr><td>p、t、k（及 st、sp、mp、nt）前的母音太長</td><td>沒有區分母音長短</td><td>每個母音都唸一樣長</td><td>母音縮短為快拍</td></tr>
+          <tr><td>a 表尾子音 11～13 號（m、mb、mp）的 /æ/ 怪怪的</td><td>美式口語把 m、n 前的 /æ/ 唸成 /eə/</td><td>母音被後面的音帶著走</td><td>用不接鼻音的環境取母音，再接回鼻音</td></tr>
+          <tr><td>s 開頭的音節 s 不見、th 掉了</td><td>音素被模型漏掉</td><td>叢音少唸一個音</td><td>改用別的前導音、補接缺漏的音素</td></tr>
+        </tbody>
+      </table></div>
+      <p>從頭子音、尾子音，到母音的音質、長短和語調，這個順序跟學生從 140 音練到 8800 音的順序幾乎一樣。</p>
+
+      <h3>可以被驗證：用數字看見發音</h3>
+      <p>我聽到的每一個「怪」，都能在聲音裡量到對應的數字；修正之後，數字也跟著回到標準範圍。F1（第一共振峰）大致反映嘴巴張多大，F2（第二共振峰）大致反映舌頭前後；音高看語調升降，時長看母音唸多久。</p>
+      <div class="tscroll"><table>
+        <thead><tr><th>檢查項目</th><th>量什麼</th><th>修正前</th><th>修正後</th></tr></thead>
+        <tbody>
+          <tr><td>m、n 前的 /æ/</td><td>42 個音檔母音中段的 F1 / F2 中位數（Hz）。對照：at、ak 裡的標準 /æ/ 為 1,066 / 1,917</td><td>807 / 2,402（偏向 /e/）</td><td>957 / 2,039（回到 /æ/ 範圍）</td></tr>
+          <tr><td>母音四聲</td><td>6,788 個音檔母音的起點與終點音高</td><td>sp 等音節語調上揚</td><td>全部下降：約 232 Hz → 165 Hz，中位數降 5.9 個半音</td></tr>
+          <tr><td>四聲是否平順</td><td>下降途中往上抖超過 1 個半音的音檔數</td><td>121 個</td><td>3 個（為檢測工具誤判，聲音本身平順）</td></tr>
+          <tr><td>快拍</td><td>bat 的母音長度</td><td>0.22 秒</td><td>0.12 秒</td></tr>
+          <tr><td>快拍</td><td>bamp、bant、bast、basp 的母音長度</td><td>0.27～0.35 秒</td><td>0.12～0.16 秒</td></tr>
+          <tr><td>不唸字母</td><td>播放時呼叫瀏覽器文字轉語音的次數</td><td>會把 ap 唸成 A-P</td><td>0 次，全部播放預先做好的音檔</td></tr>
+        </tbody>
+      </table></div>
+      <p><b>發音對不對，是可以量測、可以重複檢查的。</b>學生的錄音也能用同樣的方法分析，例如免費的語音分析軟體 Praat。而在這次協作裡，每一個問題都是先被老師的耳朵聽出來，數字是後來才確認的。</p>
+
+      <h3>對照閱讀科學</h3>
+      <p>這次觀察到的現象，都跟閱讀科學已經有的研究結果一致。SoR 的根據來自這些研究，不是來自我們的 AI 經驗。</p>
+      <div class="tscroll"><table>
+        <thead><tr><th>研究發現</th><th>在這次協作中看到的</th></tr></thead>
+        <tbody>
+          <tr><td><a href="https://www.nichd.nih.gov/health/topics/reading/conditioninfo/teach" target="_blank" rel="noopener">美國國家閱讀小組</a>（2000）：明確的音素覺識教學和系統化的自然發音教學，是教多數孩子閱讀最有效的方法之一</td><td>模型不會「自己想通」假字怎麼唸；只有把每個音素明確指定、按系統逐一檢查，才唸得對</td></tr>
+          <tr><td><a href="https://library.ecu.edu/wp-content/pv-uploads/sites/257/2019/07/ehri.pdf" target="_blank" rel="noopener">Ehri（2014）</a>「字形映射」：字要存進記憶，靠的是字母和音素的連結，這需要音素覺識與字母對音的知識</td><td>少一個音素（掉了 s、ch、th）或多一個音素（字首的 /ʌ/、尾音的 /i/），就是錯的連結，老師一聽就聽得出來</td></tr>
+          <tr><td>假字測驗被用來看「純粹的解碼能力」，因為假字沒辦法靠背誦或猜（<a href="https://shanahanonliteracy.com/blog/which-should-we-use-nonsense-word-tests-or-word-id-tests" target="_blank" rel="noopener">Shanahan</a>）</td><td>模型唸真字沒問題，一碰到假字就露出「猜字」和「唸字母」的毛病</td></tr>
+          <tr><td><a href="https://web.math.princeton.edu/~sswang/developmental-diaschisis-references/Science-2010-Dehaene-1359-64.pdf" target="_blank" rel="noopener">Dehaene 等（2010）</a>：學會讀寫會增強左腦處理文字的區域，也增強對口語語音的處理；成年後才學，大部分改變一樣會發生</td><td>聽力和字母是一起練的：老師的耳朵決定了音檔的品質。成人學習者一樣可以練出這種耳朵</td></tr>
+          <tr><td><a href="https://en.wikipedia.org/wiki/Simple_view_of_reading" target="_blank" rel="noopener">簡單閱讀觀</a>（Gough 與 Tunmer，1986）：閱讀理解＝解碼 × 語言理解；Scarborough（2001）的「閱讀繩」再細分</td><td>這次處理的是「解碼」這一股。會唸了，還要聽得懂、懂字義，才是完整的閱讀</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>誠實的界線</h3>
+      <p>這次經驗是一個很好的比喻，但不是 SoR 有效的證據；證據是上面那些研究。</p>
+      <ul>
+        <li><b>它能說明的：</b>假字會把「猜字」和「背字」的捷徑堵住；發音對錯可以拆到單一音素來檢查，而且可以量測、重複驗證；聽得出音素差異的耳朵是可以練出來的專業能力。</li>
+        <li><b>AI 不是人腦：</b>語音模型用統計方式學，跟孩子學讀的機制很不一樣。錯誤「看起來像」，不代表原因相同。</li>
+        <li><b>這不是一項實驗：</b>沒有對照組，也沒有測量學生的學習成果。</li>
+        <li><b>SoR 最強的證據在「識字解碼」：</b>閱讀理解還需要詞彙、背景知識和語言理解。</li>
+        <li><b>多數研究來自英語母語孩子：</b>用在台灣把英文當外語學的學生，方向一致，但直接的研究相對少。</li>
+      </ul>
+      <p><b>SoR 是目前最符合腦科學證據的識字與解碼學習法，而這次幫 AI 調音的過程，讓這件事變得看得見。</b></p>
+
+      <h3>給學習者、家長與老師的話</h3>
+      <p>連 AI 都得照規則一個音一個音練，才唸得對假字；你們在練的，正是這套方法。</p>
+      <ul>
+        <li><b>給學習者：</b>唸假字覺得怪、覺得沒意義，是正常的。假字的用處，就是讓你不能猜，只能真的拼。拼得出假字，代表你看到任何生字都拼得出來。</li>
+        <li><b>給家長：</b>孩子的進步是可以檢驗的。聽聽看他的尾子音有沒有多帶一個母音、字首有沒有多加一個音、語調穩不穩，這些就是我們這次幫 AI 修的地方。</li>
+        <li><b>給老師：</b>你的耳朵是最重要的檢測工具。工具可以量數字，但要有人先聽出「哪裡怪」。聽出問題、指出是哪個音素、找出原因、修正、再聽一次，也是我們每天在課堂上做的事。</li>
       </ul>
     </div>
   </section>
