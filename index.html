@@ -182,6 +182,7 @@ nav.modes button[aria-pressed="true"]{background:var(--coral);border-color:var(-
 .btn.pu{background:var(--purple);border-color:var(--purple);color:#fff;font-weight:700}
 .btn.nv{background:var(--navy);border-color:var(--navy);color:#fff;font-weight:700}
 .btn:disabled{opacity:.45;cursor:default}
+.tip{margin:0;display:flex;gap:8px;align-items:flex-start;background:var(--coral-bg);color:var(--ink,inherit);border-left:6px solid var(--coral);border-radius:10px;padding:10px 14px;font-weight:700;font-size:1rem;line-height:1.5}
 .hint{color:var(--soft);font-size:.88rem;margin:0;max-width:70ch}
 .seg{display:inline-flex;border:1.5px solid var(--rule);border-radius:999px;overflow:hidden;background:var(--sheet)}
 .seg button{border:0;background:none;padding:4px 12px;font-size:.88rem;color:var(--soft)}
@@ -428,6 +429,7 @@ section{display:flex;flex-direction:column;gap:14px}
 
   <!-- 拼讀機 -->
   <section id="view-blend" hidden>
+    <p class="tip"><span aria-hidden="true">💬</span>指字練習。腦科學說，英文拼讀是一次又一次「眼到、口到、手到、心到」的歸納和積累。</p>
     <p class="hint">按「抽一個」，先自己把頭子音和韻尾拼起來唸出聲，再按「聽答案」核對。</p>
     <div class="machine">
       <div class="reel on"><small>頭子音</small><div class="us" id="bOnB"></div><div class="big" id="bOn">st</div></div>
@@ -458,6 +460,7 @@ section{display:flex;flex-direction:column;gap:14px}
 
   <!-- 假字手寫板 -->
   <section id="view-pad" hidden>
+    <p class="tip"><span aria-hidden="true">💬</span>請邊唸、邊聽、邊寫，完成作業。</p>
     <p class="hint">一頁一組。固定一個頭子音，配這個母音的全部尾子音；或固定一個尾子音，配全部頭子音。點格子上方的字可以聽音。</p>
     <div class="row">
       <div class="seg" id="pBy"><button type="button" data-by="on">固定頭子音</button><button type="button" data-by="co">固定尾子音</button></div>
@@ -476,6 +479,7 @@ section{display:flex;flex-direction:column;gap:14px}
 
   <!-- 140／280 音 -->
   <section id="view-cv" hidden>
+    <p class="tip"><span aria-hidden="true">💬</span>把自然拼讀練到又快又準，流暢準確。</p>
     <div class="card">
       <h2><span class="tag">PA ⇄ Phonics</span>頭子音 × 10 個母音</h2>
       <div class="row">
