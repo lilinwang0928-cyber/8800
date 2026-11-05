@@ -185,6 +185,16 @@ nav.modes button[aria-pressed="true"]{background:var(--coral);border-color:var(-
 .tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
 .tscroll table{min-width:560px}
 #aiTune{margin-top:16px}
+.v3{display:inline-flex;flex-wrap:wrap;gap:6px}
+.v3 button{display:inline-flex;align-items:baseline;gap:4px;background:var(--sheet);border:1.5px solid var(--ink);border-radius:999px;padding:5px 12px;font-weight:700;line-height:1.3;color:var(--ink)}
+.v3 button b{color:var(--coral)}
+.v3 button small{font-weight:500;font-size:.72rem;color:var(--soft);margin-left:2px}
+.v3 button[data-m="clr"]{border-color:var(--blue-ink,var(--ink))}
+.v3 button[data-m="chl"]{border-style:dashed}
+.v3 button.on{background:var(--coral);border-color:var(--coral);color:var(--coral-ink,#fff)}
+.v3 button.on b,.v3 button.on small{color:inherit}
+.flow{flex-basis:100%;margin:2px 0 0;font-size:.8rem;color:var(--soft);display:flex;flex-wrap:wrap;gap:4px 6px;align-items:center}
+.flow span{background:var(--rule2);border-radius:999px;padding:1px 8px;color:var(--ink)}
 .tip{margin:0;display:flex;gap:8px;align-items:flex-start;background:var(--coral-bg);color:var(--ink,inherit);border-left:6px solid var(--coral);border-radius:10px;padding:10px 14px;font-weight:700;font-size:1rem;line-height:1.5}
 .hint{color:var(--soft);font-size:.88rem;margin:0;max-width:70ch}
 .seg{display:inline-flex;border:1.5px solid var(--rule);border-radius:999px;overflow:hidden;background:var(--sheet)}
@@ -410,7 +420,7 @@ section{display:flex;flex-direction:column;gap:14px}
     <div class="now card">
       <div class="us" id="nowBlk"></div>
       <div class="big" id="nowWord">bat</div>
-      <button type="button" class="btn" id="again">🔊 再聽一次</button>
+      <div class="v3" role="group" aria-label="語音模式" data-v3="g"><button type="button" data-m="nat"><b>①</b> 自然聆聽<small>100%</small></button><button type="button" data-m="clr"><b>②</b> 清晰跟讀<small>85%</small></button><button type="button" data-m="chl"><b>③</b> 挑戰模仿<small>100%</small></button></div>
       <button type="button" class="btn" id="starBtn">標為真字 ★</button>
       <div class="rec">
         <button type="button" class="btn red" id="gRec">🎙 錄自己的聲音</button>
@@ -418,6 +428,7 @@ section{display:flex;flex-direction:column;gap:14px}
         <button type="button" class="btn" id="gBoth" disabled>⇄ 示範＋自己</button>
         <span class="sm" id="gRecMsg"></span>
       </div>
+      <p class="flow"><span>先聽 Listen</span>→<span>模仿 Imitate</span>→<span>練習 Practice</span>→<span>自主 Own Your Voice</span></p>
       <div class="row" style="margin-left:auto">
         <span class="sm">格內顯示</span>
         <div class="seg" id="disp"><button type="button" data-d="txt">字母</button><button type="button" data-d="blk">SoR專利注音</button><button type="button" data-d="both">兩者</button></div>
@@ -433,7 +444,7 @@ section{display:flex;flex-direction:column;gap:14px}
   <!-- 拼讀機 -->
   <section id="view-blend" hidden>
     <p class="tip"><span aria-hidden="true">💬</span>指字練習。腦科學說，英文拼讀是一次又一次「眼到、口到、手到、心到」的歸納和積累。</p>
-    <p class="hint">按「抽一個」，先自己把頭子音和韻尾拼起來唸出聲，再按「聽答案」核對。</p>
+    <p class="hint">按「抽一個」，先自己把頭子音和韻尾拼起來唸出聲，再按「① 自然聆聽」核對；「② 清晰跟讀」放慢到 85%；「③ 挑戰模仿」聽完會自動開始錄音。</p>
     <div class="machine">
       <div class="reel on"><small>頭子音</small><div class="us" id="bOnB"></div><div class="big" id="bOn">st</div></div>
       <div class="plus">＋</div>
@@ -443,9 +454,15 @@ section{display:flex;flex-direction:column;gap:14px}
     </div>
     <div class="row">
       <button type="button" class="btn red" id="bSpin">抽一個</button>
-      <button type="button" class="btn pu" id="bHear">🔊 聽答案</button>
+      <div class="v3" role="group" aria-label="語音模式" data-v3="b"><button type="button" data-m="nat"><b>①</b> 自然聆聽<small>100%</small></button><button type="button" data-m="clr"><b>②</b> 清晰跟讀<small>85%</small></button><button type="button" data-m="chl"><b>③</b> 挑戰模仿<small>100%</small></button></div>
       <button type="button" class="btn" id="bStar">標為真字 ★</button>
       <label class="inl"><input type="checkbox" id="bHide"> 先藏起字母（只看積木）</label>
+    </div>
+    <div class="row rec" style="border-left:0;padding-left:0">
+      <button type="button" class="btn red" id="bRec">🎙 錄自己的聲音</button>
+      <button type="button" class="btn" id="bMine" disabled>▶ 聽自己的錄音</button>
+      <button type="button" class="btn" id="bBoth" disabled>⇄ 示範＋自己</button>
+      <span class="sm" id="bRecMsg"></span>
     </div>
   </section>
 
@@ -505,13 +522,14 @@ section{display:flex;flex-direction:column;gap:14px}
     <div class="now card" id="cvNow">
       <div class="us" id="cvBlk"></div>
       <div class="big" id="cvWord">be</div>
-      <button type="button" class="btn pu" id="cvHear">🔊 聽示範</button>
+      <div class="v3" role="group" aria-label="語音模式" data-v3="cv"><button type="button" data-m="nat"><b>①</b> 自然聆聽<small>100%</small></button><button type="button" data-m="clr"><b>②</b> 清晰跟讀<small>85%</small></button><button type="button" data-m="chl"><b>③</b> 挑戰模仿<small>100%</small></button></div>
       <div class="rec">
         <button type="button" class="btn red" id="cvRec">🎙 錄自己的聲音</button>
         <button type="button" class="btn" id="cvMine" disabled>▶ 聽自己的錄音</button>
         <button type="button" class="btn" id="cvBoth" disabled>⇄ 示範＋自己</button>
         <span class="sm" id="cvRecMsg"></span>
       </div>
+      <p class="flow"><span>先聽 Listen</span>→<span>模仿 Imitate</span>→<span>練習 Practice</span>→<span>自主 Own Your Voice</span></p>
     </div>
     <div class="scroll"><table class="g" id="cvTbl"></table></div>
     <div class="card">
@@ -604,6 +622,7 @@ section{display:flex;flex-direction:column;gap:14px}
 
       <h3>這份學習單的使用原則</h3>
       <ul>
+        <li><b>三種語音模式</b>：① 自然聆聽 100%（建立完整聲音印象）→ ② 清晰跟讀 85%（放慢但音高與母音不變，適合辨音、跟讀）→ ③ 挑戰模仿 100%（聽一次就自動錄音，錄完回放比較）。照著「先聽 Listen → 模仿 Imitate → 練習 Practice → 自主 Own Your Voice」，慢慢減少對示範的依賴。學習單不打發音分數，錄音只存在自己的裝置上、不上傳。</li>
         <li><b>一次只變一個單位</b>：同一張表固定母音，只換頭子音或尾子音；手寫板「固定頭子音／固定尾子音」與聽音選字「只差頭子音或只差尾子音」都照這個原則設計。</li>
         <li><b>先讀穩再加速</b>：節拍器從 56 BPM 開始，前一段讀不穩就退回練習，不急著跳級。</li>
         <li><b>假字是刻意設計</b>：手寫板上的假字沒有意義，學生無法靠「認得這個字」猜讀，只能真正把音拼出來，這正是檢核拼讀能力的關鍵。</li>
@@ -783,14 +802,16 @@ function loadAudio(id,cb){var a=AUD[id];if(a){if(a.buf){if(cb)cb(a);}else if(a.f
       var got=false,done=function(buf){if(got)return;got=true;a.buf=buf;delete d.a;fin(a);};
       var p=ac().decodeAudioData(u8.buffer,done,bad);if(p&&p.then)p.then(done,bad);}catch(e){bad();}};
   sc.onerror=bad;document.head.appendChild(sc);}
-function noAudio(){var n=$("voiceNote");if(n)n.textContent="找不到錄音檔：請把 audio 資料夾和本頁放在同一層。";}
+function noAudio(){var n=$("voiceNote");if(!n)return;n.innerHTML='音檔載入失敗（請確認 audio 資料夾和本頁放在同一層、網路正常）。<button type="button" class="btn" id="audRetry">↻ 重試</button>';
+  $("audRetry").onclick=function(){Object.keys(AUD).forEach(function(k){if(AUD[k].fail)delete AUD[k];});n.textContent="";loadAudio(sheet(cur).id);};}
 var curSrc=null;
 function playClip(a,w){var m=a&&a.buf&&a.map&&a.map[w];if(!m)return false;
   try{if(curSrc)curSrc.stop();}catch(e){}
-  var c=ac(),src=c.createBufferSource();src.buffer=a.buf;src.connect(c.destination);src.start(0,m[0],m[1]);curSrc=src;return true;}
+  var c=ac(),src=c.createBufferSource();src.buffer=a.buf;src.connect(c.destination);src.start(0,m[0],m[1]);curSrc=src;return m[1];}
 function sheetOf(t){for(var i=0;i<SH.length;i++){var s=sheet(i);var cs=codas(s);for(var j=0;j<ONS.length;j++)for(var k=0;k<cs.length;k++)if(word(s,ONS[j][0],cs[k])===t)return s.id;}return null;}
-function speak(t,sid){sid=sid||sheet(cur).id;
-  loadAudio(sid,function(a){if(playClip(a,t))return;var o=sheetOf(t);if(o&&o!==sid)loadAudio(o,function(b){if(!playClip(b,t))noClip(t);});else noClip(t);});}
+function speak(t,sid,slow,cb){sid=sid||sheet(cur).id;var S=slow?"s":"";
+  var go=function(a){var d=playClip(a,t);if(d){if(cb)cb(d);return true;}return false;};
+  loadAudio(sid+S,function(a){if(go(a))return;var o=sheetOf(t);if(o&&o!==sid)loadAudio(o+S,function(b){if(!go(b))noClip(t);});else noClip(t);});}
 function noClip(t){var m=$("ppMsg2");if(mode==="pp"&&m)m.textContent="「"+t+"」不在 8800 音表裡，沒有錄音。請用「從這張表抽一個」練習。";}
 function stopClip(){try{if(curSrc)curSrc.stop();}catch(e){}curSrc=null;}
 if(synth){pickVoice();if("onvoiceschanged" in synth)synth.onvoiceschanged=pickVoice;}
@@ -873,7 +894,7 @@ function drawBpm(){$("bpm").innerHTML=[56,64,72,88,96].map(function(b){return '<
 
 /* ===== 拼讀機 ===== */
 var bl={o:"st",c:"mp"};
-function drawBlend(){var s=sheet(cur),cs=codas(s);if(cs.indexOf(bl.c)<0)bl.c=cs[0];
+function drawBlend(){var s=sheet(cur),cs=codas(s);if(cs.indexOf(bl.c)<0)bl.c=cs[0];if(window.bRecSync)bRecSync();
   var hide=$("bHide").checked;
   $("bOnB").innerHTML=seqHTML(onsU(bl.o),"∅");$("bOn").textContent=bl.o||"–";
   $("bRiB").innerHTML=seqHTML(s.vu.concat(COU[bl.c]));$("bRi").innerHTML=rimeHTML(s,bl.c);
@@ -1048,19 +1069,19 @@ function linesBack(lines,on){var out=[];lines.forEach(function(L){out=out.concat
 $("cvAllRow").addEventListener("click",function(){cvSeq(linesBack(CVV.map(function(_,v){return cvOns().map(function(o){return [o,v];});}),$("cvBack").checked),1);});
 $("cvAllCol").addEventListener("click",function(){var vs=CVV.map(function(_,v){return v;});cvSeq(linesBack(cvOns().map(function(o){return vs.map(function(v){return [o,v];});}),$("cvBack").checked),1);});
 $("cvStop").addEventListener("click",function(){stopAll();});
-$("cvHear").addEventListener("click",function(){speak(cvKey(cvs.o,cvs.v),"cv");});
 /* 錄音回放（8800 音、140／280 音共用） */
 var recr=null;
 function playMine(k){var a=new Audio(REC[k]);a.play().catch(function(){});return a;}
+var ENC=["Great effort! Keep going!","Every practice makes a difference!","Listen again, and give it another try!","Your voice, your progress!"];
 function makeRec(p){ // p:{rec,mine,both,msg,key(),sid(),demo()}
   function sync(){var k=p.key();$(p.mine).disabled=!REC[k];$(p.both).disabled=!REC[k];if(!recr)$(p.msg).textContent=REC[k]?"已有你的錄音。":"";}
   $(p.rec).addEventListener("click",function(){var btn=this,k=p.key();
     if(recr){try{recr.stop();}catch(e){}return;}
     if(!navigator.mediaDevices||!window.MediaRecorder){$(p.msg).textContent="這個瀏覽器不能錄音。請用 Chrome、Edge 或 Safari 開啟。";return;}
-    navigator.mediaDevices.getUserMedia({audio:true}).then(function(st){var ch=[];recr=new MediaRecorder(st);
+    stopAll();navigator.mediaDevices.getUserMedia({audio:true}).then(function(st){var ch=[];recr=new MediaRecorder(st);
       recr.ondataavailable=function(e){if(e.data&&e.data.size)ch.push(e.data);};
       recr.onstop=function(){st.getTracks().forEach(function(t){t.stop();});if(REC[k])URL.revokeObjectURL(REC[k]);REC[k]=URL.createObjectURL(new Blob(ch,{type:recr.mimeType||"audio/webm"}));recr=null;
-        btn.textContent="🎙 錄自己的聲音";btn.classList.remove("recon");sync();$(p.msg).textContent="錄好了，按「聽自己的錄音」回放。";};
+        btn.textContent="🎙 錄自己的聲音";btn.classList.remove("recon");sync();$(p.msg).textContent="錄好了，按「聽自己的錄音」回放，和示範比一比。 "+rnd(ENC);};
       recr.start();btn.textContent="⏹ 停止錄音";btn.classList.add("recon");$(p.msg).textContent="錄音中…唸完再按一次停止（最長 5 秒）。";
       setTimeout(function(){if(recr&&recr.state==="recording")recr.stop();},5000);
     },function(){$(p.msg).textContent="沒有取得麥克風權限。請在瀏覽器網址列旁允許使用麥克風。";});});
@@ -1068,6 +1089,18 @@ function makeRec(p){ // p:{rec,mine,both,msg,key(),sid(),demo()}
   $(p.both).addEventListener("click",function(){var k=p.key();if(!REC[k])return;p.demo();setTimeout(function(){playMine(k);},1100);});
   return sync;}
 window.cvRecSync=makeRec({rec:"cvRec",mine:"cvMine",both:"cvBoth",msg:"cvRecMsg",key:function(){return "cv:"+cvKey(cvs.o,cvs.v);},demo:function(){speak(cvKey(cvs.o,cvs.v),"cv");}});
+window.bRecSync=makeRec({rec:"bRec",mine:"bMine",both:"bBoth",msg:"bRecMsg",key:function(){var s=sheet(cur);return s.id+":"+word(s,bl.o,bl.c);},demo:function(){speak(word(sheet(cur),bl.o,bl.c));}});
+/* 三種語音模式：① 自然聆聽 100%　② 清晰跟讀 85%（音高不變）　③ 挑戰模仿 100%＋聽完自動錄音 */
+var V3={g:{say:function(){return [word(sheet(cur),sel.o,sel.c),null];},rec:"gRec",msg:"gRecMsg"},
+  cv:{say:function(){return [cvKey(cvs.o,cvs.v),"cv"];},rec:"cvRec",msg:"cvRecMsg"},
+  b:{say:function(){var s=sheet(cur),w=word(s,bl.o,bl.c);bag("read",s.id)[w]=1;save();drawSheets();drawHead();bReveal();return [w,null];},rec:"bRec",msg:"bRecMsg"}};
+document.addEventListener("click",function(e){var b=e.target.closest(".v3 button");if(!b)return;var g=b.parentNode,V=V3[g.getAttribute("data-v3")],m=b.getAttribute("data-m");
+  if(recr){try{recr.stop();}catch(x){}}stopAll();
+  [].forEach.call(g.children,function(x){x.classList.toggle("on",x===b);});setTimeout(function(){b.classList.remove("on");},1200);
+  var s=V.say();
+  if(m==="chl"){$(V.msg).textContent="③ 挑戰模仿：仔細聽，聽完會自動開始錄音，換你唸！";
+    speak(s[0],s[1],false,function(d){setTimeout(function(){if(!recr)$(V.rec).click();},d*1000+350);});}
+  else speak(s[0],s[1],m==="clr");});
 window.gRecSync=makeRec({rec:"gRec",mine:"gMine",both:"gBoth",msg:"gRecMsg",key:function(){var s=sheet(cur);return s.id+":"+word(s,sel.o,sel.c);},demo:function(){speak(word(sheet(cur),sel.o,sel.c));}});
 $("cvShow").addEventListener("click",function(){cvs.show=!cvs.show;var t=$("cvPads").querySelectorAll(".tr");for(var i=0;i<t.length;i++)t[i].hidden=!cvs.show;this.className="btn"+(cvs.show?" on":"");this.textContent="描紅："+(cvs.show?"開":"關");});
 $("cvClear").addEventListener("click",function(){sizeInk($("cvPads"));});
@@ -1103,7 +1136,6 @@ $("modes").addEventListener("click",function(e){var b=e.target.closest("button[d
 $("sheets").addEventListener("click",function(e){var b=e.target.closest("button");if(b)setSheet(+b.getAttribute("data-sheet"));});
 $("tbl").addEventListener("click",function(e){var b=e.target.closest("td button");if(!b)return;stopAll();var o=b.getAttribute("data-o"),c=b.getAttribute("data-c");
   focusCell(o,c,true);drawSheets();speak(word(sheet(cur),o,c));});
-$("again").addEventListener("click",function(){speak(word(sheet(cur),sel.o,sel.c));});
 $("starBtn").addEventListener("click",function(){var on=toggleStar(sel.o,sel.c);$("starBtn").className="btn"+(on?" on":"");});
 $("bpm").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;store.bpm=+b.getAttribute("data-b");save();drawBpm();});
 $("playRow").addEventListener("click",function(){var s=sheet(cur);startPlay(visCodas(s).map(function(c){return [sel.o,c];}));});
@@ -1119,8 +1151,7 @@ var armed=false;
 $("clearSheet").addEventListener("click",function(){var b=$("clearSheet");if(!armed){armed=true;b.textContent="再按一次確定清除";setTimeout(function(){armed=false;b.textContent="清除這張表的紀錄";},3000);return;}
   armed=false;b.textContent="清除這張表的紀錄";var s=sheet(cur);store.read[s.id]={};store.star[s.id]={};save();setSheet(cur);});
 $("bSpin").addEventListener("click",function(){var s=sheet(cur);bl.o=rnd(ONS)[0];bl.c=rnd(codas(s));drawBlend();});
-$("bHear").addEventListener("click",function(){var s=sheet(cur),w=word(s,bl.o,bl.c);bag("read",s.id)[w]=1;save();drawSheets();drawHead();speak(w);
-  ["bOn","bRi","bAll"].forEach(function(id){$(id).style.visibility="";});});
+function bReveal(){["bOn","bRi","bAll"].forEach(function(id){$(id).style.visibility="";});}
 $("bStar").addEventListener("click",function(){toggleStar(bl.o,bl.c);drawBlend();});
 $("bHide").addEventListener("change",drawBlend);
 $("qPlay").addEventListener("click",function(){if(!q)newQ();speak(q.ans);});
