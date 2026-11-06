@@ -11,6 +11,7 @@
 <meta name="theme-color" content="#d6705f">
 <meta name="apple-mobile-web-app-title" content="8800音">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Noto+Sans+TC:wght@400;500;700;900&display=swap">
+<script>(function(){try{var t=localStorage.getItem("sor8800-theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
 <style>
 /* 配色取自 SoR 課本：珊瑚紅（PA 音）、橘（Phonics 形）、積木藍＝子音、積木粉＝母音、紫＝聽力測驗、藏青＝停止 */
 :root{
@@ -121,7 +122,8 @@ button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid
 .band{height:10px;background:linear-gradient(90deg,var(--coral) 0 60%,var(--orange) 60%)}
 .wrap{max-width:1200px;margin:0 auto;padding:18px 16px 56px;display:flex;flex-direction:column;gap:16px}
 header.top{display:grid;grid-template-columns:minmax(0,360px) minmax(0,1fr);align-items:center;gap:16px 28px}
-.appline .reload{margin-left:auto;font-weight:700;white-space:nowrap}
+.appline .theme{margin-left:auto;font-weight:700;white-space:nowrap}
+.appline .reload{font-weight:700;white-space:nowrap}
 .hero{width:100%;height:auto;border-radius:22px;box-shadow:0 14px 30px -18px rgba(120,60,40,.55);display:block}
 .appline{display:flex;align-items:center;gap:10px;margin-bottom:6px}
 .appicon{width:56px;height:56px;border-radius:14px;box-shadow:0 4px 10px -4px rgba(120,60,40,.5)}
@@ -355,7 +357,7 @@ section{display:flex;flex-direction:column;gap:14px}
   <header class="top">
     <img class="hero" src="img/header.webp" srcset="img/header-800.webp 600w, img/header.webp 1000w" sizes="(max-width:700px) 100vw, 360px" width="1000" height="1000" alt="大小安迪哥陪你練 PA">
     <div class="ttl">
-      <div class="appline"><img class="appicon" src="img/icon-192.png" width="56" height="56" alt=""><span class="sm">SoR 美語・PA ⇄ Phonics</span><button type="button" class="btn reload" id="reloadBtn" onclick="location.reload()" title="重新整理頁面">↻ 重新整理</button></div>
+      <div class="appline"><img class="appicon" src="img/icon-192.png" width="56" height="56" alt=""><span class="sm">SoR 美語・PA ⇄ Phonics</span><button type="button" class="btn theme" id="themeBtn" aria-pressed="false" title="切換深色／淺色版面">🌙 深色</button><button type="button" class="btn reload" id="reloadBtn" onclick="location.reload()" title="重新整理頁面">↻ 重新整理</button></div>
       <h1><em>8800 音</em>音節表互動學習單</h1>
       <p class="lede">8800 音 17 張表（頭子音 × 母音 × 20 個尾子音）＋ 140／280 音。點格子聽示範、跟著節拍器唸、錄下自己的聲音比一比，再動手寫。</p>
       <div class="legend"><b class="sm">SoR專利注音：</b>
@@ -1174,6 +1176,14 @@ drawBpm();drawDisp();drawCue();
 ppExp=ppAnswer(ppParse($("ppIn").value));
 setSheet(cur);setMode("grid");
 })();
+
+/* ===== 深淺版面切換 ===== */
+(function(){var R=document.documentElement,B=document.getElementById("themeBtn");if(!B)return;
+  function isDark(){var t=R.getAttribute("data-theme");if(t)return t==="dark";return !!(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches);}
+  function paint(){var d=isDark();B.textContent=d?"☀️ 淺色":"🌙 深色";B.setAttribute("aria-pressed",d?"true":"false");B.title=d?"切換成淺色版面":"切換成深色版面";}
+  B.addEventListener("click",function(){var n=isDark()?"light":"dark";R.setAttribute("data-theme",n);try{localStorage.setItem("sor8800-theme",n);}catch(e){}paint();if(window.drawCue)try{drawCue();}catch(e){}});
+  if(window.matchMedia){try{matchMedia("(prefers-color-scheme: dark)").addEventListener("change",paint);}catch(e){}}
+  paint();})();
 
 </script>
 </body>
