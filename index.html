@@ -651,7 +651,7 @@ section{display:flex;flex-direction:column;gap:14px}
       <p>我對音檔只有一個要求：<b>照假字規則唸出音素組合，不能當成真字唸，也不能唸成字母。</b>瀏覽器內建的文字轉語音做不到，所以改用可以直接輸入音標的開源語音模型。接下來的每一個問題，都是我用耳朵聽出來、Claude 用數據找出原因、再一起修正。</p>
 
       <h3>調音紀錄：AI 犯的錯，和學生一樣</h3>
-      <p>我們一共修正了 10 類問題，依發生順序排列：</p>
+      <p>我們一共修正了 11 類問題，依發生順序排列：</p>
       <div class="tscroll"><table>
         <thead><tr><th>我聽到的</th><th>原因</th><th>學生身上的對應</th><th>修正方式</th></tr></thead>
         <tbody>
@@ -665,6 +665,7 @@ section{display:flex;flex-direction:column;gap:14px}
           <tr><td>p、t、k（及 st、sp、mp、nt）前的母音太長</td><td>沒有區分母音長短</td><td>每個母音都唸一樣長</td><td>母音縮短為快拍</td></tr>
           <tr><td>a 表尾子音 11～13 號（m、mb、mp）的 /æ/ 怪怪的</td><td>美式口語把 m、n 前的 /æ/ 唸成 /eə/</td><td>母音被後面的音帶著走</td><td>用不接鼻音的環境取母音，再接回鼻音</td></tr>
           <tr><td>s 開頭的音節 s 不見、th 掉了</td><td>音素被模型漏掉</td><td>叢音少唸一個音</td><td>改用別的前導音、補接缺漏的音素</td></tr>
+          <tr><td>尾子音 12 號 mb 的 b 沒唸出來</td><td>照真字 lamb、comb 的拼字習慣，把 b 當不發音</td><td>用背過的真字規則去套假字</td><td>m 之後補上尾子音「氣音ㄅ」：雙唇輕輕放開，不帶母音</td></tr>
         </tbody>
       </table></div>
       <p>從頭子音、尾子音，到母音的音質、長短和語調，這個順序跟學生從 140 音練到 8800 音的順序幾乎一樣。</p>
@@ -937,7 +938,7 @@ bindInk($("pads"),function(){return +$("pPen").value;});
 
 /* ===== 聽音選字 ===== */
 var q=null,score={ok:0,n:0};
-var QC=["s","b","p","d","t","g","K","st","sp","m","mp","n","nd","nt","ch","sh","th"]; // 去掉同音的 ss、mb、ph
+var QC=["s","b","p","d","t","g","K","st","sp","m","mb","mp","n","nd","nt","ch","sh","th"]; // 去掉同音的 ss、ph
 function newQ(){var s=sheet(cur),opts=[];
   var pool=function(a,n){a=a.slice();var r=[];while(r.length<n&&a.length)r.push(a.splice(Math.floor(Math.random()*a.length),1)[0]);return r;};
   if(Math.random()<0.5){var c=rnd(QC);c=c==="K"?s.k:c;opts=pool(ONS.slice(1).map(function(o){return o[0];}),4).map(function(o){return [o,c];});}
