@@ -231,6 +231,20 @@ nav.modes button[aria-pressed="true"]{background:var(--coral);border-color:var(-
 .ci-bl{display:flex;flex-wrap:wrap;gap:8px}
 .ci-bl span{border:1.5px dashed var(--rule);border-radius:999px;padding:4px 12px;font-size:.9rem;color:var(--soft)}
 .ci-bl span.got{border-style:solid;border-color:var(--coral);color:var(--ink);background:var(--coral-bg);font-weight:700}
+.pbar{position:fixed;left:50%;transform:translateX(-50%);bottom:max(10px,env(safe-area-inset-bottom));z-index:50;width:min(560px,calc(100% - 20px));display:flex;align-items:center;gap:8px;padding:8px 10px 8px 14px;background:var(--sheet);color:var(--ink);border:1.5px solid var(--ink);border-radius:999px;box-shadow:0 10px 28px -12px rgba(0,0,0,.45)}
+.pbar[hidden]{display:none}
+.pb-now{flex:1;min-width:0;display:flex;align-items:baseline;gap:6px;white-space:nowrap;overflow:hidden}
+.pb-now b{font-size:1.15rem;overflow:hidden;text-overflow:ellipsis}
+.pb-now small{color:var(--soft);font-size:.78rem}
+.pb-dot{width:9px;height:9px;border-radius:50%;background:var(--rule);flex:none;align-self:center}
+.pbar.on .pb-dot{background:var(--coral);animation:pbBlink 1s infinite}
+@keyframes pbBlink{50%{opacity:.25}}
+.pbar button{border-radius:999px;font-weight:700;white-space:nowrap;cursor:pointer;line-height:1.2}
+.pb-main{background:var(--coral);border:1.5px solid var(--coral);color:var(--coral-ink);padding:8px 16px;font-size:1rem;min-width:88px}
+.pb-btn{background:none;border:1.5px solid var(--rule);color:var(--ink);padding:7px 11px;font-size:.9rem}
+.pb-x{background:none;border:0;color:var(--soft);padding:6px 8px;font-size:1rem}
+@media (max-width:420px){.pb-btn{padding:7px 8px;font-size:.82rem}.pb-main{min-width:76px;padding:8px 12px}.pb-now small{display:none}}
+body{padding-bottom:84px}
 .tip{margin:0;display:flex;gap:8px;align-items:flex-start;background:var(--coral-bg);color:var(--ink,inherit);border-left:6px solid var(--coral);border-radius:10px;padding:10px 14px;font-weight:700;font-size:1rem;line-height:1.5}
 .hint{color:var(--soft);font-size:.88rem;margin:0;max-width:70ch}
 .seg{display:inline-flex;border:1.5px solid var(--rule);border-radius:999px;overflow:hidden;background:var(--sheet)}
@@ -783,6 +797,13 @@ section{display:flex;flex-direction:column;gap:14px}
     </div>
   </section>
 
+  <div class="pbar" id="pbar" hidden role="region" aria-label="播放控制">
+    <span class="pb-now"><span class="pb-dot" id="pbDot"></span><b id="pbWord">—</b><small id="pbInfo"></small></span>
+    <button type="button" class="pb-main" id="pbMain" aria-label="暫停">⏸ 暫停</button>
+    <button type="button" class="pb-btn" id="pbAgain" aria-label="重播">↻ 重播</button>
+    <button type="button" class="pb-btn" id="pbStop" aria-label="停止">■ 停止</button>
+    <button type="button" class="pb-x" id="pbClose" aria-label="關閉播放列">✕</button>
+  </div>
   <footer>
     <div>
       <p style="margin:0 0 4px"><b>SoR專利注音</b>出自蕭博士 SoR 專利雙語音標（2024 年 4 月獲經濟部智慧財產局發明專利）。</p>
@@ -878,11 +899,35 @@ function loadAudio(id,cb){var a=AUD[id];if(a){if(a.buf){if(cb)cb(a);}else if(a.f
 function noAudio(){var n=$("voiceNote");if(!n)return;n.innerHTML='音檔載入失敗（請確認 audio 資料夾和本頁放在同一層、網路正常）。<button type="button" class="btn" id="audRetry">↻ 重試</button>';
   $("audRetry").onclick=function(){Object.keys(AUD).forEach(function(k){if(AUD[k].fail)delete AUD[k];});n.textContent="";loadAudio(sheet(cur).id);};}
 var curSrc=null;
+/* ===== 下方播放控制列 ===== */
+var PB={last:null,paused:false,gstep:null,gms:0,closed:false};
+function pbLabel(t){var m=/^c(\d+)_(\d+)$/.exec(t||"");return m?cvWord(+m[1],+m[2]):(t||"—");}
+function pbSeq(){return !!(sq||timer||(PB.paused&&(PB.gstep||PB.sq)));}
+function pbSync(){var bar=$("pbar");if(!bar||!PB.last)return;
+  var playing=!PB.paused&&(!!curSrc||!!sq||!!timer);
+  if(playing)PB.closed=false;bar.hidden=PB.closed;bar.classList.toggle("on",playing);
+  $("pbWord").textContent=pbLabel(PB.last.t);
+  $("pbInfo").textContent=(sq||timer||PB.sq||(PB.paused&&PB.gstep))?"連續播放・"+store.bpm+" BPM":(PB.last.slow?"清晰跟讀 85%":"100%");
+  var M=$("pbMain");if(PB.paused){M.textContent="▶ 繼續";M.setAttribute("aria-label","繼續播放");}
+  else if(playing){M.textContent="⏸ 暫停";M.setAttribute("aria-label","暫停");}
+  else{M.textContent="▶ 播放";M.setAttribute("aria-label","再播一次");}}
+function pbPause(){PB.paused=true;
+  if(timer){clearInterval(timer);timer=null;}
+  if(sq){clearInterval(sq.t);sq.t=null;PB.sq=sq;}
+  try{ac();actxP.suspend();}catch(e){}pbSync();}
+function pbResume(){PB.paused=false;var c=actxP;
+  var go=function(){if(PB.gstep&&queue.length){PB.gstep();timer=setInterval(PB.gstep,PB.gms);}
+    else if(PB.sq&&sq===PB.sq){sq.step();sq.t=setInterval(sq.step,60000/store.bpm);}
+    PB.sq=null;pbSync();};
+  if(c&&c.state==="suspended")c.resume().then(go,go);else go();}
+function pbMain(){if(PB.paused)return pbResume();
+  if(curSrc||sq||timer)return pbPause();
+  if(PB.last)speak(PB.last.t,PB.last.sid,PB.last.slow);}
 function playClip(a,w){var m=a&&a.buf&&a.map&&a.map[w];if(!m)return false;
   try{if(curSrc)curSrc.stop();}catch(e){}
-  var c=ac(),src=c.createBufferSource();src.buffer=a.buf;src.connect(c.destination);src.start(0,m[0],m[1]);curSrc=src;actAdd("l");return m[1];}
+  var c=ac(),src=c.createBufferSource();src.buffer=a.buf;src.connect(c.destination);src.start(0,m[0],m[1]);curSrc=src;actAdd("l");src.onended=function(){if(curSrc===src){curSrc=null;pbSync();}};pbSync();return m[1];}
 function sheetOf(t){for(var i=0;i<SH.length;i++){var s=sheet(i);var cs=codas(s);for(var j=0;j<ONS.length;j++)for(var k=0;k<cs.length;k++)if(word(s,ONS[j][0],cs[k])===t)return s.id;}return null;}
-function speak(t,sid,slow,cb){sid=sid||sheet(cur).id;var S=slow?"s":"";
+function speak(t,sid,slow,cb){sid=sid||sheet(cur).id;var S=slow?"s":"";PB.last={t:t,sid:sid,slow:!!slow};PB.paused=false;
   var go=function(a){var d=playClip(a,t);if(d){if(cb)cb(d);return true;}return false;};
   loadAudio(sid+S,function(a){if(go(a))return;var o=sheetOf(t);if(o&&o!==sid)loadAudio(o+S,function(b){if(!go(b))noClip(t);});else noClip(t);});}
 function noClip(t){var m=$("ppMsg2");if(mode==="pp"&&m)m.textContent="「"+t+"」不在 8800 音表裡，沒有錄音。請用「從這張表抽一個」練習。";}
@@ -952,9 +997,9 @@ function seqPlay(list){stopAll();if(!list.length)return;sq={list:list.slice(),t:
   var step=function(){if(!sq)return;if(sq.el)sq.el.classList.remove("play");if(!sq.list.length){seqStop();return;}
     var it=sq.list.shift();tick(sq.n%4===0);beatLamp(sq.n);sq.n++;if(it.el){it.el.classList.add("play");it.el.scrollIntoView({block:"nearest",inline:"nearest"});sq.el=it.el;}
     if(it.fn)it.fn();speak(it.k,it.sid);};
-  step();sq.t=setInterval(step,60000/store.bpm);}
-function stopAll(){seqStop();if(timer){clearInterval(timer);timer=null;}queue=[];stopClip();if(synth){try{synth.cancel();}catch(e){}}
-  var p=$("tbl").querySelector("td.play");if(p)p.classList.remove("play");$("beat").classList.remove("on");}
+  sq.step=step;step();sq.t=setInterval(step,60000/store.bpm);pbSync();}
+function stopAll(){seqStop();if(timer){clearInterval(timer);timer=null;}queue=[];stopClip();PB.paused=false;PB.gstep=null;PB.sq=null;if(actxP&&actxP.state==="suspended")try{actxP.resume();}catch(e){}if(synth){try{synth.cancel();}catch(e){}}
+  var p=$("tbl").querySelector("td.play");if(p)p.classList.remove("play");$("beat").classList.remove("on");pbSync();}
 function startPlay(list,nb){stopAll();if(!nb&&$("back").checked&&list.length>1)list=list.concat(list.slice(0,-1).reverse());
   queue=list;beatN=0;var ms=60000/store.bpm;
   function step(){var p=$("tbl").querySelector("td.play");if(p)p.classList.remove("play");
@@ -962,7 +1007,7 @@ function startPlay(list,nb){stopAll();if(!nb&&$("back").checked&&list.length>1)l
     var it=queue.shift();tick(beatN%4===0);beatLamp(beatN);beatN++;
     focusCell(it[0],it[1],true);var td=cellTd(it[0],it[1]);if(td){td.classList.add("play");td.scrollIntoView({block:"nearest",inline:"nearest"});}
     speak(word(sheet(cur),it[0],it[1]));}
-  step();timer=setInterval(step,ms);}
+  PB.gstep=step;PB.gms=ms;step();timer=setInterval(step,ms);pbSync();}
 function drawBpm(){$("bpm").innerHTML=[56,64,72,88,96].map(function(b){return '<button type="button" data-b="'+b+'" aria-pressed="'+(store.bpm===b)+'">'+b+'<small>BPM</small></button>';}).join("");}
 
 /* ===== 拼讀機 ===== */
@@ -1245,6 +1290,10 @@ document.addEventListener("pointerdown",function(){ac();},{once:true});
 drawBpm();drawDisp();drawCue();
 ppExp=ppAnswer(ppParse($("ppIn").value));
 setSheet(cur);setMode("grid");
+$("pbMain").addEventListener("click",pbMain);
+$("pbAgain").addEventListener("click",function(){if(!PB.last)return;var L=PB.last;if(sq||timer||PB.paused)stopAll();speak(L.t,L.sid,L.slow);});
+$("pbStop").addEventListener("click",function(){stopAll();});
+$("pbClose").addEventListener("click",function(){stopAll();PB.closed=true;$("pbar").hidden=true;});
 /* ===== 每日打卡 ===== */
 var QUOTES=[
  ["先聽見聲音，再模仿聲音，最後讓聲音成為自己的能力。","Listen. Imitate. Practice. Own your voice."],
