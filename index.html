@@ -122,10 +122,14 @@ button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid
 .band{height:10px;background:linear-gradient(90deg,var(--coral) 0 60%,var(--orange) 60%)}
 .wrap{max-width:1200px;margin:0 auto;padding:18px 16px 56px;display:flex;flex-direction:column;gap:16px}
 header.top{display:grid;grid-template-columns:minmax(0,360px) minmax(0,1fr);align-items:center;gap:16px 28px}
-.appline .theme{margin-left:auto;font-weight:700;white-space:nowrap}
+.appline .streak{margin-left:auto;font-weight:700;white-space:nowrap;position:relative}
+.appline .streak i{position:absolute;top:2px;right:2px;width:9px;height:9px;border-radius:50%;background:var(--coral)}
+.appline .streak i[hidden]{display:none}
+.appline .theme{font-weight:700;white-space:nowrap}
 .appline .reload{font-weight:700;white-space:nowrap}
 .hero{width:100%;height:auto;border-radius:22px;box-shadow:0 14px 30px -18px rgba(120,60,40,.55);display:block}
-.appline{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.appline{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin-bottom:6px}
+@media (max-width:520px){.appline .btn{padding:5px 10px;font-size:.88rem}.appline .appicon{width:44px;height:44px}}
 .appicon{width:56px;height:56px;border-radius:14px;box-shadow:0 4px 10px -4px rgba(120,60,40,.5)}
 @media (max-width:700px){header.top{grid-template-columns:1fr}}
 .badge{flex:none;width:86px;height:86px;border-radius:50%;background:var(--coral-bg);display:grid;place-items:center;text-align:center;line-height:1.05;color:var(--coral);font-weight:900}
@@ -198,6 +202,35 @@ nav.modes button[aria-pressed="true"]{background:var(--coral);border-color:var(-
 .v3 button.on b,.v3 button.on small{color:inherit}
 .flow{flex-basis:100%;margin:2px 0 0;font-size:.8rem;color:var(--soft);display:flex;flex-wrap:wrap;gap:4px 6px;align-items:center}
 .flow span{background:var(--rule2);border-radius:999px;padding:1px 8px;color:var(--ink)}
+#view-checkin .card{margin-top:14px}
+.ci-top{text-align:center}
+.ci-date{font-weight:700;color:var(--soft)}
+.ci-stats{display:flex;justify-content:center;gap:10px;margin:10px 0}
+.ci-stats div{flex:1;max-width:130px;background:var(--rule2);border-radius:14px;padding:8px 4px;display:flex;flex-direction:column}
+.ci-stats b{font-size:1.9rem;line-height:1.1;color:var(--coral)}
+.ci-stats span{font-size:.8rem;color:var(--soft)}
+.ci-today{font-size:.92rem;margin:4px 0 10px}
+.ci-btn{font-size:1.15rem;padding:10px 26px;background:var(--coral);border-color:var(--coral);color:var(--coral-ink);font-weight:800}
+.ci-btn:disabled{background:var(--rule2);border-color:var(--rule);color:var(--soft);opacity:1}
+.ci-msg{min-height:1.4em;font-weight:700;margin:10px 0 0}
+.ci-msg.pop{animation:ciPop .5s ease}
+@keyframes ciPop{0%{transform:scale(.85);opacity:0}100%{transform:none;opacity:1}}
+.ci-quote h3,.ci-badges h3{margin:0 0 6px}
+.ci-quote .zh{font-size:1.12rem;font-weight:700;line-height:1.6;margin:0}
+.ci-quote .en{color:var(--soft);font-style:italic;margin:4px 0 0}
+.ci-calhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.ci-calhead .btn{padding:2px 14px;font-size:1.2rem}
+.ci-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center}
+.ci-grid .h{font-size:.75rem;color:var(--soft);font-weight:700}
+.ci-grid .d{position:relative;aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:10px;font-size:.9rem;background:var(--rule2)}
+.ci-grid .d.e{background:none}
+.ci-grid .d.today{outline:2px solid var(--coral);outline-offset:-2px;font-weight:800}
+.ci-grid .d.on{background:var(--coral);color:var(--coral-ink);font-weight:800}
+.ci-grid .d.on::after{content:"SoR";position:absolute;bottom:2px;font-size:.5rem;letter-spacing:.04em;opacity:.9}
+.ci-grid .d.fut{opacity:.45}
+.ci-bl{display:flex;flex-wrap:wrap;gap:8px}
+.ci-bl span{border:1.5px dashed var(--rule);border-radius:999px;padding:4px 12px;font-size:.9rem;color:var(--soft)}
+.ci-bl span.got{border-style:solid;border-color:var(--coral);color:var(--ink);background:var(--coral-bg);font-weight:700}
 .tip{margin:0;display:flex;gap:8px;align-items:flex-start;background:var(--coral-bg);color:var(--ink,inherit);border-left:6px solid var(--coral);border-radius:10px;padding:10px 14px;font-weight:700;font-size:1rem;line-height:1.5}
 .hint{color:var(--soft);font-size:.88rem;margin:0;max-width:70ch}
 .seg{display:inline-flex;border:1.5px solid var(--rule);border-radius:999px;overflow:hidden;background:var(--sheet)}
@@ -357,7 +390,7 @@ section{display:flex;flex-direction:column;gap:14px}
   <header class="top">
     <img class="hero" src="img/header.webp" srcset="img/header-800.webp 600w, img/header.webp 1000w" sizes="(max-width:700px) 100vw, 360px" width="1000" height="1000" alt="大小安迪哥陪你練 PA">
     <div class="ttl">
-      <div class="appline"><img class="appicon" src="img/icon-192.png" width="56" height="56" alt=""><span class="sm">SoR 美語・PA ⇄ Phonics</span><button type="button" class="btn theme" id="themeBtn" aria-pressed="false" title="切換深色／淺色版面">🌙 深色</button><button type="button" class="btn reload" id="reloadBtn" onclick="location.reload()" title="重新整理頁面">↻ 重新整理</button></div>
+      <div class="appline"><img class="appicon" src="img/icon-192.png" width="56" height="56" alt=""><span class="sm">SoR 美語・PA ⇄ Phonics</span><button type="button" class="btn streak" id="streakBtn" title="每日打卡">🔥 <b id="streakN">0</b> 天<i id="streakDot" aria-label="今天還沒打卡"></i></button><button type="button" class="btn theme" id="themeBtn" aria-pressed="false" title="切換深色／淺色版面">🌙 深色</button><button type="button" class="btn reload" id="reloadBtn" onclick="location.reload()" title="重新整理頁面">↻ 重新整理</button></div>
       <h1><em>8800 音</em>音節表互動學習單</h1>
       <p class="lede">8800 音 17 張表（頭子音 × 母音 × 20 個尾子音）＋ 140／280 音。點格子聽示範、跟著節拍器唸、錄下自己的聲音比一比，再動手寫。</p>
       <div class="legend"><b class="sm">SoR專利注音：</b>
@@ -381,6 +414,7 @@ section{display:flex;flex-direction:column;gap:14px}
       <button type="button" data-target="pp">音素三階段</button>
     </div>
     <div class="ngrp"><span class="nlab">看</span>
+      <button type="button" data-target="checkin">每日打卡</button>
       <button type="button" data-target="stars">我的真字</button>
       <button type="button" data-target="guide">教師說明</button>
     </div>
@@ -583,6 +617,36 @@ section{display:flex;flex-direction:column;gap:14px}
   </section>
 
   <!-- 我的真字 -->
+  <!-- 每日打卡 -->
+  <section id="view-checkin" hidden>
+    <p class="tip"><span aria-hidden="true">💬</span>每天練一點，聲音就會慢慢變成自己的。練完記得來打卡！</p>
+    <div class="ci-top card">
+      <div class="ci-date" id="ciDate"></div>
+      <div class="ci-stats">
+        <div><b id="ciStreak">0</b><span>連續天數</span></div>
+        <div><b id="ciTotal">0</b><span>累計天數</span></div>
+        <div><b id="ciBest">0</b><span>最長連續</span></div>
+      </div>
+      <div class="ci-today" id="ciToday"></div>
+      <button type="button" class="btn ci-btn" id="ciBtn">✅ 今日打卡</button>
+      <p class="ci-msg" id="ciMsg" aria-live="polite"></p>
+    </div>
+    <div class="ci-quote card">
+      <h3>今日小語</h3>
+      <p class="zh" id="qZh"></p>
+      <p class="en" id="qEn"></p>
+    </div>
+    <div class="ci-cal card">
+      <div class="ci-calhead"><button type="button" class="btn" id="calPrev" aria-label="上個月">‹</button><b id="calTitle"></b><button type="button" class="btn" id="calNext" aria-label="下個月">›</button></div>
+      <div class="ci-grid" id="calGrid"></div>
+      <p class="sm">打過卡的日子會蓋上 SoR 印章。打卡紀錄只存在這台裝置上。</p>
+    </div>
+    <div class="ci-badges card">
+      <h3>里程碑</h3>
+      <div class="ci-bl" id="ciBadges"></div>
+    </div>
+  </section>
+
   <section id="view-stars" hidden>
     <p class="hint">這裡收著你在各張表標過星的字。點一下可以再聽；回到音節表再點星號可以取消。</p>
     <div id="starList"></div>
@@ -783,11 +847,16 @@ function seqHTML(us,noneLabel){if(!us.length)return noneLabel?'<span class="us">
   return '<span class="us">'+us.map(unitHTML).join("")+'</span>';}
 
 /* ===== 儲存（沿用舊版 key，學生進度不會遺失） ===== */
-var KEY="sor8800-v1",store={cueS:true,cueV:true,fix:{},read:{},star:{},sheet:0,rate:0.8,bpm:56,disp:"txt",step:0};
+var KEY="sor8800-v1",store={ci:{},act:{},cueS:true,cueV:true,fix:{},read:{},star:{},sheet:0,rate:0.8,bpm:56,disp:"txt",step:0};
 try{var raw=localStorage.getItem(KEY);if(raw){var ob=JSON.parse(raw);if(ob&&typeof ob==="object"){for(var kk in store)if(ob[kk]!=null)store[kk]=ob[kk];}}}catch(e){}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(store));}catch(e){}}
 function bag(kind,id){return store[kind][id]||(store[kind][id]={});}
 
+/* ===== 每日打卡 ===== */
+function dkey(d){d=d||new Date();return d.getFullYear()+"-"+("0"+(d.getMonth()+1)).slice(-2)+"-"+("0"+d.getDate()).slice(-2);}
+function actAdd(k){var t=dkey(),A=store.act[t]||(store.act[t]={l:0,r:0});A[k]=(A[k]||0)+1;
+  var ks=Object.keys(store.act).sort();while(ks.length>60)delete store.act[ks.shift()];
+  clearTimeout(actAdd.t);actAdd.t=setTimeout(function(){save();if(mode==="checkin")drawCIToday();},400);}
 /* ===== 語音 ===== */
 var synth=window.speechSynthesis||null,voice=null,keep=null;
 var SPK={ar:"are",er:"err",oo:"ooh",ou:"ow",oi:"oy",as:"ass",is:"iss",us:"uss",es:"ess",os:"oss"};
@@ -811,7 +880,7 @@ function noAudio(){var n=$("voiceNote");if(!n)return;n.innerHTML='音檔載入�
 var curSrc=null;
 function playClip(a,w){var m=a&&a.buf&&a.map&&a.map[w];if(!m)return false;
   try{if(curSrc)curSrc.stop();}catch(e){}
-  var c=ac(),src=c.createBufferSource();src.buffer=a.buf;src.connect(c.destination);src.start(0,m[0],m[1]);curSrc=src;return m[1];}
+  var c=ac(),src=c.createBufferSource();src.buffer=a.buf;src.connect(c.destination);src.start(0,m[0],m[1]);curSrc=src;actAdd("l");return m[1];}
 function sheetOf(t){for(var i=0;i<SH.length;i++){var s=sheet(i);var cs=codas(s);for(var j=0;j<ONS.length;j++)for(var k=0;k<cs.length;k++)if(word(s,ONS[j][0],cs[k])===t)return s.id;}return null;}
 function speak(t,sid,slow,cb){sid=sid||sheet(cur).id;var S=slow?"s":"";
   var go=function(a){var d=playClip(a,t);if(d){if(cb)cb(d);return true;}return false;};
@@ -1084,7 +1153,7 @@ function makeRec(p){ // p:{rec,mine,both,msg,key(),sid(),demo()}
     if(!navigator.mediaDevices||!window.MediaRecorder){$(p.msg).textContent="這個瀏覽器不能錄音。請用 Chrome、Edge 或 Safari 開啟。";return;}
     stopAll();navigator.mediaDevices.getUserMedia({audio:true}).then(function(st){var ch=[];recr=new MediaRecorder(st);
       recr.ondataavailable=function(e){if(e.data&&e.data.size)ch.push(e.data);};
-      recr.onstop=function(){st.getTracks().forEach(function(t){t.stop();});if(REC[k])URL.revokeObjectURL(REC[k]);REC[k]=URL.createObjectURL(new Blob(ch,{type:recr.mimeType||"audio/webm"}));recr=null;
+      recr.onstop=function(){actAdd("r");st.getTracks().forEach(function(t){t.stop();});if(REC[k])URL.revokeObjectURL(REC[k]);REC[k]=URL.createObjectURL(new Blob(ch,{type:recr.mimeType||"audio/webm"}));recr=null;
         btn.textContent="🎙 錄自己的聲音";btn.classList.remove("recon");sync();$(p.msg).textContent="錄好了，按「聽自己的錄音」回放，和示範比一比。 "+rnd(ENC);};
       recr.start();btn.textContent="⏹ 停止錄音";btn.classList.add("recon");$(p.msg).textContent="錄音中…唸完再按一次停止（最長 5 秒）。";
       setTimeout(function(){if(recr&&recr.state==="recording")recr.stop();},5000);
@@ -1127,11 +1196,11 @@ function setPL(k){if(curPL===k)return;curPL=k;var p=PL[k];
 $("musPick").addEventListener("click",function(e){var b=e.target.closest("button");if(b)setPL(b.getAttribute("data-pl"));});
 
 /* ===== 切換 ===== */
-var VIEWS=["grid","cv","blend","quiz","music","pad","pp","stars","guide"];
+var VIEWS=["grid","cv","blend","quiz","music","pad","pp","checkin","stars","guide"];
 function setMode(m){mode=m;stopAll();VIEWS.forEach(function(k){$("view-"+k).hidden=k!==m;});
   [].forEach.call($("modes").querySelectorAll("button[data-target]"),function(b){b.setAttribute("aria-pressed",b.getAttribute("data-target")===m);});
-  var g=m==="guide"||m==="cv"||m==="music";$("sheetArea").hidden=g;$("headBox").hidden=g||m==="stars";
-  if(m==="stars")drawStars();if(m==="quiz"&&!q)newQ();if(m==="blend")drawBlend();if(m==="pad")drawPads();if(m==="pp")drawPP();if(m==="cv"){loadAudio("cv");drawCV();}if(m==="music"&&!curPL)setPL("pron");}
+  var g=m==="guide"||m==="cv"||m==="music";$("sheetArea").hidden=g;$("headBox").hidden=g||m==="stars"||m==="checkin";$("sheetArea").hidden=g||m==="checkin";
+  if(m==="stars")drawStars();if(m==="checkin")drawCI();if(m==="quiz"&&!q)newQ();if(m==="blend")drawBlend();if(m==="pad")drawPads();if(m==="pp")drawPP();if(m==="cv"){loadAudio("cv");drawCV();}if(m==="music"&&!curPL)setPL("pron");}
 function setSheet(i){cur=i;store.sheet=i;save();stopAll();loadAudio(sheet(i).id);drawSheets();drawHead();drawSteps();
   var s=sheet(cur);if(codas(s).indexOf(sel.c)<0)sel.c=codas(s)[codas(s).length>20?6:5];drawTable();focusCell(sel.o,sel.c,false);
   drawBlend();if(mode==="pad")drawPads();q=null;if(mode==="quiz")newQ();}
@@ -1176,6 +1245,80 @@ document.addEventListener("pointerdown",function(){ac();},{once:true});
 drawBpm();drawDisp();drawCue();
 ppExp=ppAnswer(ppParse($("ppIn").value));
 setSheet(cur);setMode("grid");
+/* ===== 每日打卡 ===== */
+var QUOTES=[
+ ["先聽見聲音，再模仿聲音，最後讓聲音成為自己的能力。","Listen. Imitate. Practice. Own your voice."],
+ ["每天五分鐘，比一週一次兩小時更有用。","A little every day goes a long way."],
+ ["唸錯沒關係，聽出自己哪裡不一樣，就是進步。","Hearing the difference is already progress."],
+ ["假字不能猜，只能真的拼。拼得出假字，就拼得出生字。","If you can read a nonsense word, you can read any new word."],
+ ["一個音一個音地練，聲音會越來越穩。","One sound at a time builds a steady voice."],
+ ["眼到、口到、手到、心到，拼讀就會慢慢自動化。","Eyes, mouth, hands and mind — together they make reading automatic."],
+ ["尾子音不加母音，是英文聽起來道地的祕密。","Keep the final sound clean — no extra vowel."],
+ ["快拍的母音短短的，像輕輕點一下鼓。","Before p, t and k, keep the vowel short and crisp."],
+ ["錄下自己的聲音，你就是自己最好的老師。","Record yourself — your ears are your best teacher."],
+ ["今天比昨天多唸對一個音，就值得慶祝。","One more sound right today is worth celebrating."],
+ ["慢慢唸對，再慢慢唸快。","First get it right, then get it fast."],
+ ["耳朵越聽越靈，嘴巴才會越唸越準。","Sharper ears make clearer speech."],
+ ["拼讀像投籃，投得越多，手感越好。","Like shooting hoops — the more you practice, the better your touch."],
+ ["不用一次全會，只要今天有練。","You don't have to master it all today. Just practice today."],
+ ["跟著節拍器，讓聲音有穩定的節奏。","Let the beat keep your sounds steady."],
+ ["聽示範，再聽自己，差一點點的地方就是下一步。","Compare with the model — the small gap is your next step."],
+ ["每一次開口，都是在幫大腦鋪一條新的路。","Every time you speak, you build a new path in your brain."],
+ ["先求清楚，再求流暢。","Clear first, fluent next."],
+ ["唸出來，大腦記得更牢。","Say it out loud — your brain remembers more."],
+ ["橫唸、直唸都練，聲音的變化就聽得出來。","Read across and down to hear how sounds change."],
+ ["不和別人比，只和昨天的自己比。","Compare yourself only with who you were yesterday."],
+ ["累了就休息，明天再回來，打卡不中斷就好。","Tired? Rest, and come back tomorrow."],
+ ["會拼一個音節，就能拼出一千個字。","Master syllables, and thousands of words open up."],
+ ["聲音對了，單字就記得住。","When the sound is right, the word sticks."],
+ ["今天的小進步，是明天的大能力。","Today's small step is tomorrow's big skill."],
+ ["相信方法，也相信自己。","Trust the method. Trust yourself."],
+ ["四聲往下，母音穩穩的，聽起來就很有自信。","A steady falling tone sounds confident."],
+ ["多聽一次，多唸一次，就多會一點。","One more listen, one more try, a little more skill."],
+ ["學語言沒有捷徑，但每天走一點就會到。","No shortcuts — but daily steps get you there."],
+ ["Your voice, your progress! 你的聲音，就是你的進步。","Your voice, your progress!"],
+ ["Every practice makes a difference! 每一次練習都算數。","Every practice makes a difference!"]];
+var MILES=[[1,"🌱 第一次打卡"],[3,"✨ 連續 3 天"],[7,"🏅 連續 7 天"],[14,"🎖 連續 14 天"],[21,"🌟 連續 21 天・習慣養成"],[30,"🏆 連續 30 天"],[50,"💎 連續 50 天"],[100,"👑 連續 100 天"]];
+var calM=null;
+function ciDays(){return Object.keys(store.ci).sort();}
+function ciStreak(){var d=new Date(),n=0;if(!store.ci[dkey(d)])d.setDate(d.getDate()-1);
+  while(store.ci[dkey(d)]){n++;d.setDate(d.getDate()-1);}return n;}
+function ciBest(){var ks=ciDays(),b=0,c=0,prev=null;ks.forEach(function(k){var t=new Date(k+"T12:00:00");
+  c=(prev&&(t-prev)/864e5<1.5)?c+1:1;if(c>b)b=c;prev=t;});return b;}
+function quoteOf(d){var x=Math.floor((new Date(d.getFullYear(),d.getMonth(),d.getDate())-new Date(2026,0,1))/864e5);return QUOTES[((x%QUOTES.length)+QUOTES.length)%QUOTES.length];}
+function drawCIHead(){var el=document.getElementById("streakN");if(!el)return;el.textContent=ciStreak();
+  document.getElementById("streakDot").hidden=!!store.ci[dkey()];}
+function drawCIToday(){var A=store.act[dkey()]||{l:0,r:0},el=$("ciToday");if(!el)return;
+  el.innerHTML="今天已經聽了 <b>"+(A.l||0)+"</b> 個音、錄了 <b>"+(A.r||0)+"</b> 次自己的聲音"+((A.l||0)+(A.r||0)?"，很棒！":"。先去練一練再來打卡吧！");}
+function drawCI(){var now=new Date(),t=dkey(now),W="日一二三四五六";
+  $("ciDate").textContent=now.getFullYear()+" 年 "+(now.getMonth()+1)+" 月 "+now.getDate()+" 日（星期"+W[now.getDay()]+"）";
+  var s=ciStreak();$("ciStreak").textContent=s;$("ciTotal").textContent=ciDays().length;$("ciBest").textContent=ciBest();
+  var done=store.ci[t],b=$("ciBtn");b.disabled=!!done;b.textContent=done?"✓ 今天已打卡（"+done.t+"）":"✅ 今日打卡";
+  if(done&&!$("ciMsg").textContent)$("ciMsg").textContent=cheer(s,false);
+  if(!done&&!$("ciMsg").textContent&&ciDays().length&&!store.ci[dkey(new Date(now.getTime()-864e5))])$("ciMsg").textContent="沒關係，今天重新開始也很好！";
+  drawCIToday();var q=quoteOf(now);$("qZh").textContent=q[0];$("qEn").textContent=q[0].indexOf(q[1])>=0?"":q[1];
+  if(!calM)calM=new Date(now.getFullYear(),now.getMonth(),1);drawCal();
+  var best=Math.max(ciBest(),s);$("ciBadges").innerHTML=MILES.map(function(m){return '<span class="'+(best>=m[0]?"got":"")+'">'+m[1]+"</span>";}).join("");
+  drawCIHead();}
+function drawCal(){var y=calM.getFullYear(),m=calM.getMonth(),first=new Date(y,m,1).getDay(),n=new Date(y,m+1,0).getDate(),t=dkey(),h="";
+  $("calTitle").textContent=y+" 年 "+(m+1)+" 月";
+  "日一二三四五六".split("").forEach(function(c){h+='<div class="h">'+c+"</div>";});
+  for(var i=0;i<first;i++)h+='<div class="d e"></div>';
+  for(var d=1;d<=n;d++){var k=dkey(new Date(y,m,d)),c="d"+(store.ci[k]?" on":"")+(k===t?" today":"")+(k>t?" fut":"");
+    h+='<div class="'+c+'"'+(store.ci[k]?' title="'+store.ci[k].t+' 打卡"':"")+">"+d+"</div>";}
+  $("calGrid").innerHTML=h;}
+function cheer(s,fresh){var M=null;MILES.forEach(function(x){if(s===x[0])M=x;});
+  if(fresh&&M)return "🎉 達成「"+M[1].replace(/^\S+\s/,"")+"」！"+(s>=21?"練習已經變成習慣了！":"繼續保持！");
+  var L=["打卡成功！今天也有好好練習 👏","Great effort! 明天見！","每一次練習都算數，連續 "+s+" 天了！","你的聲音，就是你的進步！","太棒了，連續 "+s+" 天！"];
+  return fresh?L[(s+new Date().getDate())%L.length]:"今天已經打過卡了，連續 "+s+" 天，明天繼續加油！";}
+(function(){var B=document.getElementById("ciBtn");if(!B)return;
+  B.addEventListener("click",function(){var n=new Date(),t=dkey(n);if(store.ci[t])return;var A=store.act[t]||{};
+    store.ci[t]={t:("0"+n.getHours()).slice(-2)+":"+("0"+n.getMinutes()).slice(-2),l:A.l||0,r:A.r||0};save();
+    var s=ciStreak(),m=$("ciMsg");m.textContent=cheer(s,true);m.classList.remove("pop");void m.offsetWidth;m.classList.add("pop");drawCI();});
+  $("calPrev").addEventListener("click",function(){calM=new Date(calM.getFullYear(),calM.getMonth()-1,1);drawCal();});
+  $("calNext").addEventListener("click",function(){calM=new Date(calM.getFullYear(),calM.getMonth()+1,1);drawCal();});
+  document.getElementById("streakBtn").addEventListener("click",function(){setMode("checkin");window.scrollTo({top:document.getElementById("modes").offsetTop-8,behavior:"smooth"});});
+  drawCIHead();})();
 })();
 
 /* ===== 深淺版面切換 ===== */
@@ -1185,6 +1328,7 @@ setSheet(cur);setMode("grid");
   B.addEventListener("click",function(){var n=isDark()?"light":"dark";R.setAttribute("data-theme",n);try{localStorage.setItem("sor8800-theme",n);}catch(e){}paint();if(window.drawCue)try{drawCue();}catch(e){}});
   if(window.matchMedia){try{matchMedia("(prefers-color-scheme: dark)").addEventListener("change",paint);}catch(e){}}
   paint();})();
+
 
 </script>
 </body>
