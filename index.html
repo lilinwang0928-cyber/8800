@@ -279,6 +279,65 @@ table.dc td.no{animation:dcShake .35s}
 table.dc input{width:92%;font:inherit;font-size:.8rem;border:0;border-bottom:1px dashed var(--rule);background:transparent;color:var(--ink);text-align:center;padding:2px;margin-bottom:6px}
 table.dc input::placeholder{color:var(--soft);opacity:.7}
 .dc-note{margin-top:10px;color:var(--soft)}
+@font-face{font-family:"Playwrite US Trad";src:url(fonts/playwrite-us-trad.woff2) format("woff2");font-weight:400;font-display:swap}
+.ribbon{background:var(--coral);color:var(--coral-ink);border-radius:14px;padding:14px 20px;display:flex;flex-direction:column;gap:2px;position:relative;overflow:hidden}
+.ribbon b{font-size:1.45rem;font-weight:900}.ribbon small{font-size:.95rem;font-weight:700;opacity:.92}
+.tag2{display:inline-block;background:var(--coral);color:var(--coral-ink);border-radius:10px;padding:6px 10px;font-weight:800;line-height:1.2}
+.wu-tips{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;margin:12px 0}
+.wu-tip{display:flex;align-items:center;gap:8px;font-weight:700}
+.wic{display:inline-flex;width:34px;height:34px;border-radius:10px;align-items:center;justify-content:center;flex:none;font-style:normal}
+.wic .ic{width:28px;height:28px}
+.wic.t{background:var(--pink-bg);color:var(--pink-ink)}.wic.r{background:var(--blue-bg);color:var(--blue-ink)}.wic.z{background:var(--star-bg);color:var(--star)}
+.wu-sheet{margin-top:12px;display:flex;flex-direction:column;gap:10px}
+h3.dot{margin:10px 0 0;display:flex;align-items:center;gap:8px}h3.dot::before{content:"";width:14px;height:14px;border-radius:50%;background:var(--coral)}
+.wu-line{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.wu-line .n{width:22px;color:var(--soft);font-family:var(--latin)}
+.wu-grp{display:flex;border:1.5px solid var(--ink);border-radius:10px;overflow:hidden;background:var(--sheet)}
+.wbox{width:44px;height:52px;border:0;border-right:1px solid var(--rule);background:none;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2px;gap:0}
+.wbox:last-child{border-right:0}
+.wbox .ic{width:26px;height:26px}.wbox small{font-size:.68rem;color:var(--soft);line-height:1}
+.wbox.t{color:var(--pink-ink);background:var(--pink-bg)}.wbox.r{color:var(--blue-ink);background:var(--blue-bg)}.wbox.z{color:var(--star);background:var(--star-bg)}
+.wbox.on,.wd.on{box-shadow:inset 0 0 0 3px var(--coral)}
+.sua{font-weight:900;color:var(--coral);letter-spacing:.05em;padding:2px 6px;border-radius:8px}.sua.on{background:var(--coral);color:var(--coral-ink)}
+.wu-poem .wu-line{margin-bottom:6px}
+.wd-count{margin-left:auto;color:var(--coral)}
+.wd-grid{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:4px;align-items:center}
+.wd{border:1.5px solid var(--rule);background:var(--sheet);border-radius:10px;padding:3px 0;display:flex;flex-direction:column;align-items:center;gap:1px;line-height:1}
+.wd span{display:flex;align-items:center;gap:2px;font-size:.72rem;color:var(--soft)}
+.wd .ic{width:15px;height:15px}
+.wd.t{color:var(--pink-ink)}.wd.r{color:var(--blue-ink)}.wd.z{color:var(--star)}
+.wd.done{background:var(--coral);border-color:var(--coral);color:var(--coral-ink)}.wd.done span{color:var(--coral-ink)}
+.wd-row{grid-column:1/-1;text-align:right;font-size:.75rem;color:var(--soft);font-weight:700;border-bottom:1px solid var(--rule);margin-bottom:4px}
+.egg-cover{background:#cdb98f;color:#2f2a20;border-radius:14px;padding:16px 20px;display:flex;flex-direction:column;align-items:flex-start;gap:4px}
+.egg-cover small{font-weight:700}.egg-cover b{font-size:1.4rem;background:#fff;color:#2f2a20;padding:2px 14px;border-radius:4px}
+.eg-tab{margin:12px 0;flex-wrap:wrap}
+.eg-page{margin-top:12px;display:flex;flex-direction:column;gap:12px}
+.eg-say{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;font-weight:700}
+.who{font-size:.72rem;font-weight:800;border-radius:999px;padding:2px 9px}.who.dr{background:var(--rule2);color:var(--ink)}.who.pg{background:#2b2b2b;color:#fff}
+.who.pg{margin-left:14px}
+.eg-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.wpad{position:relative;margin:0;border:1.5px solid var(--rule);border-radius:12px;background:var(--sheet);overflow:hidden;touch-action:none}
+.wpad svg.gd,.wpad canvas.ink{position:absolute;inset:0;width:100%;height:100%}
+.wpad svg.gd{color:var(--soft)}
+.wpad .er{position:absolute;top:6px;right:6px;padding:2px 10px;font-size:.8rem;z-index:2}
+.wpad figcaption{position:absolute;left:8px;bottom:6px;font-size:.75rem;color:var(--soft);pointer-events:none}
+.count-box{display:flex;flex-direction:column;gap:8px;align-items:center}
+.nums{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;font-size:1.4rem;font-weight:900}
+.nums span{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:var(--rule2);color:var(--soft)}
+.nums span.on{background:var(--coral);color:var(--coral-ink);transform:scale(1.15)}
+.nums i{width:12px}
+.center{text-align:center;margin:0}
+.eg-ic{display:flex;justify-content:center;gap:16px}
+.ei{display:flex;flex-direction:column;align-items:center;gap:2px;font-weight:800}
+.ei .wic{width:46px;height:46px;border-radius:50%}.ei .ic{width:34px;height:34px}
+.abc-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+@media (min-width:760px){.abc-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.abc-card{display:grid;grid-template-columns:4.2em 1fr;align-items:center;border:1.5px solid var(--rule);border-radius:10px;background:var(--sheet);padding:4px 10px;text-align:left}
+.abc-card .pr{font-family:var(--latin);font-size:1.5rem}
+.abc-card .cu{font-family:"Playwrite US Trad",cursive;font-size:1.45rem;color:var(--blue-ink);line-height:1.9}
+.abc-card.on,.abc-card.play{border-color:var(--coral);box-shadow:0 0 0 3px var(--coral-bg)}
+.abc-cur{font-family:"Playwrite US Trad",cursive;font-size:1.5rem;min-width:3em;text-align:center}
+@media (max-width:520px){.eg-2{grid-template-columns:1fr 1fr;gap:6px}.wbox{width:36px;height:46px}.wbox .ic{width:22px;height:22px}.who.pg{margin-left:0}}
 .tip{margin:0;display:flex;gap:8px;align-items:flex-start;background:var(--coral-bg);color:var(--ink,inherit);border-left:6px solid var(--coral);border-radius:10px;padding:10px 14px;font-weight:700;font-size:1rem;line-height:1.5}
 .hint{color:var(--soft);font-size:.88rem;margin:0;max-width:70ch}
 .seg{display:inline-flex;border:1.5px solid var(--rule);border-radius:999px;overflow:hidden;background:var(--sheet)}
@@ -456,9 +515,11 @@ section{display:flex;flex-direction:column;gap:14px}
       <button type="button" data-target="blend">拼讀機</button>
       <button type="button" data-target="quiz">聽音選字</button>
       <button type="button" data-target="dc">解碼大挑戰</button>
+      <button type="button" data-target="wu">暖聲運動</button>
       <button type="button" data-target="music">音樂練習</button>
     </div>
     <div class="ngrp"><span class="nlab">寫</span>
+      <button type="button" data-target="abc">字母習字本</button>
       <button type="button" data-target="pad">假字手寫板</button>
       <button type="button" data-target="pp">音素三階段</button>
     </div>
@@ -565,6 +626,135 @@ section{display:flex;flex-direction:column;gap:14px}
   </section>
 
   <!-- 假字手寫板 -->
+  <!-- 每日美語暖聲運動 -->
+  <section id="view-wu" hidden>
+    <div class="ribbon"><b>每日美語暖聲運動</b><small>初次見面，用吐舌頭跟美語破冰！</small></div>
+    <div class="card wu-tips">
+      <span class="tag2">練習小訣竅</span>
+      <div class="wu-tip"><i class="wic t"><svg viewBox="0 0 40 40" class="ic"><path d="M8 13c4 3 20 3 24 0" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/><path d="M12 14v9a8 8 0 0 0 16 0v-9" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/><path d="M20 16v8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></i>看到吐舌，就空氣吐舌唸。</div>
+      <div class="wu-tip"><i class="wic r"><svg viewBox="0 0 40 40" class="ic"><path d="M20 20.5a1.6 1.6 0 1 1 1.6-1.6M21.6 18.9a3.6 3.6 0 1 1-5.2-3.2 5.8 5.8 0 0 1 8.4 5.4 7.8 7.8 0 1 1-11.4-7.6 10 10 0 0 1 14.8 8.6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></i>看到捲舌，就捲舌唸。</div>
+      <div class="wu-tip"><i class="wic z"><svg viewBox="0 0 40 40" class="ic"><path d="M23 5 11 22h8l-3 13 13-18h-8z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/></svg></i>麻麻吐舌音（★ 腦會自己學！）</div>
+    </div>
+    <div class="row rec" style="border-left:0;padding-left:0">
+      <button type="button" class="btn red" id="wuRec">🎙 錄自己的聲音</button>
+      <button type="button" class="btn" id="wuMine" disabled>▶ 聽自己的錄音</button>
+      <button type="button" class="btn" id="wuBoth" disabled hidden>⇄</button>
+      <span class="sm" id="wuRecMsg"></span>
+    </div>
+    <div class="seg" id="wuTab" role="group" aria-label="暖聲練習"><button type="button" data-t="song">33 吐捲舌之歌・絕句</button><button type="button" data-t="day">每日吐捲舌定課表</button></div>
+
+    <div id="wuSong" class="card wu-sheet">
+      <p class="hint"><b>a.</b> 在空格中填入老師指定的圖案。　<b>b.</b> 填入您自己出的吐捲舌考題。<br>點一下空格就換圖案：空白 → 吐舌 → 捲舌 → 麻麻吐舌 → 空白。</p>
+      <div class="row">
+        <button type="button" class="btn" id="wuRand">🎲 隨機出題</button>
+        <button type="button" class="btn" id="wuClear">清空</button>
+        <button type="button" class="btn pu" id="wuGo">▶ 跟著節拍唸</button>
+        <button type="button" class="btn" id="wuStop">■ 停止</button>
+        <label class="sm">節拍 <select id="wuBpm"><option>56</option><option>64</option><option>72</option><option>88</option><option>96</option></select> BPM</label>
+      </div>
+      <h3 class="dot">33 吐捲舌之歌</h3>
+      <div id="wu33"></div>
+      <h3 class="dot">五言絕句</h3>
+      <div id="wu5" class="wu-poem"></div>
+      <h3 class="dot">七言絕句</h3>
+      <div id="wu7" class="wu-poem"></div>
+    </div>
+
+    <div id="wuDay" class="card wu-sheet" hidden>
+      <p class="hint">每天 100 次：吐舌 30 次、麻麻吐舌 30 次、捲舌 40 次。唸完一組「三十三」就點一下打勾，或按「跟拍自動打勾」跟著節拍唸。每天會重新開始。</p>
+      <div class="row">
+        <button type="button" class="btn pu" id="wdGo">▶ 跟拍自動打勾</button>
+        <button type="button" class="btn" id="wdStop">■ 停止</button>
+        <button type="button" class="btn" id="wdReset">重新開始</button>
+        <b id="wdCount" class="wd-count">今天完成 0／100</b>
+      </div>
+      <div id="wdGrid" class="wd-grid"></div>
+    </div>
+  </section>
+
+  <!-- 英文 26 個字母習字本 -->
+  <section id="view-abc" hidden>
+    <div class="egg-cover"><small>心靜下來、優雅地</small><b>準備開始畫歪蛋</b></div>
+    <div class="seg eg-tab" id="egTab" role="group" aria-label="習字本單元">
+      <button type="button" data-p="1">一、練歪蛋前的準備</button><button type="button" data-p="2">二、邊唸邊描歪蛋</button><button type="button" data-p="3">三、我會把歪蛋畫完</button><button type="button" data-p="4">四、點點連連畫歪蛋</button><button type="button" data-p="5">五、優雅地畫歪蛋</button><button type="button" data-p="6">六、臺灣雙語六線譜</button><button type="button" data-p="7">七、吐捲舌畫歪蛋</button><button type="button" data-p="8">英文 26 個字母</button>
+    </div>
+    <div class="row"><label class="sm">筆粗 <input type="range" id="egPen" min="2" max="10" value="4"></label><span class="sm">在灰色導引線上描，或照著示範在旁邊畫。每一格右上角都有擦子。</span></div>
+
+    <div class="eg-page card" data-p="1">
+      <div class="eg-say"><span class="who dr">蕭博士</span>跟著蕭光頭一起畫一個大大的圓！<span class="who pg">我</span>我會畫一個大大的圓！</div>
+      <div class="eg-2"><figure class="wpad" style="aspect-ratio:1/1"><svg class="gd" id="g_1a" preserveAspectRatio="xMidYMid meet"></svg><canvas class="ink" id="c_1a"></canvas><button type="button" class="btn er" data-er="c_1a">🧽 擦掉</button><figcaption>描圓</figcaption></figure><figure class="wpad" style="aspect-ratio:1/1"><svg class="gd" id="g_1b" preserveAspectRatio="xMidYMid meet"></svg><canvas class="ink" id="c_1b"></canvas><button type="button" class="btn er" data-er="c_1b">🧽 擦掉</button><figcaption>自己畫</figcaption></figure></div>
+      <div class="eg-say"><span class="who dr">蕭博士</span>接著，把圓畫成一個時鐘，並畫上「逆時針」轉動的時針。<span class="who pg">我</span>我會跟著蕭博士畫出一個大大的時鐘。</div>
+      <div class="eg-2"><figure class="wpad" style="aspect-ratio:1/1"><svg class="gd" id="g_1c" preserveAspectRatio="xMidYMid meet"></svg><canvas class="ink" id="c_1c"></canvas><button type="button" class="btn er" data-er="c_1c">🧽 擦掉</button><figcaption>時鐘（逆時針）</figcaption></figure><figure class="wpad" style="aspect-ratio:1/1"><svg class="gd" id="g_1d" preserveAspectRatio="xMidYMid meet"></svg><canvas class="ink" id="c_1d"></canvas><button type="button" class="btn er" data-er="c_1d">🧽 擦掉</button><figcaption>自己畫</figcaption></figure></div>
+      <div class="eg-say"><span class="who dr">蕭博士</span>從兩點鐘的地方，逆著指針的方向，畫一個大圓！<span class="who pg">我</span>原來，逆時針可以畫得這麼輕鬆！</div>
+      <div class="eg-2"><figure class="wpad" style="aspect-ratio:1/1"><svg class="gd" id="g_1e" preserveAspectRatio="xMidYMid meet"></svg><canvas class="ink" id="c_1e"></canvas><button type="button" class="btn er" data-er="c_1e">🧽 擦掉</button><figcaption>從 2 點出發</figcaption></figure><figure class="wpad" style="aspect-ratio:1/1"><svg class="gd" id="g_1f" preserveAspectRatio="xMidYMid meet"></svg><canvas class="ink" id="c_1f"></canvas><button type="button" class="btn er" data-er="c_1f">🧽 擦掉</button><figcaption>自己畫</figcaption></figure></div>
+      <div class="eg-say"><span class="who dr">蕭博士</span>接著，我們把這個圓畫得歪歪的，像不像一個「歪蛋」呢？<span class="who pg">我</span>我會逆時針畫大小歪蛋。</div>
+      <figure class="wpad" style="aspect-ratio:2.6/1"><svg class="gd" id="g_1g" preserveAspectRatio="xMidYMid meet"></svg><canvas class="ink" id="c_1g"></canvas><button type="button" class="btn er" data-er="c_1g">🧽 擦掉</button><figcaption>大小歪蛋</figcaption></figure>
+    </div>
+
+    <div class="eg-page card" data-p="2" hidden>
+      <div class="count-box"><div class="nums" id="egNums"></div><div class="row"><button type="button" class="btn pu" id="egCount">▶ 跟著數，每數一個畫一個歪蛋</button><button type="button" class="btn" id="egCountStop">■ 停止</button></div></div>
+      <div class="eg-say"><span class="who dr">蕭博士</span>從紅點開始，每唸一個數字，畫一個歪蛋。</div>
+      <figure class="wpad" style="aspect-ratio:1.6/1"><svg class="gd" id="g_2a" preserveAspectRatio="xMidYMid meet"></svg><canvas class="ink" id="c_2a"></canvas><button type="button" class="btn er" data-er="c_2a">🧽 擦掉</button><figcaption>描歪蛋</figcaption></figure>
+      <div class="eg-say"><span class="who pg">我</span>換我試試看！</div>
+      <div class="eg-2"><figure class="wpad" style="aspect-ratio:1/1"><svg class="gd" id="g_2b" preserveAspectRatio="xMidYMid meet"></svg><canvas class="ink" id="c_2b"></canvas><button type="button" class="btn er" data-er="c_2b">🧽 擦掉</button></figure><figure class="wpad" style="aspect-ratio:1/1"><svg class="gd" id="g_2c" preserveAspectRatio="xMidYMid meet"></svg><canvas class="ink" id="c_2c"></canvas><button type="button" class="btn er" data-er="c_2c">🧽 擦掉</button></figure></div>
+    </div>
+
+    <div class="eg-page card" data-p="3" hidden>
+      <div class="eg-say"><span class="who dr">蕭博士</span>歪蛋只剩半顆，請試著把剩下半顆畫完。從紅點開始，在紅點結束。</div>
+      <figure class="wpad" style="aspect-ratio:1.6/1"><svg class="gd" id="g_3a" preserveAspectRatio="xMidYMid meet"></svg><canvas class="ink" id="c_3a"></canvas><button type="button" class="btn er" data-er="c_3a">🧽 擦掉</button><figcaption>畫完另外半顆</figcaption></figure>
+      <div class="eg-say"><span class="who pg">我</span>我會把歪蛋優雅地畫完。</div>
+      <div class="eg-2"><figure class="wpad" style="aspect-ratio:1/1"><svg class="gd" id="g_3b" preserveAspectRatio="xMidYMid meet"></svg><canvas class="ink" id="c_3b"></canvas><button type="button" class="btn er" data-er="c_3b">🧽 擦掉</button></figure><figure class="wpad" style="aspect-ratio:1/1"><svg class="gd" id="g_3c" preserveAspectRatio="xMidYMid meet"></svg><canvas class="ink" id="c_3c"></canvas><button type="button" class="btn er" data-er="c_3c">🧽 擦掉</button></figure></div>
+    </div>
+
+    <div class="eg-page card" data-p="4" hidden>
+      <div class="eg-say"><span class="who dr">蕭博士</span>蕭博士和您一起繼續畫一顆一顆的歪蛋！<span class="who pg">我</span>我會跟著點點畫！</div>
+      <div class="eg-2"><figure class="wpad" style="aspect-ratio:1/1"><svg class="gd" id="g_4a" preserveAspectRatio="xMidYMid meet"></svg><canvas class="ink" id="c_4a"></canvas><button type="button" class="btn er" data-er="c_4a">🧽 擦掉</button><figcaption>點點連連</figcaption></figure><figure class="wpad" style="aspect-ratio:1/1"><svg class="gd" id="g_4b" preserveAspectRatio="xMidYMid meet"></svg><canvas class="ink" id="c_4b"></canvas><button type="button" class="btn er" data-er="c_4b">🧽 擦掉</button><figcaption>自己連</figcaption></figure></div>
+      <div class="eg-say"><span class="who dr">蕭博士</span>試著用點點來畫不同的圖形。從「從這裡開始」那顆開始。</div>
+      <figure class="wpad" style="aspect-ratio:1.5/1"><svg class="gd" id="g_4c" preserveAspectRatio="xMidYMid meet"></svg><canvas class="ink" id="c_4c"></canvas><button type="button" class="btn er" data-er="c_4c">🧽 擦掉</button><figcaption>點點畫圖形</figcaption></figure>
+    </div>
+
+    <div class="eg-page card" data-p="5" hidden>
+      <div class="eg-say"><span class="who dr">蕭博士</span>相信您已經慢慢能畫出超漂亮的歪蛋，現在我們要漸漸把紅色點點藏進心裡，不告訴任何人您是從哪裡開始畫這顆美麗的歪蛋！</div>
+      <figure class="wpad" style="aspect-ratio:1.5/1"><svg class="gd" id="g_5a" preserveAspectRatio="xMidYMid meet"></svg><canvas class="ink" id="c_5a"></canvas><button type="button" class="btn er" data-er="c_5a">🧽 擦掉</button><figcaption>紅點都還在</figcaption></figure>
+      <figure class="wpad" style="aspect-ratio:0.85/1"><svg class="gd" id="g_5b" preserveAspectRatio="xMidYMid meet"></svg><canvas class="ink" id="c_5b"></canvas><button type="button" class="btn er" data-er="c_5b">🧽 擦掉</button><figcaption>紅點慢慢藏進心裡</figcaption></figure>
+    </div>
+
+    <div class="eg-page card" data-p="6" hidden>
+      <div class="eg-say"><span class="who dr">蕭博士</span>在臺灣雙語六線譜上，畫上小小的歪蛋。</div>
+      <p class="sm center">蕭博士示範</p>
+      <figure class="wpad" style="aspect-ratio:2.2/1"><svg class="gd" id="g_6a" preserveAspectRatio="xMidYMid meet"></svg><canvas class="ink" id="c_6a"></canvas><button type="button" class="btn er" data-er="c_6a">🧽 擦掉</button></figure>
+      <p class="sm center">換我試試看</p>
+      <figure class="wpad" style="aspect-ratio:1.3/1"><svg class="gd" id="g_6b" preserveAspectRatio="xMidYMid meet"></svg><canvas class="ink" id="c_6b"></canvas><button type="button" class="btn er" data-er="c_6b">🧽 擦掉</button></figure>
+    </div>
+
+    <div class="eg-page card" data-p="7" hidden>
+      <div class="eg-say"><span class="who dr">蕭博士</span>畫歪蛋時，除了眼到、手到，也可耳到、口到。</div>
+      <div class="eg-ic"><span class="ei"><i class="wic t"><svg viewBox="0 0 40 40" class="ic"><path d="M8 13c4 3 20 3 24 0" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/><path d="M12 14v9a8 8 0 0 0 16 0v-9" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/><path d="M20 16v8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></i><small>三</small></span><span class="ei"><i class="wic t"><svg viewBox="0 0 40 40" class="ic"><path d="M8 13c4 3 20 3 24 0" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/><path d="M12 14v9a8 8 0 0 0 16 0v-9" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/><path d="M20 16v8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></i><small>十</small></span><span class="ei"><i class="wic t"><svg viewBox="0 0 40 40" class="ic"><path d="M8 13c4 3 20 3 24 0" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/><path d="M12 14v9a8 8 0 0 0 16 0v-9" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/><path d="M20 16v8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></i><small>三</small></span></div><p class="center"><b>邊唸吐舌三十三，邊從大歪蛋畫到小歪蛋。</b></p>
+      <figure class="wpad" style="aspect-ratio:4/1"><svg class="gd" id="g_7a" preserveAspectRatio="xMidYMid meet"></svg><canvas class="ink" id="c_7a"></canvas><button type="button" class="btn er" data-er="c_7a">🧽 擦掉</button></figure>
+      <div class="eg-ic"><span class="ei"><i class="wic r"><svg viewBox="0 0 40 40" class="ic"><path d="M20 20.5a1.6 1.6 0 1 1 1.6-1.6M21.6 18.9a3.6 3.6 0 1 1-5.2-3.2 5.8 5.8 0 0 1 8.4 5.4 7.8 7.8 0 1 1-11.4-7.6 10 10 0 0 1 14.8 8.6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></i><small>三</small></span><span class="ei"><i class="wic r"><svg viewBox="0 0 40 40" class="ic"><path d="M20 20.5a1.6 1.6 0 1 1 1.6-1.6M21.6 18.9a3.6 3.6 0 1 1-5.2-3.2 5.8 5.8 0 0 1 8.4 5.4 7.8 7.8 0 1 1-11.4-7.6 10 10 0 0 1 14.8 8.6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></i><small>十</small></span><span class="ei"><i class="wic r"><svg viewBox="0 0 40 40" class="ic"><path d="M20 20.5a1.6 1.6 0 1 1 1.6-1.6M21.6 18.9a3.6 3.6 0 1 1-5.2-3.2 5.8 5.8 0 0 1 8.4 5.4 7.8 7.8 0 1 1-11.4-7.6 10 10 0 0 1 14.8 8.6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></i><small>三</small></span></div><p class="center"><b>邊唸捲舌三十三，邊從大歪蛋畫到小歪蛋。</b></p>
+      <figure class="wpad" style="aspect-ratio:4/1"><svg class="gd" id="g_7b" preserveAspectRatio="xMidYMid meet"></svg><canvas class="ink" id="c_7b"></canvas><button type="button" class="btn er" data-er="c_7b">🧽 擦掉</button></figure>
+      <div class="eg-ic"><span class="ei"><i class="wic t"><svg viewBox="0 0 40 40" class="ic"><path d="M8 13c4 3 20 3 24 0" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/><path d="M12 14v9a8 8 0 0 0 16 0v-9" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/><path d="M20 16v8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></i><small>三</small></span><span class="ei"><i class="wic r"><svg viewBox="0 0 40 40" class="ic"><path d="M20 20.5a1.6 1.6 0 1 1 1.6-1.6M21.6 18.9a3.6 3.6 0 1 1-5.2-3.2 5.8 5.8 0 0 1 8.4 5.4 7.8 7.8 0 1 1-11.4-7.6 10 10 0 0 1 14.8 8.6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></i><small>十</small></span><span class="ei"><i class="wic t"><svg viewBox="0 0 40 40" class="ic"><path d="M8 13c4 3 20 3 24 0" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/><path d="M12 14v9a8 8 0 0 0 16 0v-9" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/><path d="M20 16v8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></i><small>三</small></span></div><p class="center"><b>邊唸吐捲舌三十三，邊從大歪蛋畫到小歪蛋。</b></p>
+      <figure class="wpad" style="aspect-ratio:4/1"><svg class="gd" id="g_7c" preserveAspectRatio="xMidYMid meet"></svg><canvas class="ink" id="c_7c"></canvas><button type="button" class="btn er" data-er="c_7c">🧽 擦掉</button></figure>
+    </div>
+
+    <div class="eg-page card" data-p="8" hidden>
+      <h3>英文 26 個字母：會唸也會寫！</h3>
+      <div class="row">
+        <button type="button" class="btn pu" id="abcAll">▶ 點我聽整頁</button>
+        <button type="button" class="btn" id="abcStop">■ 停止</button>
+        <button type="button" class="btn red" id="abcRec">🎙 錄自己的聲音</button>
+        <button type="button" class="btn" id="abcMine" disabled>▶ 聽自己的錄音</button>
+        <button type="button" class="btn" id="abcBoth" disabled hidden>⇄</button>
+        <span class="sm" id="abcRecMsg"></span>
+      </div>
+      <p class="sm">點點看，英文字母怎麼唸？左邊是印刷體，右邊是臺灣雙語高山體（草寫）。腦科學說，練英文草寫幫助背單字！</p>
+      <div class="abc-grid" id="abcGrid"></div>
+      <h3>字母習字板</h3>
+      <div class="row"><button type="button" class="btn" id="abcPrev">‹ 上一個</button><b id="abcCur" class="abc-cur">Aa</b><button type="button" class="btn" id="abcNext">下一個 ›</button><button type="button" class="btn" id="abcSay">🔊 唸</button></div>
+      <figure class="wpad" style="aspect-ratio:2.4/1"><svg class="gd" id="g_8" preserveAspectRatio="xMidYMid meet"></svg><canvas class="ink" id="c_8"></canvas><button type="button" class="btn er" data-er="c_8">🧽 擦掉</button><figcaption>照著灰色字母描，再自己寫</figcaption></figure>
+    </div>
+  </section>
+
   <section id="view-pad" hidden>
     <p class="tip"><span aria-hidden="true">💬</span>請邊唸、邊聽、邊寫，完成作業。</p>
     <p class="hint">一頁一組。固定一個頭子音，配這個母音的全部尾子音；或固定一個尾子音，配全部頭子音。點格子上方的字可以聽音。</p>
@@ -927,7 +1117,7 @@ function seqHTML(us,noneLabel){if(!us.length)return noneLabel?'<span class="us">
   return '<span class="us">'+us.map(unitHTML).join("")+'</span>';}
 
 /* ===== 儲存（沿用舊版 key，學生進度不會遺失） ===== */
-var KEY="sor8800-v1",store={dc:{read:{},mean:{}},ci:{},act:{},cueS:true,cueV:true,fix:{},read:{},star:{},sheet:0,rate:0.8,bpm:56,disp:"txt",step:0};
+var KEY="sor8800-v1",store={wu:{},dc:{read:{},mean:{}},ci:{},act:{},cueS:true,cueV:true,fix:{},read:{},star:{},sheet:0,rate:0.8,bpm:56,disp:"txt",step:0};
 try{var raw=localStorage.getItem(KEY);if(raw){var ob=JSON.parse(raw);if(ob&&typeof ob==="object"){for(var kk in store)if(ob[kk]!=null)store[kk]=ob[kk];}}}catch(e){}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(store));}catch(e){}}
 function bag(kind,id){return store[kind][id]||(store[kind][id]={});}
@@ -1057,7 +1247,7 @@ function seqPlay(list){stopAll();if(!list.length)return;sq={list:list.slice(),t:
     var it=sq.list.shift();tick(sq.n%4===0);beatLamp(sq.n);sq.n++;if(it.el){it.el.classList.add("play");it.el.scrollIntoView({block:"nearest",inline:"nearest"});sq.el=it.el;}
     if(it.fn)it.fn();speak(it.k,it.sid);};
   sq.step=step;step();sq.t=setInterval(step,60000/store.bpm);pbSync();}
-function stopAll(){seqStop();if(timer){clearInterval(timer);timer=null;}queue=[];stopClip();PB.paused=false;PB.gstep=null;PB.sq=null;if(actxP&&actxP.state==="suspended")try{actxP.resume();}catch(e){}if(synth){try{synth.cancel();}catch(e){}}
+function stopAll(){seqStop();stopWU();if(timer){clearInterval(timer);timer=null;}queue=[];stopClip();PB.paused=false;PB.gstep=null;PB.sq=null;if(actxP&&actxP.state==="suspended")try{actxP.resume();}catch(e){}if(synth){try{synth.cancel();}catch(e){}}
   var p=$("tbl").querySelector("td.play");if(p)p.classList.remove("play");$("beat").classList.remove("on");pbSync();}
 function startPlay(list,nb){stopAll();if(!nb&&$("back").checked&&list.length>1)list=list.concat(list.slice(0,-1).reverse());
   queue=list;beatN=0;var ms=60000/store.bpm;
@@ -1300,11 +1490,11 @@ function setPL(k){if(curPL===k)return;curPL=k;var p=PL[k];
 $("musPick").addEventListener("click",function(e){var b=e.target.closest("button");if(b)setPL(b.getAttribute("data-pl"));});
 
 /* ===== 切換 ===== */
-var VIEWS=["grid","cv","blend","quiz","dc","music","pad","pp","checkin","stars","guide"];
+var VIEWS=["grid","cv","blend","quiz","dc","wu","abc","music","pad","pp","checkin","stars","guide"];
 function setMode(m){mode=m;stopAll();VIEWS.forEach(function(k){$("view-"+k).hidden=k!==m;});
   [].forEach.call($("modes").querySelectorAll("button[data-target]"),function(b){b.setAttribute("aria-pressed",b.getAttribute("data-target")===m);});
-  var g=m==="guide"||m==="cv"||m==="music"||m==="dc";$("sheetArea").hidden=g;$("headBox").hidden=g||m==="stars"||m==="checkin";$("sheetArea").hidden=g||m==="checkin";
-  if(m==="stars")drawStars();if(m==="dc"){loadAudio("01");drawDC();}if(m==="checkin")drawCI();if(m==="quiz"&&!q)newQ();if(m==="blend")drawBlend();if(m==="pad")drawPads();if(m==="pp")drawPP();if(m==="cv"){loadAudio("cv");drawCV();}if(m==="music"&&!curPL)setPL("pron");}
+  var g=m==="guide"||m==="cv"||m==="music"||m==="dc"||m==="wu"||m==="abc";$("sheetArea").hidden=g;$("headBox").hidden=g||m==="stars"||m==="checkin";$("sheetArea").hidden=g||m==="checkin";
+  if(m==="stars")drawStars();if(m==="dc"){loadAudio("01");drawDC();}if(m==="wu")drawWU();if(m==="abc"){loadAudio("abc");drawEG();}if(m==="checkin")drawCI();if(m==="quiz"&&!q)newQ();if(m==="blend")drawBlend();if(m==="pad")drawPads();if(m==="pp")drawPP();if(m==="cv"){loadAudio("cv");drawCV();}if(m==="music"&&!curPL)setPL("pron");}
 function setSheet(i){cur=i;store.sheet=i;save();stopAll();loadAudio(sheet(i).id);drawSheets();drawHead();drawSteps();
   var s=sheet(cur);if(codas(s).indexOf(sel.c)<0)sel.c=codas(s)[codas(s).length>20?6:5];drawTable();focusCell(sel.o,sel.c,false);
   drawBlend();if(mode==="pad")drawPads();q=null;if(mode==="quiz")newQ();}
@@ -1394,6 +1584,128 @@ $("dcQuiz").addEventListener("click",function(){if(dcQ){if(dcQ.cur)speak(dcKey(d
 $("dcStop").addEventListener("click",function(){stopAll();dcQ=null;$("dcScore").textContent="";$("dcQuiz").textContent="▶ 聽力測驗";[].forEach.call($("dcTbl").querySelectorAll("td.ok,td.no"),function(t){t.classList.remove("ok","no");});});
 $("dcAll").addEventListener("click",function(){dcQ=null;$("dcQuiz").textContent="▶ 聽力測驗";var L=DC[dcLv];seqPlay(L.w.map(function(w){return {k:dcKey(w),sid:"01",el:dcTd(w)};}));});
 window.dcRecSync=makeRec({rec:"dcRec",mine:"dcMine",both:"dcBoth",msg:"dcRecMsg",max:60000,key:function(){return "dc:"+dcLv;},demo:function(){}});
+/* ===== 每日美語暖聲運動：吐捲舌 33 ===== */
+var WIC={t:'<svg viewBox="0 0 40 40" class="ic"><path d="M8 13c4 3 20 3 24 0" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/><path d="M12 14v9a8 8 0 0 0 16 0v-9" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/><path d="M20 16v8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>',r:'<svg viewBox="0 0 40 40" class="ic"><path d="M20 20.5a1.6 1.6 0 1 1 1.6-1.6M21.6 18.9a3.6 3.6 0 1 1-5.2-3.2 5.8 5.8 0 0 1 8.4 5.4 7.8 7.8 0 1 1-11.4-7.6 10 10 0 0 1 14.8 8.6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>',z:'<svg viewBox="0 0 40 40" class="ic"><path d="M23 5 11 22h8l-3 13 13-18h-8z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/></svg>'},WNAME={t:"吐舌",r:"捲舌",z:"麻麻吐舌"};
+function wuS(){var W=store.wu||(store.wu={});W.s=W.s||Array(36).fill("");W.p5=W.p5||Array(20).fill("");W.p7=W.p7||Array(28).fill("");W.d=W.d||{};return W;}
+var wuT=null;
+function stopWU(){if(wuT){clearInterval(wuT);wuT=null;}[].forEach.call(document.querySelectorAll(".wbox.on,.wd.on,.sua.on,#egNums span.on"),function(e){e.classList.remove("on");});}
+function wbox(sec,i,v,lab){return '<button type="button" class="wbox '+v+'" data-sec="'+sec+'" data-i="'+i+'" aria-label="'+(v?WNAME[v]:"空格")+'">'+(v?WIC[v]:'<span class="ic"></span>')+(lab?'<small>'+lab+'</small>':'')+'</button>';}
+function drawWU(){var W=wuS(),h="";
+  for(var l=0;l<3;l++){h+='<div class="wu-line"><span class="n">'+(l+1)+'.</span>';
+    for(var g=0;g<4;g++){h+='<span class="wu-grp">';for(var k=0;k<3;k++){var i=l*12+g*3+k;h+=wbox("s",i,W.s[i],"三十三".charAt(k));}h+='</span>';}
+    h+='<span class="sua" data-l="'+l+'">ㄙㄨㄚ！</span></div>';}
+  $("wu33").innerHTML=h;
+  [["p5",5,"wu5"],["p7",7,"wu7"]].forEach(function(P){var a=W[P[0]],h2="";
+    for(var l2=0;l2<4;l2++){h2+='<div class="wu-line"><span class="n">'+(l2+1)+'.</span><span class="wu-grp">';for(var k2=0;k2<P[1];k2++){var j=l2*P[1]+k2;h2+=wbox(P[0],j,a[j],"");}h2+='</span></div>';}
+    $(P[2]).innerHTML=h2;});
+  $("wuBpm").value=String(store.bpm);drawWD();}
+function wdToday(){var W=wuS(),t=dkey();if(!W.d[t]){W.d[t]=[];var ks=Object.keys(W.d).sort();while(ks.length>14)delete W.d[ks.shift()];}return W.d[t];}
+function wdKind(i){return i<30?"t":(i<60?"z":"r");}
+function drawWD(){var D=wdToday(),h="";
+  for(var i=0;i<100;i++){var k=wdKind(i);h+='<button type="button" class="wd '+k+(D.indexOf(i)>=0?" done":"")+'" data-i="'+i+'" aria-label="第 '+(i+1)+' 次 '+WNAME[k]+'三十三">'+
+      ["三","十","三"].map(function(c){return '<span>'+c+WIC[k]+'</span>';}).join("")+'</button>';
+    if(i%10===9)h+='<div class="wd-row">'+(i+1)+' 次</div>';}
+  $("wdGrid").innerHTML=h;$("wdCount").textContent="今天完成 "+D.length+"／100"+(D.length>=100?" 🎉":"");}
+$("wuTab").addEventListener("click",function(e){var b=e.target.closest("button[data-t]");if(!b)return;stopWU();var t=b.getAttribute("data-t");
+  [].forEach.call(this.children,function(x){x.setAttribute("aria-pressed",x===b);});$("wuSong").hidden=t!=="song";$("wuDay").hidden=t!=="day";});
+document.addEventListener("click",function(e){var b=e.target.closest(".wbox");if(!b||wuT)return;var W=wuS(),sec=b.getAttribute("data-sec"),i=+b.getAttribute("data-i"),A=W[sec],o=["","t","r","z"];
+  A[i]=o[(o.indexOf(A[i])+1)%4];save();b.outerHTML=wbox(sec,i,A[i],sec==="s"?"三十三".charAt(i%3):"");});
+$("wuRand").addEventListener("click",function(){var W=wuS(),o=["t","r","z"];["s","p5","p7"].forEach(function(k){W[k]=W[k].map(function(){return o[Math.floor(Math.random()*3)];});});save();drawWU();});
+$("wuClear").addEventListener("click",function(){var W=wuS();["s","p5","p7"].forEach(function(k){W[k]=W[k].map(function(){return "";});});save();drawWU();});
+$("wuBpm").addEventListener("change",function(){store.bpm=+this.value;save();});
+$("wuGo").addEventListener("click",function(){stopAll();var steps=[];
+  for(var l=0;l<3;l++){for(var j=0;j<12;j++)steps.push({el:'.wbox[data-sec="s"][data-i="'+(l*12+j)+'"]',s:j%3===0});steps.push({el:'.sua[data-l="'+l+'"]',s:true});}
+  for(var a=0;a<20;a++)steps.push({el:'.wbox[data-sec="p5"][data-i="'+a+'"]',s:a%5===0});
+  for(var c=0;c<28;c++)steps.push({el:'.wbox[data-sec="p7"][data-i="'+c+'"]',s:c%7===0});
+  var n=0,prev=null;var step=function(){if(prev)prev.classList.remove("on");if(n>=steps.length){stopWU();return;}var it=steps[n++],el=document.querySelector(it.el);
+    tick(it.s);if(el){el.classList.add("on");el.scrollIntoView({block:"nearest"});prev=el;}};
+  step();wuT=setInterval(step,60000/store.bpm);});
+$("wuStop").addEventListener("click",stopWU);
+$("wdGrid").addEventListener("click",function(e){var b=e.target.closest(".wd");if(!b||wuT)return;var D=wdToday(),i=+b.getAttribute("data-i"),p=D.indexOf(i);
+  if(p>=0)D.splice(p,1);else{D.push(i);actAdd("w");}save();drawWD();});
+$("wdGo").addEventListener("click",function(){stopAll();var D=wdToday(),beat=0,cur=-1;
+  var next=function(){for(var i=0;i<100;i++)if(D.indexOf(i)<0)return i;return -1;};
+  var step=function(){if(cur<0){cur=next();if(cur<0){stopWU();drawWD();return;}beat=0;}
+    var el=$("wdGrid").querySelector('.wd[data-i="'+cur+'"]');tick(beat===0);if(el){el.classList.add("on");el.scrollIntoView({block:"nearest"});}
+    beat++;if(beat>=3){D.push(cur);actAdd("w");save();var c=cur;cur=-1;setTimeout(function(){drawWD();if(wuT===null)return;},60000/store.bpm-40);}};
+  step();wuT=setInterval(step,60000/store.bpm);});
+$("wdStop").addEventListener("click",function(){stopWU();drawWD();});
+$("wdReset").addEventListener("click",function(){stopWU();var W=wuS();W.d[dkey()]=[];save();drawWD();});
+window.wuRecSync=makeRec({rec:"wuRec",mine:"wuMine",both:"wuBoth",msg:"wuRecMsg",max:60000,key:function(){return "wu";},demo:function(){}});
+
+/* ===== 英文 26 個字母習字本（歪蛋） ===== */
+var egP=1,abcI=0,AZ="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+function E(cx,cy,rx,ry,rot,a){return '<ellipse cx="'+cx+'" cy="'+cy+'" rx="'+rx+'" ry="'+ry+'" transform="rotate('+rot+' '+cx+' '+cy+')" fill="none" '+(a||"")+'/>';}
+function EP(cx,cy,rx,ry,rot,t){var x=rx*Math.cos(t),y=ry*Math.sin(t),r=rot*Math.PI/180;return [cx+x*Math.cos(r)-y*Math.sin(r),cy+x*Math.sin(r)+y*Math.cos(r)];}
+var GS='stroke="currentColor" stroke-width="2" opacity=".55"',DS='stroke="currentColor" stroke-width="2" stroke-dasharray="7 6" opacity=".6"',FAT='stroke="currentColor" stroke-width="9" opacity=".18"';
+function RD(p,r,o){return '<circle cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="'+(r||6)+'" fill="#e57373" opacity="'+(o==null?1:o)+'"/>';}
+var ARW='<defs><marker id="ah" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="currentColor"/></marker></defs>';
+var T0=-0.38; // 紅點：歪蛋右側（約兩點鐘）
+function egg(cx,cy,s,o){o=o||{};var rx=34*s,ry=62*s,rot=28,h=E(cx,cy,rx,ry,rot,o.st||DS);var p=EP(cx,cy,rx,ry,rot,T0);
+  if(o.dots){for(var k=1;k<10;k++){var q=EP(cx,cy,rx,ry,rot,T0-k*2*Math.PI/10);h+='<circle cx="'+q[0].toFixed(1)+'" cy="'+q[1].toFixed(1)+'" r="'+(2.6*Math.max(1,s))+'" fill="currentColor" opacity=".7"/>';}}
+  if(o.dot!==false)h+=RD(p,o.r||5*Math.max(.8,s),o.op);
+  if(o.arrow){var a1=EP(cx,cy,rx*1.22,ry*1.12,rot,T0),a2=EP(cx,cy,rx*1.22,ry*1.12,rot,T0-0.9);h+='<path d="M'+a1[0]+' '+a1[1]+' A'+rx*1.22+' '+ry*1.12+' '+rot+' 0 0 '+a2[0]+' '+a2[1]+'" fill="none" stroke="currentColor" stroke-width="2" marker-end="url(#ah)"/>';}
+  return h;}
+function staff(x,y,w,g){var h='',ys=[0,1,2,3,4,5].map(function(i){return y+i*g;});
+  ys.forEach(function(v,i){h+='<line x1="'+x+'" x2="'+(x+w)+'" y1="'+v+'" y2="'+v+'" stroke="'+(i===3?"#e57373":"currentColor")+'" stroke-width="'+(i===3?1.6:1)+'" '+(i===0||i===5?'stroke-dasharray="5 5"':'')+' opacity=".6"/>';});
+  for(var sx=x-5*g;sx<x+w;sx+=g*1.2){var x1=Math.max(x,sx),y1=y+5*g-(x1-sx)*2.6;var x2=Math.min(x+w,sx+5*g/2.6);var y2=y+5*g-(x2-sx)*2.6;if(x2>x1)h+='<line x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'" stroke="currentColor" stroke-width=".6" opacity=".25"/>';}
+  return h;}
+function clock(cx,cy,r,nums,full){var h=E(cx,cy,r,r,0,full?GS:DS);if(nums)for(var i=1;i<=12;i++){var a=i*Math.PI/6;h+='<text x="'+(cx+Math.sin(a)*r*.8)+'" y="'+(cy-Math.cos(a)*r*.8+6)+'" font-size="15" text-anchor="middle" fill="currentColor" opacity=".7">'+i+'</text>';}return h;}
+function GUIDE(id){var g=$("g_"+id);if(!g)return;var vb="0 0 200 200",h=ARW;
+  switch(id){
+  case"1a":h+=E(100,100,80,80,0,DS);break;
+  case"1b":break;
+  case"1c":h+=clock(100,100,78,1,0)+'<line x1="100" y1="100" x2="140" y2="125" stroke="currentColor" stroke-width="2.5" marker-end="url(#ah)" opacity=".7"/>'+
+     '<path d="M150 40 A88 88 0 0 0 40 44" fill="none" stroke="currentColor" stroke-width="2" marker-end="url(#ah)" opacity=".7"/><path d="M38 150 A88 88 0 0 0 160 160" fill="none" stroke="currentColor" stroke-width="2" marker-end="url(#ah)" opacity=".7"/>';break;
+  case"1d":h+=clock(100,100,78,1,0);break;
+  case"1e":h+=clock(100,100,78,1,0)+RD([100+78*Math.sin(Math.PI/3),100-78*Math.cos(Math.PI/3)],6);break;
+  case"1f":h+=E(100,100,78,78,0,DS)+RD([100+78*Math.sin(Math.PI/3),100-78*Math.cos(Math.PI/3)],6)+'<text x="'+(100+62*Math.sin(Math.PI/3))+'" y="'+(100-62*Math.cos(Math.PI/3)+6)+'" font-size="15" text-anchor="middle" fill="currentColor">2</text>';break;
+  case"1g":vb="0 0 520 200";h+=egg(80,100,1.45,{st:GS})+egg(220,105,1.25)+egg(345,110,1)+egg(450,115,.8);break;
+  case"2a":vb="0 0 320 200";h+=egg(160,100,1.35,{st:'stroke="currentColor" stroke-width="2" opacity=".55"',arrow:1})+E(160,100,34*1.35+4,62*1.35+4,28,'stroke="currentColor" stroke-width="1.2" opacity=".35"')+E(160,100,34*1.35-4,62*1.35-4,28,'stroke="currentColor" stroke-width="1.2" opacity=".35"');break;
+  case"2b":h+=egg(100,100,1.35,{arrow:1});break;
+  case"2c":h+=egg(100,108,1,{arrow:1});break;
+  case"3a":vb="0 0 320 200";(function(){var cx=160,cy=100,rx=34*1.35,ry=62*1.35,p=EP(cx,cy,rx,ry,28,T0),q=EP(cx,cy,rx,ry,28,T0-Math.PI);
+     h+='<path d="M'+p[0]+' '+p[1]+' A'+rx+' '+ry+' 28 0 0 '+q[0]+' '+q[1]+'" fill="none" stroke="currentColor" stroke-width="2.4" opacity=".8"/>'+E(cx,cy,rx,ry,28,'stroke="currentColor" stroke-width="1.2" stroke-dasharray="3 6" opacity=".35"')+RD(p,6)+
+       '<path d="M250 120 A110 90 0 0 0 110 40" fill="none" stroke="currentColor" stroke-width="2" marker-end="url(#ah)" opacity=".6"/>';})();break;
+  case"3b":case"3c":(function(){var s=id==="3b"?1.35:1,cx=100,cy=100,rx=34*s,ry=62*s,p=EP(cx,cy,rx,ry,28,T0),q=EP(cx,cy,rx,ry,28,T0-Math.PI);
+     h+='<path d="M'+p[0]+' '+p[1]+' A'+rx+' '+ry+' 28 0 0 '+q[0]+' '+q[1]+'" fill="none" stroke="currentColor" stroke-width="2.4" opacity=".75"/>'+RD(p,6);})();break;
+  case"4a":h+=egg(100,100,1.35,{st:GS,dots:1,arrow:1,r:7});break;
+  case"4b":h+=egg(100,100,1.35,{st:'stroke="currentColor" stroke-width="1" stroke-dasharray="2 5" opacity=".4"',dots:1,arrow:1,r:7});break;
+  case"4c":vb="0 0 600 400";(function(){var pts=[];for(var i=0;i<40;i++){var t=i/39;pts.push([40+t*520,330-Math.abs(Math.sin(t*Math.PI*2.2))*230*(t<.15?t/.15:1)]);}
+     pts.forEach(function(p,i){h+=egg(p[0],p[1],.33,{st:'stroke="currentColor" stroke-width="1" stroke-dasharray="2 4" opacity=".5"',dots:1,r:3});});
+     h+='<text x="18" y="'+(pts[0][1]-30)+'" font-size="15" fill="currentColor">從這裡開始 ↓</text>';})();break;
+  case"5a":vb="0 0 600 400";for(var r=0;r<3;r++)for(var c=0;c<3;c++)h+=egg(140+c*190,72+r*128,.92,{st:FAT,r:9});break;
+  case"5b":vb="0 0 600 700";for(var r2=0;r2<6;r2++)for(var c2=0;c2<6;c2++){var op=r2<3?1:(r2===3?.6:(r2===4?(c2<4?.35:0):0));h+=egg(88+c2*98,65+r2*114,.68,{st:FAT,r:7,op:op,dot:op>0});}break;
+  case"6a":vb="0 0 300 140";h+=staff(20,20,260,20)+E(150,70,8,16,25,'stroke="currentColor" stroke-width="2.6" opacity=".85"');break;
+  case"6b":vb="0 0 600 470";for(var s3=0;s3<4;s3++){var y0=12+s3*115;h+=staff(10,y0,580,18);for(var k3=0;k3<20;k3++)h+=E(32+k3*28.5,y0+45,7.5,14.5,25,'stroke="currentColor" stroke-width="2" opacity=".28"');}break;
+  case"7a":case"7b":case"7c":vb="0 0 800 200";h+=staff(10,20,780,30);for(var k4=0;k4<6;k4++)h+=E(55+k4*78,95,22,42,25,'stroke="currentColor" stroke-width="2.4" opacity=".3"');for(var k5=0;k5<6;k5++)h+=E(530+k5*42,125,10,20,25,'stroke="currentColor" stroke-width="2" opacity=".3"');break;
+  case"8":vb="0 0 720 300";h+=staff(10,30,700,48)+'<text x="40" y="'+(30+3*48)+'" font-family="Playwrite US Trad, cursive" font-size="150" fill="currentColor" opacity=".25">'+AZ.charAt(abcI)+AZ.charAt(abcI).toLowerCase()+'</text>'+
+     '<text x="380" y="'+(30+3*48)+'" font-family="Playwrite US Trad, cursive" font-size="150" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="4 5" opacity=".4">'+AZ.charAt(abcI)+AZ.charAt(abcI).toLowerCase()+'</text>';break;}
+  g.setAttribute("viewBox",vb);g.innerHTML=h.split("#ah)").join("#ah_"+id+")").replace('id="ah"','id="ah_'+id+'"');}
+function drawEG(){[].forEach.call($("egTab").children,function(b){b.setAttribute("aria-pressed",+b.getAttribute("data-p")===egP);});
+  [].forEach.call(document.querySelectorAll(".eg-page"),function(p){p.hidden=+p.getAttribute("data-p")!==egP;});
+  var pg=document.querySelector('.eg-page[data-p="'+egP+'"]');[].forEach.call(pg.querySelectorAll("svg.gd"),function(s){GUIDE(s.id.slice(2));});
+  if(egP===2&&!$("egNums").children.length){$("egNums").innerHTML="一二三四五六七".split("").map(function(c){return "<span>"+c+"</span>";}).join("")+"<i></i>"+"七六五四三二一".split("").map(function(c){return "<span>"+c+"</span>";}).join("");}
+  if(egP===8)drawABC();
+  requestAnimationFrame(function(){sizeInk(pg);});}
+$("egTab").addEventListener("click",function(e){var b=e.target.closest("button[data-p]");if(!b)return;stopAll();egP=+b.getAttribute("data-p");drawEG();});
+$("view-abc").addEventListener("click",function(e){var b=e.target.closest("button[data-er]");if(!b)return;var c=$(b.getAttribute("data-er"));c.getContext("2d").clearRect(0,0,c.width,c.height);});
+bindInk($("view-abc"),function(){return +$("egPen").value;});
+window.addEventListener("resize",function(){if(mode==="abc"){var pg=document.querySelector('.eg-page[data-p="'+egP+'"]');if(pg)sizeInk(pg);}});
+$("egCount").addEventListener("click",function(){stopAll();var S=$("egNums").querySelectorAll("span"),n=0,prev=null;
+  var step=function(){if(prev)prev.classList.remove("on");if(n>=S.length){stopWU();return;}var el=S[n];tick(n%7===0);el.classList.add("on");prev=el;n++;};step();wuT=setInterval(step,60000/store.bpm);});
+$("egCountStop").addEventListener("click",stopWU);
+function drawABC(){var h="";for(var i=0;i<26;i++){var L=AZ.charAt(i);h+='<button type="button" class="abc-card'+(i===abcI?" on":"")+'" data-i="'+i+'" aria-label="字母 '+L+'"><span class="pr">'+L+L.toLowerCase()+'</span><span class="cu">'+L+L.toLowerCase()+'</span></button>';}
+  $("abcGrid").innerHTML=h;$("abcCur").textContent=AZ.charAt(abcI)+AZ.charAt(abcI).toLowerCase();GUIDE("8");
+  if(document.fonts&&document.fonts.load)document.fonts.load('40px "Playwrite US Trad"').then(function(){GUIDE("8");},function(){});}
+function abcGo(i){abcI=(i+26)%26;[].forEach.call($("abcGrid").children,function(b,k){b.classList.toggle("on",k===abcI);});$("abcCur").textContent=AZ.charAt(abcI)+AZ.charAt(abcI).toLowerCase();GUIDE("8");var c=$("c_8");c.getContext("2d").clearRect(0,0,c.width,c.height);}
+$("abcGrid").addEventListener("click",function(e){var b=e.target.closest(".abc-card");if(!b)return;stopAll();abcGo(+b.getAttribute("data-i"));speak(AZ.charAt(abcI),"abc");});
+$("abcPrev").addEventListener("click",function(){abcGo(abcI-1);});$("abcNext").addEventListener("click",function(){abcGo(abcI+1);});
+$("abcSay").addEventListener("click",function(){stopAll();speak(AZ.charAt(abcI),"abc");});
+$("abcAll").addEventListener("click",function(){seqPlay(AZ.split("").map(function(L,i){return {k:L,sid:"abc",el:$("abcGrid").children[i],fn:function(){abcGo(i);}};}));});
+$("abcStop").addEventListener("click",function(){stopAll();});
+window.abcRecSync=makeRec({rec:"abcRec",mine:"abcMine",both:"abcBoth",msg:"abcRecMsg",max:60000,key:function(){return "abc";},demo:function(){}});
+
 /* ===== 每日打卡 ===== */
 var QUOTES=[
  ["先聽見聲音，再模仿聲音，最後讓聲音成為自己的能力。","Listen. Imitate. Practice. Own your voice."],
@@ -1438,7 +1750,7 @@ function quoteOf(d){var x=Math.floor((new Date(d.getFullYear(),d.getMonth(),d.ge
 function drawCIHead(){var el=document.getElementById("streakN");if(!el)return;el.textContent=ciStreak();
   document.getElementById("streakDot").hidden=!!store.ci[dkey()];}
 function drawCIToday(){var A=store.act[dkey()]||{l:0,r:0},el=$("ciToday");if(!el)return;
-  el.innerHTML="今天已經聽了 <b>"+(A.l||0)+"</b> 個音、錄了 <b>"+(A.r||0)+"</b> 次自己的聲音"+((A.l||0)+(A.r||0)?"，很棒！":"。先去練一練再來打卡吧！");}
+  var WD=(store.wu&&store.wu.d&&store.wu.d[dkey()]||[]).length;el.innerHTML="今天已經聽了 <b>"+(A.l||0)+"</b> 個音、錄了 <b>"+(A.r||0)+"</b> 次自己的聲音、暖聲運動 <b>"+WD+"</b>／100 次"+((A.l||0)+(A.r||0)?"，很棒！":"。先去練一練再來打卡吧！");}
 function drawCI(){var now=new Date(),t=dkey(now),W="日一二三四五六";
   $("ciDate").textContent=now.getFullYear()+" 年 "+(now.getMonth()+1)+" 月 "+now.getDate()+" 日（星期"+W[now.getDay()]+"）";
   var s=ciStreak();$("ciStreak").textContent=s;$("ciTotal").textContent=ciDays().length;$("ciBest").textContent=ciBest();
