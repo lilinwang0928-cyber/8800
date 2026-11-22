@@ -1687,9 +1687,9 @@ function GUIDE(id){var g=$("g_"+id);if(!g)return;var vb="0 0 200 200",h=ARW;
      h+='<text x="18" y="'+(pts[0][1]-30)+'" font-size="15" fill="currentColor">從這裡開始 ↓</text>';})();break;
   case"5a":vb="0 0 600 400";for(var r=0;r<3;r++)for(var c=0;c<3;c++)h+=egg(140+c*190,72+r*128,.92,{st:FAT,r:9});break;
   case"5b":vb="0 0 600 700";for(var r2=0;r2<6;r2++)for(var c2=0;c2<6;c2++){var op=r2<3?1:(r2===3?.6:(r2===4?(c2<4?.35:0):0));h+=egg(88+c2*98,65+r2*114,.68,{st:FAT,r:7,op:op,dot:op>0});}break;
-  case"6a":vb="0 0 300 140";h+=staff(20,20,260,20)+E(150,70,8,16,25,'stroke="currentColor" stroke-width="2.6" opacity=".85"');break;
-  case"6b":vb="0 0 600 470";for(var s3=0;s3<4;s3++){var y0=12+s3*115;h+=staff(10,y0,580,18);for(var k3=0;k3<20;k3++)h+=E(32+k3*28.5,y0+45,7.5,14.5,25,'stroke="currentColor" stroke-width="2" opacity=".28"');}break;
-  case"7a":case"7b":case"7c":vb="0 0 800 200";h+=staff(10,20,780,30);for(var k4=0;k4<6;k4++)h+=E(55+k4*78,95,22,42,25,'stroke="currentColor" stroke-width="2.4" opacity=".3"');for(var k5=0;k5<6;k5++)h+=E(530+k5*42,125,10,20,25,'stroke="currentColor" stroke-width="2" opacity=".3"');break;
+  case"6a":vb="0 0 300 140";h+=staff(20,20,260,20)+E(150,70,8,16,38,'stroke="currentColor" stroke-width="2.6" opacity=".85"');break;
+  case"6b":vb="0 0 600 470";for(var s3=0;s3<4;s3++){var y0=12+s3*115;h+=staff(10,y0,580,18);for(var k3=0;k3<20;k3++)h+=E(32+k3*28.5,y0+45,7.5,14.5,38,'stroke="currentColor" stroke-width="2" opacity=".28"');}break;
+  case"7a":case"7b":case"7c":vb="0 0 800 200";h+=staff(10,20,780,30);for(var k4=0;k4<6;k4++)h+=E(55+k4*78,95,22,42,38,'stroke="currentColor" stroke-width="2.4" opacity=".3"');for(var k5=0;k5<6;k5++)h+=E(530+k5*42,125,10,20,38,'stroke="currentColor" stroke-width="2" opacity=".3"');break;
   case"8":vb="0 0 720 300";h+=staff(10,30,700,48)+'<text x="40" y="'+(30+3*48)+'" font-family="Playwrite US Trad, cursive" font-size="150" fill="currentColor" opacity=".25">'+AZ.charAt(abcI)+AZ.charAt(abcI).toLowerCase()+'</text>'+
      '<text x="380" y="'+(30+3*48)+'" font-family="Playwrite US Trad, cursive" font-size="150" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="4 5" opacity=".4">'+AZ.charAt(abcI)+AZ.charAt(abcI).toLowerCase()+'</text>';break;}
   g.setAttribute("viewBox",vb);g.innerHTML=h.split("#ah)").join("#ah_"+id+")").replace('id="ah"','id="ah_'+id+'"');}
