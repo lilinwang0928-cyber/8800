@@ -276,7 +276,7 @@ table.g th,table.g td{border-right:1px solid var(--rule2);border-bottom:1px soli
 table.g thead th{position:sticky;top:0;z-index:2;background:var(--sheet);padding:4px 6px 6px;font-weight:400;vertical-align:bottom;border-bottom:2px solid var(--coral);--ks:28px}
 table.g thead th .no{display:block;font-size:.66rem;color:var(--soft);font-family:var(--body)}
 table.g thead th .lt{display:block;font-weight:700;color:var(--blue-ink);font-size:.95rem;margin-top:2px}
-table.g thead th.corner{left:0;z-index:3;font-family:var(--body);font-size:.72rem;color:var(--soft);text-align:left;line-height:1.3;vertical-align:middle}
+table.g thead th.corner{left:0;z-index:3;font-family:var(--body);font-size:.72rem;color:var(--soft);text-align:left;line-height:1.3;vertical-align:middle;white-space:nowrap}
 table.g tbody th{position:sticky;left:0;z-index:1;background:var(--sheet);padding:3px 8px;border-right:2px solid var(--coral);text-align:left;--ks:26px}
 table.g tbody th .hb{display:flex;align-items:center;gap:6px}
 table.g tbody th .no{font-size:.66rem;color:var(--soft);font-family:var(--body);width:1.3em;text-align:right}
@@ -969,7 +969,7 @@ function drawSteps(){var h='<button type="button" data-st="0" aria-pressed="'+(!
   var s=sheet(cur),v=visCodas(s);
   $("stepNote").textContent=store.step?"第 "+store.step+" 步：尾子音 "+CIRC.charAt(STEPS[store.step-1][0])+"–"+CIRC.charAt(STEPS[store.step-1][1])+"（"+v.map(function(c){return c===""?"沒有尾子音":"-"+c;}).join("、")+"）":"顯示全部尾子音。照課本的 10 步驟，一次只練一段，再合併。";}
 function drawTable(){var s=sheet(cur),cs=visCodas(s),rd=bag("read",s.id),sr=bag("star",s.id);
-  var h='<thead><tr><th class="corner">頭子音 ╲<br>尾子音</th>';
+  var h='<thead><tr><th class="corner">頭子音 ╲尾子音</th>';
   cs.forEach(function(c){h+='<th><span class="no">'+CIRC.charAt(cnum(c))+'</span>'+seqHTML(COU[c],"∅")+'<span class="lt">'+(c?"-"+esc(c):"沒有")+'</span></th>';});
   h+="</tr></thead><tbody>";
   ONS.forEach(function(on){var o=on[0];
