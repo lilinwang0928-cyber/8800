@@ -250,6 +250,35 @@ nav.modes button[aria-pressed="true"]{background:var(--coral);border-color:var(-
 .pb-x{background:none;border:0;color:var(--soft);padding:6px 8px;font-size:1rem}
 @media (max-width:420px){.pb-btn{padding:7px 8px;font-size:.82rem}.pb-main{min-width:76px;padding:8px 12px}.pb-now small{display:none}}
 body{padding-bottom:84px}
+.dc-cover{background:var(--coral);color:var(--coral-ink);border-radius:14px;padding:16px 20px;display:flex;flex-direction:column;gap:2px}
+.dc-cover small{font-size:.95rem;font-weight:700;opacity:.9}
+.dc-cover b{font-size:1.5rem;font-weight:900;font-family:var(--latin),var(--body)}
+.dc-lv{margin:12px 0}
+.dc-top{margin-bottom:12px;display:flex;flex-direction:column;gap:8px}
+.dc-desc{margin:0;font-weight:700}
+.dc-how{margin:0;color:var(--soft)}
+.dc-wrap{overflow-x:auto}
+table.dc{border-collapse:collapse;width:100%;max-width:760px;margin:0 auto;table-layout:fixed}
+table.dc th{font-family:var(--latin);color:var(--soft);font-weight:500;font-size:.85rem;padding:4px}
+table.dc th.rn{width:28px}
+table.dc td{border:1.5px solid var(--ink);padding:0;background:var(--sheet);vertical-align:top;text-align:center}
+table.dc td button{width:100%;min-height:96px;background:none;border:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:8px 4px}
+table.dc .w{font-family:var(--latin);font-size:clamp(1.15rem,4.2vw,2rem);color:var(--ink);letter-spacing:.02em}
+table.dc .w em{font-style:normal;color:#c0392b}
+:root[data-theme="dark"] table.dc .w em{color:#ff8a7a}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) table.dc .w em{color:#ff8a7a}}
+table.dc.n5 td button{min-height:70px}
+table.dc.n5 .w em{color:inherit}
+table.dc.n5 .w{font-size:clamp(1rem,3.4vw,1.7rem)}
+table.dc td.read{background:var(--done)}
+table.dc td.play{box-shadow:inset 0 0 0 4px var(--coral)}
+table.dc td.ok{background:var(--done);animation:dcPop .4s}
+table.dc td.no{animation:dcShake .35s}
+@keyframes dcPop{0%{transform:scale(.94)}100%{transform:none}}
+@keyframes dcShake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+table.dc input{width:92%;font:inherit;font-size:.8rem;border:0;border-bottom:1px dashed var(--rule);background:transparent;color:var(--ink);text-align:center;padding:2px;margin-bottom:6px}
+table.dc input::placeholder{color:var(--soft);opacity:.7}
+.dc-note{margin-top:10px;color:var(--soft)}
 .tip{margin:0;display:flex;gap:8px;align-items:flex-start;background:var(--coral-bg);color:var(--ink,inherit);border-left:6px solid var(--coral);border-radius:10px;padding:10px 14px;font-weight:700;font-size:1rem;line-height:1.5}
 .hint{color:var(--soft);font-size:.88rem;margin:0;max-width:70ch}
 .seg{display:inline-flex;border:1.5px solid var(--rule);border-radius:999px;overflow:hidden;background:var(--sheet)}
@@ -426,6 +455,7 @@ section{display:flex;flex-direction:column;gap:14px}
       <button type="button" data-target="cv">140／280 音</button>
       <button type="button" data-target="blend">拼讀機</button>
       <button type="button" data-target="quiz">聽音選字</button>
+      <button type="button" data-target="dc">解碼大挑戰</button>
       <button type="button" data-target="music">音樂練習</button>
     </div>
     <div class="ngrp"><span class="nlab">寫</span>
@@ -621,6 +651,30 @@ section{display:flex;flex-direction:column;gap:14px}
   </section>
 
   <!-- 用音樂練發音聽力 -->
+  <!-- Phonics 解碼大挑戰 -->
+  <section id="view-dc" hidden>
+    <div class="dc-cover"><small>看字讀音，聽音辨字：</small><b>Phonics 解碼大挑戰</b></div>
+    <div class="seg dc-lv" id="dcLv" role="group" aria-label="挑戰等級"><button type="button" data-lv="0">初階挑戰 3×3</button><button type="button" data-lv="1">進階挑戰 4×4</button><button type="button" data-lv="2">神人挑戰 5×5</button></div>
+    <div class="card dc-top">
+      <p class="dc-desc" id="dcDesc"></p>
+      <div class="row">
+        <button type="button" class="btn" id="dcAll">▶ 依序唸一遍</button>
+        <button type="button" class="btn pu" id="dcQuiz">▶ 聽力測驗</button>
+        <button type="button" class="btn" id="dcStop">■ 停止</button>
+        <span class="sm" id="dcScore"></span>
+      </div>
+      <div class="row rec" style="border-left:0;padding-left:0">
+        <button type="button" class="btn red" id="dcRec">🎙 錄自己的聲音</button>
+        <button type="button" class="btn" id="dcMine" disabled>▶ 聽自己的錄音</button>
+        <button type="button" class="btn" id="dcBoth" disabled hidden>⇄</button>
+        <span class="sm" id="dcRecMsg"></span>
+      </div>
+      <p class="sm dc-how">看字讀音：點格子聽示範，自己先唸再點來對答案。聽音辨字：按「聽力測驗」，聽到哪個字就點哪一格。錄音最長 60 秒，可以把整張唸完再回放。</p>
+    </div>
+    <div class="dc-wrap"><table class="dc" id="dcTbl"></table></div>
+    <p class="sm dc-note" id="dcNote"></p>
+  </section>
+
   <section id="view-music" hidden>
     <div class="card">
       <div class="seg" id="musPick" role="group" aria-label="選擇播放清單"><button type="button" data-pl="pron">🎵 用音樂練發音聽力</button><button type="button" data-pl="calm">🍃 靜心音樂－習字四部曲</button></div>
@@ -873,7 +927,7 @@ function seqHTML(us,noneLabel){if(!us.length)return noneLabel?'<span class="us">
   return '<span class="us">'+us.map(unitHTML).join("")+'</span>';}
 
 /* ===== 儲存（沿用舊版 key，學生進度不會遺失） ===== */
-var KEY="sor8800-v1",store={ci:{},act:{},cueS:true,cueV:true,fix:{},read:{},star:{},sheet:0,rate:0.8,bpm:56,disp:"txt",step:0};
+var KEY="sor8800-v1",store={dc:{read:{},mean:{}},ci:{},act:{},cueS:true,cueV:true,fix:{},read:{},star:{},sheet:0,rate:0.8,bpm:56,disp:"txt",step:0};
 try{var raw=localStorage.getItem(KEY);if(raw){var ob=JSON.parse(raw);if(ob&&typeof ob==="object"){for(var kk in store)if(ob[kk]!=null)store[kk]=ob[kk];}}}catch(e){}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(store));}catch(e){}}
 function bag(kind,id){return store[kind][id]||(store[kind][id]={});}
@@ -1205,8 +1259,8 @@ function makeRec(p){ // p:{rec,mine,both,msg,key(),sid(),demo()}
       recr.ondataavailable=function(e){if(e.data&&e.data.size)ch.push(e.data);};
       recr.onstop=function(){actAdd("r");st.getTracks().forEach(function(t){t.stop();});if(REC[k])URL.revokeObjectURL(REC[k]);REC[k]=URL.createObjectURL(new Blob(ch,{type:recr.mimeType||"audio/webm"}));recr=null;
         btn.textContent="🎙 錄自己的聲音";btn.classList.remove("recon");sync();$(p.msg).textContent="錄好了，按「聽自己的錄音」回放，和示範比一比。 "+rnd(ENC);};
-      recr.start();btn.textContent="⏹ 停止錄音";btn.classList.add("recon");$(p.msg).textContent="錄音中…唸完再按一次停止（最長 5 秒）。";
-      setTimeout(function(){if(recr&&recr.state==="recording")recr.stop();},5000);
+      recr.start();btn.textContent="⏹ 停止錄音";btn.classList.add("recon");$(p.msg).textContent="錄音中…唸完再按一次停止（最長 "+((p.max||5000)/1000)+" 秒）。";
+      setTimeout(function(){if(recr&&recr.state==="recording")recr.stop();},p.max||5000);
     },function(){$(p.msg).textContent="沒有取得麥克風權限。請在瀏覽器網址列旁允許使用麥克風。";});});
   $(p.mine).addEventListener("click",function(){var k=p.key();if(REC[k])playMine(k);});
   $(p.both).addEventListener("click",function(){var k=p.key();if(!REC[k])return;p.demo();setTimeout(function(){playMine(k);},1100);});
@@ -1246,11 +1300,11 @@ function setPL(k){if(curPL===k)return;curPL=k;var p=PL[k];
 $("musPick").addEventListener("click",function(e){var b=e.target.closest("button");if(b)setPL(b.getAttribute("data-pl"));});
 
 /* ===== 切換 ===== */
-var VIEWS=["grid","cv","blend","quiz","music","pad","pp","checkin","stars","guide"];
+var VIEWS=["grid","cv","blend","quiz","dc","music","pad","pp","checkin","stars","guide"];
 function setMode(m){mode=m;stopAll();VIEWS.forEach(function(k){$("view-"+k).hidden=k!==m;});
   [].forEach.call($("modes").querySelectorAll("button[data-target]"),function(b){b.setAttribute("aria-pressed",b.getAttribute("data-target")===m);});
-  var g=m==="guide"||m==="cv"||m==="music";$("sheetArea").hidden=g;$("headBox").hidden=g||m==="stars"||m==="checkin";$("sheetArea").hidden=g||m==="checkin";
-  if(m==="stars")drawStars();if(m==="checkin")drawCI();if(m==="quiz"&&!q)newQ();if(m==="blend")drawBlend();if(m==="pad")drawPads();if(m==="pp")drawPP();if(m==="cv"){loadAudio("cv");drawCV();}if(m==="music"&&!curPL)setPL("pron");}
+  var g=m==="guide"||m==="cv"||m==="music"||m==="dc";$("sheetArea").hidden=g;$("headBox").hidden=g||m==="stars"||m==="checkin";$("sheetArea").hidden=g||m==="checkin";
+  if(m==="stars")drawStars();if(m==="dc"){loadAudio("01");drawDC();}if(m==="checkin")drawCI();if(m==="quiz"&&!q)newQ();if(m==="blend")drawBlend();if(m==="pad")drawPads();if(m==="pp")drawPP();if(m==="cv"){loadAudio("cv");drawCV();}if(m==="music"&&!curPL)setPL("pron");}
 function setSheet(i){cur=i;store.sheet=i;save();stopAll();loadAudio(sheet(i).id);drawSheets();drawHead();drawSteps();
   var s=sheet(cur);if(codas(s).indexOf(sel.c)<0)sel.c=codas(s)[codas(s).length>20?6:5];drawTable();focusCell(sel.o,sel.c,false);
   drawBlend();if(mode==="pad")drawPads();q=null;if(mode==="quiz")newQ();}
@@ -1299,6 +1353,47 @@ $("pbMain").addEventListener("click",pbMain);
 $("pbAgain").addEventListener("click",function(){if(!PB.last)return;var L=PB.last;if(sq||timer||PB.paused)stopAll();speak(L.t,L.sid,L.slow);});
 $("pbStop").addEventListener("click",function(){stopAll();});
 $("pbClose").addEventListener("click",function(){stopAll();PB.closed=true;$("pbar").hidden=true;});
+
+/* ===== Phonics 解碼大挑戰 ===== */
+var DC=[
+ {n:3,name:"初階挑戰 3×3",desc:"9 道題，總複習。來看看您對拼讀有多熟吧！",note:"［註］這裡的單字有兩種：專為拼讀練習而設計的「無意義假字」（nonsense words），以及符合練習規則又剛好有意義的真實單字。",
+  w:["mab","trath","rant","gast","trat","stag","mant","thag","skant"]},
+ {n:4,name:"進階挑戰 4×4",desc:"兩個容易搞混的母音來啦！16 道題，考驗您的耳朵和眼力，一起來試試吧！",note:"［註］這裡的單字有兩種：專為拼讀練習而設計的「無意義假字」（nonsense words），以及符合練習規則又剛好有意義的真實單字。",
+  w:["that","mash","mast","draph","pan","kaph","drasp","skas","laph","tran","pamp","thas","san","kamp","strass","spant"]},
+ {n:5,name:"神人挑戰 5×5",desc:"專為拼讀小達人設計。25 個真實世界的英文單字考題，看看您能不能突破極限！",note:"［註］若您完成神人挑戰，恭喜您！您的拼讀力已經可以助您一臂之力，輕鬆背單字。試著查找每個單字的詞性和意義，並填入表格。您會發現，背單字變得好容易！",
+  w:["track","amp","trap","am","bass","math","stamp","last","damp","gasp","hand","rack","dad","bat","and","tram","rat","at","trash","path","ash","strap","ran","sad","tab"],mean:true}];
+var dcLv=0,dcQ=null;
+function dcKey(w){return w.replace(/ck$/,"k");}          // 01 表的 k 拼法
+function dcHTML(w){return esc(w).replace(/a/,"<em>a</em>");}
+function dcBag(){return store.dc||(store.dc={read:{},mean:{}});}
+function drawDC(){var L=DC[dcLv],B=dcBag(),h='<thead><tr><th class="rn"></th>';
+  [].forEach.call($("dcLv").children,function(b,i){b.setAttribute("aria-pressed",i===dcLv);});
+  for(var c=0;c<L.n;c++)h+="<th>"+"ABCDE".charAt(c)+"</th>";h+="</tr></thead><tbody>";
+  for(var r=0;r<L.n;r++){h+='<tr><th class="rn">'+(r+1)+"</th>";
+    for(var c2=0;c2<L.n;c2++){var w=L.w[r*L.n+c2],id="ABCDE".charAt(c2)+(r+1);
+      h+='<td class="'+(B.read[dcLv+":"+w]?"read":"")+'"><button type="button" data-w="'+w+'" aria-label="'+id+" "+w+'"><span class="w">'+dcHTML(w)+"</span></button>"+
+        (L.mean?'<input type="text" data-w="'+w+'" value="'+esc(B.mean[w]||"")+'" placeholder="'+(w==="dad"?"n. 爸爸":"詞性．意義")+'" aria-label="'+w+' 的詞性和意義">':"")+"</td>";}
+    h+="</tr>";}
+  $("dcTbl").innerHTML=h+"</tbody>";$("dcTbl").className="dc n"+L.n;
+  $("dcDesc").textContent=L.desc;$("dcNote").textContent=L.note;dcQ=null;$("dcScore").textContent="";if(window.dcRecSync)dcRecSync();}
+function dcTd(w){var b=$("dcTbl").querySelector('button[data-w="'+w+'"]');return b?b.parentNode:null;}
+$("dcLv").addEventListener("click",function(e){var b=e.target.closest("button[data-lv]");if(!b)return;stopAll();dcLv=+b.getAttribute("data-lv");$("dcQuiz").textContent="▶ 聽力測驗";drawDC();});
+$("dcTbl").addEventListener("click",function(e){var b=e.target.closest("button[data-w]");if(!b)return;var w=b.getAttribute("data-w"),td=b.parentNode;
+  if(dcQ){ if(dcQ.busy)return;
+    if(w===dcQ.cur){td.classList.remove("no");td.classList.add("ok");dcQ.ok++;dcQ.done[w]=1;dcQ.busy=true;$("dcScore").textContent="✔ 答對了！ "+dcQ.ok+"／"+(dcQ.n)+(dcQ.miss?"（錯 "+dcQ.miss+" 次）":"");
+      setTimeout(function(){dcQ&&(dcQ.busy=false,dcNext());},900);}
+    else{dcQ.miss++;td.classList.remove("no");void td.offsetWidth;td.classList.add("no");$("dcScore").textContent="再聽一次，換一格試試！";setTimeout(function(){if(dcQ)speak(dcKey(dcQ.cur),"01");},400);}
+    return;}
+  stopAll();speak(dcKey(w),"01");var B=dcBag();B.read[dcLv+":"+w]=1;save();td.classList.add("read");});
+$("dcTbl").addEventListener("input",function(e){var i=e.target.closest("input[data-w]");if(!i)return;dcBag().mean[i.getAttribute("data-w")]=i.value;clearTimeout(drawDC.t);drawDC.t=setTimeout(save,400);});
+function dcNext(){var L=DC[dcLv],left=L.w.filter(function(w){return !dcQ.done[w];});
+  if(!left.length){$("dcScore").textContent="🎉 完成！"+L.w.length+" 題全對"+(dcQ.miss?"，過程中錯 "+dcQ.miss+" 次":"，零失誤！")+" "+rnd(ENC);dcQ=null;$("dcQuiz").textContent="▶ 聽力測驗";return;}
+  dcQ.cur=left[Math.floor(Math.random()*left.length)];speak(dcKey(dcQ.cur),"01");}
+$("dcQuiz").addEventListener("click",function(){if(dcQ){if(dcQ.cur)speak(dcKey(dcQ.cur),"01");return;}stopAll();drawDC();dcQ={ok:0,miss:0,done:{},n:DC[dcLv].w.length,cur:null,busy:false};$("dcScore").textContent="聽到哪個字，就點哪一格！（再按一次可重聽）";
+  this.textContent="↻ 再聽一次";dcNext();});
+$("dcStop").addEventListener("click",function(){stopAll();dcQ=null;$("dcScore").textContent="";$("dcQuiz").textContent="▶ 聽力測驗";[].forEach.call($("dcTbl").querySelectorAll("td.ok,td.no"),function(t){t.classList.remove("ok","no");});});
+$("dcAll").addEventListener("click",function(){dcQ=null;$("dcQuiz").textContent="▶ 聽力測驗";var L=DC[dcLv];seqPlay(L.w.map(function(w){return {k:dcKey(w),sid:"01",el:dcTd(w)};}));});
+window.dcRecSync=makeRec({rec:"dcRec",mine:"dcMine",both:"dcBoth",msg:"dcRecMsg",max:60000,key:function(){return "dc:"+dcLv;},demo:function(){}});
 /* ===== 每日打卡 ===== */
 var QUOTES=[
  ["先聽見聲音，再模仿聲音，最後讓聲音成為自己的能力。","Listen. Imitate. Practice. Own your voice."],
