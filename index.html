@@ -192,14 +192,19 @@ nav.modes button[aria-pressed="true"]{background:var(--coral);border-color:var(-
 .tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
 .tscroll table{min-width:560px}
 #aiTune{margin-top:16px}
-.v3{display:inline-flex;flex-wrap:wrap;gap:6px}
-.v3 button{display:inline-flex;align-items:baseline;gap:4px;background:var(--sheet);border:1.5px solid var(--ink);border-radius:999px;padding:5px 12px;font-weight:700;line-height:1.3;color:var(--ink)}
-.v3 button b{color:var(--coral)}
-.v3 button small{font-weight:500;font-size:.72rem;color:var(--soft);margin-left:2px}
+.v3{display:flex;flex-wrap:wrap;gap:6px;flex-basis:100%}
+.v3 button{flex:1 1 150px;display:flex;flex-direction:column;align-items:flex-start;gap:1px;text-align:left;background:var(--sheet);border:1.5px solid var(--ink);border-radius:14px;padding:6px 12px 7px;line-height:1.3;color:var(--ink);position:relative}
+.v3 button .t{font-weight:800;white-space:nowrap}
+.v3 button .t b{color:var(--coral);margin-right:3px}
+.v3 button small{font-weight:600;font-size:.72rem;color:var(--soft);margin-left:5px;border:1px solid var(--rule);border-radius:999px;padding:0 6px}
+.v3 button .d{font-size:.8rem;color:var(--soft);font-weight:500}
 .v3 button[data-m="clr"]{border-color:var(--blue-ink,var(--ink))}
-.v3 button[data-m="chl"]{border-style:dashed}
+.v3 button[data-m="clr"] small{border-color:var(--blue-ink);color:var(--blue-ink)}
+.v3 button[data-m="chl"]{border-style:dashed;border-color:var(--coral)}
+.v3 button+button::before{content:"→";position:absolute;left:-6px;top:50%;transform:translate(-50%,-50%);font-size:.7rem;color:var(--soft)}
+@media (max-width:520px){.v3 button+button::before{display:none}}
 .v3 button.on{background:var(--coral);border-color:var(--coral);color:var(--coral-ink,#fff)}
-.v3 button.on b,.v3 button.on small{color:inherit}
+.v3 button.on b,.v3 button.on small,.v3 button.on .d{color:inherit;border-color:currentColor}
 .flow{flex-basis:100%;margin:2px 0 0;font-size:.8rem;color:var(--soft);display:flex;flex-wrap:wrap;gap:4px 6px;align-items:center}
 .flow span{background:var(--rule2);border-radius:999px;padding:1px 8px;color:var(--ink)}
 #view-checkin .card{margin-top:14px}
@@ -471,7 +476,7 @@ section{display:flex;flex-direction:column;gap:14px}
     <div class="now card">
       <div class="us" id="nowBlk"></div>
       <div class="big" id="nowWord">bat</div>
-      <div class="v3" role="group" aria-label="語音模式" data-v3="g"><button type="button" data-m="nat"><b>①</b> 自然聆聽<small>100%</small></button><button type="button" data-m="clr"><b>②</b> 清晰跟讀<small>85%</small></button><button type="button" data-m="chl"><b>③</b> 挑戰模仿<small>100%</small></button></div>
+      <div class="v3" role="group" aria-label="語音模式" data-v3="g"><button type="button" data-m="nat" title="原速播放示範，先聽清楚"><span class="t"><b>①</b>🎧 自然聆聽<small>100%</small></span><span class="d">原速聽一次，先聽清楚</span></button><button type="button" data-m="clr" title="放慢到 85%（音高不變），跟著一起唸"><span class="t"><b>②</b>🐢 清晰跟讀<small>85%</small></span><span class="d">放慢聽，跟著一起唸</span></button><button type="button" data-m="chl" title="播一次示範，播完自動錄下你的聲音"><span class="t"><b>③</b>🎙 挑戰模仿<small>100%</small></span><span class="d">聽一次，自動錄你的聲音</span></button></div>
       <button type="button" class="btn" id="starBtn">標為真字 ★</button>
       <div class="rec">
         <button type="button" class="btn red" id="gRec">🎙 錄自己的聲音</button>
@@ -505,7 +510,7 @@ section{display:flex;flex-direction:column;gap:14px}
     </div>
     <div class="row">
       <button type="button" class="btn red" id="bSpin">抽一個</button>
-      <div class="v3" role="group" aria-label="語音模式" data-v3="b"><button type="button" data-m="nat"><b>①</b> 自然聆聽<small>100%</small></button><button type="button" data-m="clr"><b>②</b> 清晰跟讀<small>85%</small></button><button type="button" data-m="chl"><b>③</b> 挑戰模仿<small>100%</small></button></div>
+      <div class="v3" role="group" aria-label="語音模式" data-v3="b"><button type="button" data-m="nat" title="原速播放示範，先聽清楚"><span class="t"><b>①</b>🎧 自然聆聽<small>100%</small></span><span class="d">原速聽一次，先聽清楚</span></button><button type="button" data-m="clr" title="放慢到 85%（音高不變），跟著一起唸"><span class="t"><b>②</b>🐢 清晰跟讀<small>85%</small></span><span class="d">放慢聽，跟著一起唸</span></button><button type="button" data-m="chl" title="播一次示範，播完自動錄下你的聲音"><span class="t"><b>③</b>🎙 挑戰模仿<small>100%</small></span><span class="d">聽一次，自動錄你的聲音</span></button></div>
       <button type="button" class="btn" id="bStar">標為真字 ★</button>
       <label class="inl"><input type="checkbox" id="bHide"> 先藏起字母（只看積木）</label>
     </div>
@@ -573,7 +578,7 @@ section{display:flex;flex-direction:column;gap:14px}
     <div class="now card" id="cvNow">
       <div class="us" id="cvBlk"></div>
       <div class="big" id="cvWord">be</div>
-      <div class="v3" role="group" aria-label="語音模式" data-v3="cv"><button type="button" data-m="nat"><b>①</b> 自然聆聽<small>100%</small></button><button type="button" data-m="clr"><b>②</b> 清晰跟讀<small>85%</small></button><button type="button" data-m="chl"><b>③</b> 挑戰模仿<small>100%</small></button></div>
+      <div class="v3" role="group" aria-label="語音模式" data-v3="cv"><button type="button" data-m="nat" title="原速播放示範，先聽清楚"><span class="t"><b>①</b>🎧 自然聆聽<small>100%</small></span><span class="d">原速聽一次，先聽清楚</span></button><button type="button" data-m="clr" title="放慢到 85%（音高不變），跟著一起唸"><span class="t"><b>②</b>🐢 清晰跟讀<small>85%</small></span><span class="d">放慢聽，跟著一起唸</span></button><button type="button" data-m="chl" title="播一次示範，播完自動錄下你的聲音"><span class="t"><b>③</b>🎙 挑戰模仿<small>100%</small></span><span class="d">聽一次，自動錄你的聲音</span></button></div>
       <div class="rec">
         <button type="button" class="btn red" id="cvRec">🎙 錄自己的聲音</button>
         <button type="button" class="btn" id="cvMine" disabled>▶ 聽自己的錄音</button>
@@ -1218,7 +1223,7 @@ document.addEventListener("click",function(e){var b=e.target.closest(".v3 button
   var s=V.say();
   if(m==="chl"){$(V.msg).textContent="③ 挑戰模仿：仔細聽，聽完會自動開始錄音，換你唸！";
     speak(s[0],s[1],false,function(d){setTimeout(function(){if(!recr)$(V.rec).click();},d*1000+350);});}
-  else speak(s[0],s[1],m==="clr");});
+  else{$(V.msg).textContent=m==="clr"?"② 清晰跟讀：放慢到 85%（音高不變），請跟著一起唸。":"① 自然聆聽：原速播放示範，先聽清楚。";speak(s[0],s[1],m==="clr");}});
 window.gRecSync=makeRec({rec:"gRec",mine:"gMine",both:"gBoth",msg:"gRecMsg",key:function(){var s=sheet(cur);return s.id+":"+word(s,sel.o,sel.c);},demo:function(){speak(word(sheet(cur),sel.o,sel.c));}});
 $("cvShow").addEventListener("click",function(){cvs.show=!cvs.show;var t=$("cvPads").querySelectorAll(".tr");for(var i=0;i<t.length;i++)t[i].hidden=!cvs.show;this.className="btn"+(cvs.show?" on":"");this.textContent="描紅："+(cvs.show?"開":"關");});
 $("cvClear").addEventListener("click",function(){sizeInk($("cvPads"));});
