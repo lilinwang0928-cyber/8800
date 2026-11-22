@@ -164,7 +164,7 @@ nav.modes button{flex:none;border:1.5px solid var(--rule);background:var(--sheet
 .cell>button .spk{font-size:.9rem}
 nav.modes button[aria-pressed="true"]{background:var(--coral);border-color:var(--coral);color:var(--coral-ink)}
 
-/* 17 張表 */
+/* 20 張表 */
 .sheets{display:grid;grid-template-columns:repeat(auto-fill,minmax(74px,1fr));gap:6px}
 .sheets button{background:var(--sheet);border:1.5px solid var(--rule);border-radius:10px;padding:6px 4px 5px;display:flex;flex-direction:column;align-items:center;gap:2px;line-height:1.15;--ks:30px}
 .sheets button .g{font-family:var(--latin);font-weight:700;font-size:.92rem}
@@ -406,7 +406,7 @@ section{display:flex;flex-direction:column;gap:14px}
     <div class="ttl">
       <div class="appline"><img class="appicon" src="img/icon-192.png" width="56" height="56" alt=""><span class="sm">SoR 美語・PA ⇄ Phonics</span><button type="button" class="btn streak" id="streakBtn" title="每日打卡">🔥 <b id="streakN">0</b> 天<i id="streakDot" aria-label="今天還沒打卡"></i></button><button type="button" class="btn theme" id="themeBtn" aria-pressed="false" title="切換深色／淺色版面">🌙 深色</button><button type="button" class="btn reload" id="reloadBtn" onclick="location.reload()" title="重新整理頁面">↻ 重新整理</button></div>
       <h1><em>8800 音</em>音節表互動學習單</h1>
-      <p class="lede">8800 音 17 張表（頭子音 × 母音 × 20 個尾子音）＋ 140／280 音。點格子聽示範、跟著節拍器唸、錄下自己的聲音比一比，再動手寫。</p>
+      <p class="lede">8800 音 20 張表（頭子音 × 母音 × 20 個尾子音）＋ 140／280 音。點格子聽示範、跟著節拍器唸、錄下自己的聲音比一比，再動手寫。</p>
       <div class="legend"><b class="sm">SoR專利注音：</b>
         <span><i class="k k1"></i><i class="k k14"></i>藍色＝子音</span>
         <span><i class="k k45"></i><i class="k k49"></i>粉紅＝母音</span>
@@ -837,14 +837,14 @@ var CODA=["s","ss","b","p","d","t","g","K","st","sp","m","mb","mp","n","nd","nt"
 var COU={"":[],s:[[38]],ss:[[38]],b:[[5]],p:[[6]],d:[[16]],t:[[17]],g:[[24]],k:[[25]],ck:[[25]],st:[[38],[17]],sp:[[38],[6]],
  m:[[7]],mb:[[7],[5]],mp:[[7],[6]],n:[[18]],nd:[[18],[16]],nt:[[18],[17]],ph:[[8]],ch:[[27,621]],sh:[[28,621]],th:[[40]]};
 var COL={st:["s","t"],sp:["s","p"],mb:["m","b"],mp:["m","p"],nd:["n","d"],nt:["n","t"]};
-// 17 張表：id, 表號, 母音字母, 注音文字, 其他拼法, 魔法 e, k 拼法, 有無尾音欄, KK, 母音積木
+// 20 張表：id, 表號, 母音字母, 注音文字, 其他拼法, 魔法 e, k 拼法, 有無尾音欄, KK, 母音積木
 var SH=[
  ["01","01","a","ㄝㄚ","Aa",0,"k",0,"æ",[[49]]],["02","02","e","ㄝ","Ee",0,"k",0,"ɛ",[[45]]],["03","03","i","ㄧㄜ","Ii",0,"ck",0,"ɪ",[[62]]],
  ["04","04","o","ㄚ","Oo",0,"k",0,"ɑ",[[46]]],["05","05","u","ㄜ","Uu",0,"ck",0,"ʌ",[[44]]],["06","06","a","ㄝㄧ","a_e / ai / ay / ei",1,"ck",0,"e",[[48]]],
- ["0716","07・16","e","ㄧ","ee / ea / e_e",1,"k",0,"i",[[66]]],["08","08","i","ㄞ","i_e / ie / _y",1,"k",0,"aɪ",[[51]]],
+ ["0716","07","e","ㄧ","e_e / ea",1,"k",0,"i",[[66]]],["08","08","i","ㄞ","i_e / ie / _y",1,"k",0,"aɪ",[[51]]],
  ["09","09","o","ㄜㄨ","o_e / oa / oe",1,"k",0,"o",[[651]]],["10","10","u","ㄧㄨ","u_e / ue / ew",1,"k",0,"ju",[[65]]],
- ["11","11","ar","ㄚㄦ","ar",0,"k",1,"ɑr",[[46,47]]],["12","12・13・15","er","ㄦ","er / ir / ur",0,"k",1,"ɝ",[[47]]],
- ["14","14","or","ㄛㄦ","or",0,"k",1,"ɔr",[[43,47]]],["17","17","oo","ㄨㄜ","oo",0,"k",1,"ʊ",[[63]]],["18","18","ou","ㄝㄠ","ou / ow",0,"k",1,"aʊ",[[50]]],
+ ["11","11","ar","ㄚㄦ","ar",0,"k",1,"ɑr",[[46,47]]],["12","12","er","ㄦ","er",0,"k",1,"ɝ",[[47]]],["13","13","ir","ㄦ","ir",0,"ck",1,"ɝ",[[47]]],
+ ["14","14","or","ㄛㄦ","or",0,"k",1,"ɔr",[[43,47]]],["15","15","ur","ㄦ","ur",0,"ck",1,"ɝ",[[47]]],["16","16","ee","ㄧ","ee",0,"ck",1,"i",[[66]]],["17","17","oo","ㄨㄜ","oo",0,"k",1,"ʊ",[[63]]],["18","18","ou","ㄝㄠ","ou / ow",0,"k",1,"aʊ",[[50]]],
  ["19","19","oi","ㄛㄧ","oi / oy",0,"k",1,"ɔɪ",[[43,601]]],["20","20","air","ㄝㄦ","air / ear / _are",0,"k",1,"ɛr",[[45,47]]]
 ];
 function sheet(i){var s=SH[i];return{id:s[0],num:s[1],v:s[2],zy:s[3],alt:s[4],magic:s[5],k:s[6],open:s[7],ipa:s[8],vu:s[9]};}
