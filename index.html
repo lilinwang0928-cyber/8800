@@ -668,6 +668,12 @@ section{display:flex;flex-direction:column;gap:14px}
         <button type="button" class="btn" id="wdReset">重新開始</button>
         <b id="wdCount" class="wd-count">今天完成 0／100</b>
       </div>
+      <div class="row" style="gap:10px 16px">
+        <div class="bpm" id="wdBpm"></div>
+        <div class="cue" role="group" aria-label="節拍提示"><span class="sm">節拍提示</span><button type="button" data-cue="sound">🔊 聲音</button><button type="button" data-cue="visual">💡 視覺</button></div>
+        <span class="lamp" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <span class="sm">每一拍唸一個字：三・十・三。數字越大，語速越快；跟拍中也可以直接換速度。</span>
+      </div>
       <div id="wdGrid" class="wd-grid"></div>
     </div>
   </section>
@@ -1598,7 +1604,9 @@ function drawWU(){var W=wuS(),h="";
   [["p5",5,"wu5"],["p7",7,"wu7"]].forEach(function(P){var a=W[P[0]],h2="";
     for(var l2=0;l2<4;l2++){h2+='<div class="wu-line"><span class="n">'+(l2+1)+'.</span><span class="wu-grp">';for(var k2=0;k2<P[1];k2++){var j=l2*P[1]+k2;h2+=wbox(P[0],j,a[j],"");}h2+='</span></div>';}
     $(P[2]).innerHTML=h2;});
-  $("wuBpm").value=String(store.bpm);drawWD();}
+  $("wuBpm").value=String(store.bpm);drawWdBpm();drawWD();}
+var wdStep=null;
+function drawWdBpm(){$("wdBpm").innerHTML=[56,64,72,88,96].map(function(b){return '<button type="button" data-b="'+b+'" aria-pressed="'+(store.bpm===b)+'">'+b+'<small>BPM</small></button>';}).join("");drawCue();}
 function wdToday(){var W=wuS(),t=dkey();if(!W.d[t]){W.d[t]=[];var ks=Object.keys(W.d).sort();while(ks.length>14)delete W.d[ks.shift()];}return W.d[t];}
 function wdKind(i){return i<30?"t":(i<60?"z":"r");}
 function drawWD(){var D=wdToday(),h="";
@@ -1612,7 +1620,9 @@ document.addEventListener("click",function(e){var b=e.target.closest(".wbox");if
   A[i]=o[(o.indexOf(A[i])+1)%4];save();b.outerHTML=wbox(sec,i,A[i],sec==="s"?"三十三".charAt(i%3):"");});
 $("wuRand").addEventListener("click",function(){var W=wuS(),o=["t","r","z"];["s","p5","p7"].forEach(function(k){W[k]=W[k].map(function(){return o[Math.floor(Math.random()*3)];});});save();drawWU();});
 $("wuClear").addEventListener("click",function(){var W=wuS();["s","p5","p7"].forEach(function(k){W[k]=W[k].map(function(){return "";});});save();drawWU();});
-$("wuBpm").addEventListener("change",function(){store.bpm=+this.value;save();});
+$("wuBpm").addEventListener("change",function(){store.bpm=+this.value;save();drawWdBpm();});
+$("wdBpm").addEventListener("click",function(e){var b=e.target.closest("button[data-b]");if(!b)return;store.bpm=+b.getAttribute("data-b");save();drawWdBpm();drawBpm();$("wuBpm").value=String(store.bpm);
+  if(wuT&&wdStep){clearInterval(wuT);wuT=setInterval(wdStep,60000/store.bpm);}});
 $("wuGo").addEventListener("click",function(){stopAll();var steps=[];
   for(var l=0;l<3;l++){for(var j=0;j<12;j++)steps.push({el:'.wbox[data-sec="s"][data-i="'+(l*12+j)+'"]',s:j%3===0});steps.push({el:'.sua[data-l="'+l+'"]',s:true});}
   for(var a=0;a<20;a++)steps.push({el:'.wbox[data-sec="p5"][data-i="'+a+'"]',s:a%5===0});
@@ -1626,9 +1636,9 @@ $("wdGrid").addEventListener("click",function(e){var b=e.target.closest(".wd");i
 $("wdGo").addEventListener("click",function(){stopAll();var D=wdToday(),beat=0,cur=-1;
   var next=function(){for(var i=0;i<100;i++)if(D.indexOf(i)<0)return i;return -1;};
   var step=function(){if(cur<0){cur=next();if(cur<0){stopWU();drawWD();return;}beat=0;}
-    var el=$("wdGrid").querySelector('.wd[data-i="'+cur+'"]');tick(beat===0);if(el){el.classList.add("on");el.scrollIntoView({block:"nearest"});}
+    var el=$("wdGrid").querySelector('.wd[data-i="'+cur+'"]');tick(beat===0);beatLamp(beat);if(el){el.classList.add("on");el.scrollIntoView({block:"nearest"});}
     beat++;if(beat>=3){D.push(cur);actAdd("w");save();var c=cur;cur=-1;setTimeout(function(){drawWD();if(wuT===null)return;},60000/store.bpm-40);}};
-  step();wuT=setInterval(step,60000/store.bpm);});
+  wdStep=step;step();wuT=setInterval(step,60000/store.bpm);});
 $("wdStop").addEventListener("click",function(){stopWU();drawWD();});
 $("wdReset").addEventListener("click",function(){stopWU();var W=wuS();W.d[dkey()]=[];save();drawWD();});
 window.wuRecSync=makeRec({rec:"wuRec",mine:"wuMine",both:"wuBoth",msg:"wuRecMsg",max:60000,key:function(){return "wu";},demo:function(){}});
