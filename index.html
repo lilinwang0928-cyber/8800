@@ -443,6 +443,14 @@ canvas.ink{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cu
 .bx.slot.no{border-color:var(--coral);box-shadow:0 0 0 3px var(--coral-bg)}
 .bx .cus{font-size:1.4rem;font-weight:700}
 .pair{display:flex;flex-direction:column;gap:6px}
+.bx .u.st{gap:0}.bx .u.st .k{width:34px;height:34px}
+.bx.lc .lin{position:absolute;inset:0;width:100%;height:100%;border:0;background:transparent;text-align:center;font-family:var(--latin);font-size:1.9rem;color:var(--ink);padding:0;outline:none}
+.bx.lc .lin:focus{background:var(--coral-bg)}
+.bx.lc .x{position:absolute;top:2px;right:2px;z-index:3;width:20px;height:20px;border-radius:50%;border:1px solid var(--rule);background:var(--sheet);color:var(--soft);font-size:11px;line-height:1;padding:0;cursor:pointer;display:grid;place-items:center}
+.bx.lc .x:hover{color:var(--coral);border-color:var(--coral)}
+.bx.lc.ok{border-color:var(--done-ink);box-shadow:0 0 0 3px var(--done)}
+.bx.lc.no{border-color:var(--coral);box-shadow:0 0 0 3px var(--coral-bg)}
+.tile.say{box-shadow:0 0 0 3px var(--coral-bg);border-color:var(--coral)}
 .s3{display:flex;flex-wrap:wrap;gap:12px;align-items:stretch}
 .cline{position:relative;flex:1 1 280px;height:96px;background:var(--sheet);border:1.5px solid var(--rule);border-radius:8px;overflow:hidden}
 .video.music{max-width:960px}
@@ -1161,7 +1169,7 @@ function pbSeq(){return !!(sq||timer||(PB.paused&&(PB.gstep||PB.sq)));}
 function pbSync(){var bar=$("pbar");if(!bar||!PB.last)return;
   var playing=!PB.paused&&(!!curSrc||!!sq||!!timer);
   if(playing)PB.closed=false;bar.hidden=PB.closed;bar.classList.toggle("on",playing);
-  $("pbWord").textContent=pbLabel(PB.last.t);
+  $("pbWord").textContent=PB.last.sid==="ph"?(LBL[PB.last.t]||"").replace("字尾 ","")+"（SoR專利注音）":pbLabel(PB.last.t);
   $("pbInfo").textContent=(sq||timer||PB.sq||(PB.paused&&PB.gstep))?"連續播放・"+store.bpm+" BPM":(PB.last.slow?"清晰跟讀 85%":"100%");
   var M=$("pbMain");if(PB.paused){M.textContent="▶ 繼續";M.setAttribute("aria-label","繼續播放");}
   else if(playing){M.textContent="⏸ 暫停";M.setAttribute("aria-label","暫停");}
@@ -1346,9 +1354,9 @@ function ppAnswer(u){var vi=-1;for(var i=0;i<u.length;i++){if(VM[u[i]]&&!(u[i]==
   var r=[];for(var j=0;j<u.length;j++){var m=j<vi?OM[u[j]]:j===vi?VM[u[j]]:CM[u[j]];if(!m)return null;r.push(m);}return r;}
 function segWord(s,o,c){var ol=ONL[o]||(o?[o]:[]),cl=COL[c]||(c?[c]:[]);
   return {u:ol.concat([s.v+(s.magic?"_e":"")],cl),a:units(s,o,c).map(uKey)};}
-var ppU=[],ppHint=false,ppBlk=true,slots={},ppExp=null,ppChk=false;
+var ppU=[],ppTx=[],ppLet="hand",ppLChk=false,ppHint=false,ppBlk=true,slots={},ppExp=null,ppChk=false;
 function tileBtn(k){return '<button type="button" class="tile" data-k="'+k+'" title="'+esc(LBL[k]||"")+'">'+unitHTML(k)+'</button>';}
-function paletteHTML(){var h='<div class="card palette"><h2><span class="tag">SoR專利注音</span>點積木，放進下一個空格</h2>';
+function paletteHTML(){var h='<div class="card palette"><h2><span class="tag">SoR專利注音</span>點積木：🔊 會唸出聲音，並放進下一個空格</h2>';
   PAL.forEach(function(g){h+='<div class="pr"><span>'+g[0]+'</span>'+g[1].map(tileBtn).join("")+'</div>';});
   h+='<details><summary>更多 SoR專利注音（華語注音）</summary><div class="pr" style="margin-top:6px"><span>華語</span>'+PAL_ZH.map(tileBtn).join("")+'</div></details>';
   h+='<div class="pr"><span>自訂</span><input type="text" class="tx sm" id="ppCus" maxlength="3" placeholder="注音"><button type="button" class="btn" id="ppCusAdd">放進格子</button></div></div>';return h;}
@@ -1357,7 +1365,17 @@ function boxRow(n,lets,row){var h='<div class="boxes">',j;
       if(ppChk&&ppExp&&z&&row==="r1")st=z===ppExp[j]?" ok":" no";
       h+='<div class="bx ph slot'+(z?" filled":"")+st+'" data-row="'+row+'" data-i="'+j+'" title="'+(z?esc(LBL[z]||"")+"（點一下拿掉）":"空格")+'">'+(z?unitHTML(z):"")+'</div>';}
     return h+"</div>";}
-  for(j=0;j<n;j++)h+='<div class="bx'+(row?" ph":"")+'">'+(lets?'<div class="lt"'+(ppHint?"":" hidden")+'>'+esc(lets[j])+'</div>':'')+'<canvas class="ink"></canvas></div>';return h+"</div>";}
+  if(lets){for(j=0;j<n;j++){var tv=ppTx[j]||"",st2=ppLChk&&ppLet==="type"&&tv?(tv.toLowerCase()===lets[j].replace(/_/g,"")?" ok":" no"):"";
+      h+='<div class="bx lc'+st2+'" data-i="'+j+'"><div class="lt"'+(ppHint&&!tv?"":" hidden")+'>'+esc(lets[j])+'</div>'+
+       (ppLet==="type"?'<input class="lin" data-i="'+j+'" maxlength="5" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="第 '+(j+1)+' 格字母" value="'+esc(tv)+'">':'<canvas class="ink" data-ik="L'+j+'"></canvas>')+
+       '<button type="button" class="x" data-x="'+j+'" title="清除這一格" aria-label="清除第 '+(j+1)+' 格">✕</button></div>';}
+    return h+"</div>";}
+  for(j=0;j<n;j++)h+='<div class="bx'+(row?" ph":"")+'"><canvas class="ink" data-ik="'+(row||"z")+j+'"></canvas></div>';return h+"</div>";}
+function lchkMsg(){var ok=0,f=0,n=ppU.length;for(var i=0;i<n;i++){var v=(ppTx[i]||"").toLowerCase();if(v)f++;if(v===ppU[i].replace(/_/g,""))ok++;}
+  return f<n?"還有 "+(n-f)+" 格字母沒打。":ok===n?"字母全對！":"對了 "+ok+"／"+n+" 格，紅框的按 ✕ 清掉再打一次。";}
+function inkSnap(){var o={};[].forEach.call($("pp").querySelectorAll("canvas.ink[data-ik]"),function(c){if(c.width&&c.dataset.used)o[c.dataset.ik]=c.toDataURL();});return o;}
+function inkRestore(o){[].forEach.call($("pp").querySelectorAll("canvas.ink[data-ik]"),function(c){var u=o[c.dataset.ik];if(!u)return;var im=new Image();im.onload=function(){var x=c.getContext("2d");x.save();x.setTransform(1,0,0,1,0,0);x.drawImage(im,0,0,c.width,c.height);x.restore();c.dataset.used=1;};im.src=u;});}
+function inkClear(c){var x=c.getContext("2d");x.save();x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,c.width,c.height);x.restore();delete c.dataset.used;}
 function chkMsg(){var r=slots.r1||[],ok=0,n=ppExp.length,filled=0;for(var i=0;i<n;i++){if(r[i])filled++;if(r[i]===ppExp[i])ok++;}
   return filled<n?"第一階段還有 "+(n-filled)+" 格沒放。":ok===n?"全對！":"對了 "+ok+"／"+n+" 格，紅框的再聽一次。";}
 function drawPP(){ppU=ppParse($("ppIn").value);if(!ppU.length){$("pp").innerHTML='<p class="hint">請先輸入練習字。</p>';return;}
@@ -1366,29 +1384,39 @@ function drawPP(){ppU=ppParse($("ppIn").value);if(!ppU.length){$("pp").innerHTML
   var n=ppU.length,w=ppJoin(ppU),h=ppBlk?paletteHTML():"";
   var chk=ppBlk&&ppExp?'<div class="row"><button type="button" class="btn red" id="ppCheck">對答案</button><span class="hint" id="ppMsg">'+(ppChk?chkMsg():"")+'</span></div>':"";
   h+='<div class="stage"><div class="sn">1</div><div class="bd"><h3>第一階段：只寫注音聲音</h3><p>不寫英文，只把聽到、念出的音素寫成注音。共 '+n+' 個音素＝'+n+' 格。</p>'+boxRow(n,null,"r1")+chk+'</div></div>';
-  h+='<div class="stage"><div class="sn">2</div><div class="bd"><h3>第二階段：音素下方對應寫字母</h3><p>上排寫音素，下排寫對應的英文字母拼法。格子數必須對齊音素。</p><div class="pair">'+boxRow(n,null,"r2")+boxRow(n,ppU)+'</div><div class="row"><button type="button" class="btn'+(ppHint?" on":"")+'" id="ppHintBtn">字母提示：'+(ppHint?"開":"關")+'</button></div></div></div>';
+  h+='<div class="stage"><div class="sn">2</div><div class="bd"><h3>第二階段：音素下方對應寫字母</h3><p>上排寫音素，下排寫對應的英文字母拼法。格子數必須對齊音素。</p><div class="pair">'+boxRow(n,null,"r2")+boxRow(n,ppU)+'</div><div class="row"><span class="seg" role="group" aria-label="字母輸入方式"><button type="button" id="ppLetH" aria-pressed="'+(ppLet==="hand")+'">✍️ 用寫的</button><button type="button" id="ppLetT" aria-pressed="'+(ppLet==="type")+'">⌨️ 用打的</button></span><button type="button" class="btn" id="ppLetClr">🧽 清除全部字母</button>'+(ppLet==="type"?'<button type="button" class="btn red" id="ppLetChk">對字母</button>':'')+'<button type="button" class="btn'+(ppHint?" on":"")+'" id="ppHintBtn">字母提示：'+(ppHint?"開":"關")+'</button></div><p class="hint" id="ppLMsg">'+(ppLChk&&ppLet==="type"?lchkMsg():"寫錯了？按格子右上角 ✕ 清掉那一格重來。")+'</p></div></div>';
   var ans=ppExp?'<button type="button" class="btn" id="ppAns">看注音答案</button><div id="ppAnsRow" hidden>'+seqHTML(ppExp)+'</div>':"";
   h+='<div class="stage"><div class="sn">3</div><div class="bd"><h3>第三階段：直接默寫英文，心裡念注音</h3><p>只寫英文，不看提示。手在寫 '+esc(ppU.join("-"))+'，心裡念的是聲音。</p><div class="s3"><div class="cline" id="ppLine"><div class="ln" style="top:14%"></div><div class="ln mid" style="top:38%"></div><div class="ln base" style="top:64%"></div><div class="ln" style="top:88%"></div><canvas class="ink"></canvas><button type="button" class="eraser" id="ppErase" title="擦掉重寫">🧽 擦掉重寫</button></div><div class="think"><small>心裡念</small><button type="button" class="btn pu" id="ppSay">🔊 聽一次 '+esc(w)+'</button>'+ans+'</div></div></div></div>';
-  $("pp").innerHTML=h;markNext();sizeInk($("pp"));}
+  var snap=inkSnap();$("pp").innerHTML=h;markNext();sizeInk($("pp"));inkRestore(snap);}
 function nextSlot(){var n=ppU.length,rs=["r1","r2"];for(var k=0;k<2;k++){var r=rs[k];slots[r]=slots[r]||[];for(var i=0;i<n;i++)if(!slots[r][i])return [r,i];}return null;}
 function markNext(){var t=nextSlot();if(!t)return;var e=$("pp").querySelector('.bx.slot[data-row="'+t[0]+'"][data-i="'+t[1]+'"]');if(e)e.classList.add("next");}
 function putBlk(k){var x=nextSlot();if(!x||!k)return;slots[x[0]][x[1]]=k;ppChk=false;drawPP();}
-function setPP(u,exp){$("ppIn").value=u.join("-");slots={};ppChk=false;ppExp=exp||ppAnswer(u);drawPP();}
+function ppReset(){slots={};ppTx=[];ppLChk=false;$("pp").innerHTML="";}
+function setPP(u,exp){$("ppIn").value=u.join("-");ppReset();ppChk=false;ppExp=exp||ppAnswer(u);drawPP();}
 bindInk($("pp"),function(){return 4;});
 $("pp").addEventListener("click",function(e){var sl=e.target.closest(".bx.slot");if(sl){var r=sl.getAttribute("data-row"),i=+sl.getAttribute("data-i");if(slots[r]&&slots[r][i]){slots[r][i]=null;ppChk=false;drawPP();}return;}
   var b=e.target.closest("button");if(!b)return;
-  if(b.classList.contains("tile")){putBlk(b.getAttribute("data-k"));return;}
+  if(b.classList.contains("tile")){var tk=b.getAttribute("data-k");if(LBL[tk])speak(tk,"ph");putBlk(tk);return;}
   if(b.id==="ppCusAdd"){var v=$("ppCus").value.trim();if(v)putBlk("cus:"+v);return;}
   if(b.id==="ppCheck"){ppChk=true;drawPP();return;}
   if(b.id==="ppAns"){var r2=$("ppAnsRow");r2.hidden=!r2.hidden;b.textContent=r2.hidden?"看注音答案":"收起答案";return;}
   if(b.id==="ppSay")speak(ppJoin(ppU));
   if(b.id==="ppErase"){var cv=$("ppLine").querySelector("canvas"),c=cv.getContext("2d");c.save();c.setTransform(1,0,0,1,0,0);c.clearRect(0,0,cv.width,cv.height);c.restore();return;}
+  if(b.hasAttribute("data-x")){var xi=+b.getAttribute("data-x"),cell=b.closest(".bx");ppTx[xi]="";cell.classList.remove("ok","no");
+    var cv2=cell.querySelector("canvas");if(cv2)inkClear(cv2);var li=cell.querySelector(".lin");if(li){li.value="";li.focus();}var lt2=cell.querySelector(".lt");if(lt2)lt2.hidden=!ppHint;return;}
+  if(b.id==="ppLetH"||b.id==="ppLetT"){ppLet=b.id==="ppLetT"?"type":"hand";ppLChk=false;drawPP();if(ppLet==="type"){var f=$("pp").querySelector(".lin");if(f)f.focus();}return;}
+  if(b.id==="ppLetClr"){ppTx=[];ppLChk=false;[].forEach.call($("pp").querySelectorAll(".bx.lc canvas"),inkClear);drawPP();return;}
+  if(b.id==="ppLetChk"){ppLChk=true;drawPP();return;}
   if(b.id==="ppHintBtn"){ppHint=!ppHint;drawPP();}});
 $("ppGo").addEventListener("click",function(){setPP(ppParse($("ppIn").value));});
 $("ppIn").addEventListener("keydown",function(e){if(e.key==="Enter")setPP(ppParse($("ppIn").value));});
 $("ppRnd").addEventListener("click",function(){var s=sheet(cur),sw=segWord(s,rnd(ONS)[0],rnd(codas(s)));setPP(sw.u,sw.a);});
 $("ppHear").addEventListener("click",function(){speak(ppJoin(ppParse($("ppIn").value)));});
-$("ppClr").addEventListener("click",function(){slots={};ppChk=false;drawPP();});
+$("ppClr").addEventListener("click",function(){ppReset();ppChk=false;drawPP();});
+$("pp").addEventListener("input",function(e){if(!e.target.classList.contains("lin"))return;var i=+e.target.getAttribute("data-i");ppTx[i]=e.target.value.trim();
+  var c=e.target.closest(".bx");c.classList.remove("ok","no");var lt=c.querySelector(".lt");if(lt)lt.hidden=!ppHint||!!ppTx[i];
+  if(ppTx[i]&&ppTx[i].length>=ppU[i].replace(/_/g,"").length){var nx=$("pp").querySelector('.lin[data-i="'+(i+1)+'"]');if(nx)nx.focus();}});
+$("pp").addEventListener("pointerdown",function(e){if(e.target.classList&&e.target.classList.contains("ink"))e.target.dataset.used=1;},true);
 $("ppMode").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;ppBlk=b.getAttribute("data-m")==="blk";drawPP();});
 
 /* ===== 教師說明的 10 步驟表 ===== */
